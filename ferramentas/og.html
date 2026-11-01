@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Raio-X Tricolor · imagem de prévia</title>
+<!-- Molde da imagem de prévia (1200×630) usada no WhatsApp, LinkedIn e no topo do README.
+     Lê só data/dados.js: posição, pontos, rodada e a campanha por mando. Gerada por ferramentas/gerar-og.js. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Big+Shoulders+Display:wght@800;900&family=Doto:wght@900&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{--bg:#141416;--ink:#F2F2EE;--mute:#A6A8AE;--line:#2C2D32;--red:#F0414A;--brand:#C8102E;--led:#FFA126;--v:#2FA36B;--e:#8A8F98;--d:#E23A44}
+*{box-sizing:border-box;margin:0}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:"Archivo",Arial,sans-serif;position:relative}
+.stripe{height:14px;background:linear-gradient(to bottom,var(--brand) 0 33.3%,#fff 33.3% 66.6%,#000 66.6% 100%)}
+.in{padding:40px 64px 0;display:grid;gap:36px}
+.top{display:flex;justify-content:space-between;align-items:baseline}
+.brand{font-family:"Big Shoulders Display","Arial Narrow",sans-serif;font-weight:900;font-size:44px;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+.brand b{color:var(--red);font-weight:900}.brand span{color:#6E7076}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.placar{display:flex;align-items:center;gap:40px;padding:16px 26px;background-color:#08080A;background-image:radial-gradient(circle,rgba(255,161,38,.10) 1.2px,transparent 1.5px);background-size:7px 7px;border:1px solid #2A2A2E;box-shadow:inset 0 0 0 5px #111114;font-family:"Doto","IBM Plex Mono",monospace;font-weight:900;color:var(--led);text-shadow:0 0 8px rgba(255,140,20,.55);width:max-content}
+.placar .t{font-size:52px;letter-spacing:.06em;line-height:1}
+.placar .s{font-size:22px;letter-spacing:.06em;line-height:1.15;display:grid}
+.split{display:flex;align-items:flex-end;gap:40px;min-width:0}
+.num{font-family:"Big Shoulders Display","Arial Narrow",sans-serif;font-weight:900;font-size:176px;line-height:.78;letter-spacing:-.01em}
+.num small{font-size:.4em;vertical-align:.9em;margin-left:4px}
+.num.low{color:var(--red)}
+.lab{font-family:"IBM Plex Mono",monospace;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-top:14px;white-space:nowrap}
+.cells{display:grid;gap:7px;margin-left:auto;padding-bottom:6px}
+.row{display:grid;grid-template-columns:repeat(19,22px);gap:4px}
+.row i{display:block;width:22px;height:22px;border-radius:2px;background:var(--e)}
+.row i.v{background:var(--v)}.row i.d{background:var(--d)}.row i.p{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(242,242,238,.34)}
+.foot{position:absolute;left:64px;right:64px;bottom:30px;display:flex;justify-content:space-between;gap:24px;white-space:nowrap;font-size:16px;color:var(--mute);border-top:1px solid var(--line);padding-top:16px}
+.foot b{color:var(--ink);font-weight:600}
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+<div class="in">
+  <div class="top"><div class="brand"><b>Raio-X</b> Tricolor <span>2026</span></div><div class="meta" id="meta">Análise independente</div></div>
+  <div class="placar" id="placar"><div class="t">SÃO PAULO</div></div>
+  <div class="split">
+    <div><div class="num" id="pc">--</div><div class="lab">No Morumbis</div></div>
+    <div><div class="num low" id="pf">--</div><div class="lab">Fora de casa</div></div>
+    <div class="cells" id="cells"></div>
+  </div>
+</div>
+<div class="foot"><span>Análise de desempenho do São Paulo no Brasileirão, rodada a rodada · por <b>Gustavo Negri Tavares</b></span><span>gustavonegri23.github.io/raio-x-spfc</span></div>
+<script src="../data/dados.js"></script>
+<script>
+(function(){
+  var G=(window.SOFA&&SOFA.G)||[],N=window.PROXIMOS||[],T=window.TABELA||[],M=window.META||{};
+  function res(g){return g[4]>g[5]?'v':g[4]===g[5]?'e':'d';}
+  function lado(home){var gs=G.filter(function(g){return !!g[2]===home;}).sort(function(a,b){return a[0]-b[0];});
+    var pts=gs.reduce(function(s,g){var r=res(g);return s+(r==='v'?3:r==='e'?1:0);},0);
+    var cells=gs.map(function(g){return '<i class="'+res(g)+'"></i>';}).join('')+N.filter(function(n){return !!n.home===home;}).map(function(){return '<i class="p"></i>';}).join('');
+    return {pct:gs.length?Math.round(pts/(gs.length*3)*100):0,cells:cells};}
+  var c=lado(true),f=lado(false);
+  document.getElementById('pc').innerHTML=c.pct+'<small>%</small>';
+  document.getElementById('pf').innerHTML=f.pct+'<small>%</small>';
+  document.getElementById('cells').innerHTML='<div class="row">'+c.cells+'</div><div class="row">'+f.cells+'</div>';
+  var sp=T.filter(function(r){return r[1]==='São Paulo';})[0];
+  if(sp)document.getElementById('placar').innerHTML='<div class="t">SÃO PAULO</div><div class="t">'+sp[0]+'º</div><div class="s"><span>'+sp[8]+' PONTOS</span><span>'+sp[3]+'V '+sp[4]+'E '+sp[5]+'D</span></div>';
+  if(M.rodada)document.getElementById('meta').textContent='Análise independente · após a '+M.rodada+'ª rodada';
+  document.body.setAttribute('data-pronto','1');
+})();
+</script>
+</body>
+</html>

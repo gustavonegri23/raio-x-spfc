@@ -6,7 +6,10 @@
 - **Seções reorganizadas na ordem da história**: o que aconteceu (trajetória, técnicos, copas), por quê (mando, adversários, clássicos, finalização, chutes, janelas, sistema, físico), quem (ataque, duplas, fichas) e o que fazer (prioridades, simulador, escalações). O placar das previsões e a metodologia viraram o epílogo "Método e acerto".
 - **Capa**: placar no estilo do antigo letreiro do Morumbi com o próximo jogo, campanha jogo a jogo por mando e aproveitamento em casa e fora (tudo calculado de `dados.js`, atualiza sozinho), KPIs, achados e selo do placar das previsões.
 - **Navegação**: barra fixa com progresso de leitura, links diretos para cada seção (ex.: `#s-shots`) e os links antigos (`#gols`, `#jogos`, `#jogadores`, `#j-<jogador>`) continuam funcionando.
-- **Compartilhamento**: metatags para WhatsApp/LinkedIn e favicon. A imagem de prévia espera `og-card.png` na raiz do repositório (copiar o card da rodada com esse nome).
+- **Compartilhamento**: metatags para WhatsApp/LinkedIn, favicon e `og-card.png` (1200×630) gerado por `ferramentas/gerar-og.js` a partir de `ferramentas/og.html`. Lê só `dados.js`; rodar depois do `gerar-card.js` a cada rodada.
+- **Achados da capa**: o título conta os itens sozinho ("Seis achados"); a skill pode escrever de 3 a 6 sem mexer no título.
+- **Fim de temporada**: sem próximos jogos, o placar da capa mostra "FIM" e a posição final.
+- **README** reescrito como vitrine: imagem de prévia, link do site, capítulos, como é atualizado e estrutura.
 
 ## 01/11/2026 · credibilidade, conteúdo novo e card para redes
 

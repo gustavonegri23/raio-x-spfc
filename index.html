@@ -403,7 +403,7 @@ body[data-view="capa"] .nav-prog{display:none}
 .cover{background:var(--cover);color:var(--cover-ink);box-shadow:0 0 0 100vmax var(--cover);clip-path:inset(0 -100vmax);margin-top:-1px}
 .cover-in{padding-block:clamp(36px,6vw,72px) clamp(32px,5vw,56px)}
 .cover-k{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cover-mute)}
-.cover h1{color:var(--cover-ink);margin:18px 0 18px;max-width:14ch;font-size:clamp(52px,10vw,124px)}
+.cover h1{color:var(--cover-ink);margin:18px 0 18px;line-height:.94;max-width:14ch;font-size:clamp(52px,10vw,124px)}
 .cover h1 em{color:var(--cover-red)}
 .cover .lede{color:var(--cover-mute);font-size:clamp(17px,2vw,19px)}
 .camp{margin:clamp(32px,5vw,52px) 0 0;padding-top:22px;border-top:1px solid var(--cover-line)}
@@ -589,7 +589,7 @@ section[aria-labelledby]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 6
   </div>
   <section aria-labelledby="s-resumo">
   <span class="eyebrow">Resumo executivo</span>
-  <h2 id="s-resumo">Cinco achados</h2>
+  <h2 id="s-resumo" data-conta="achados">Os achados</h2>
   <div class="findings">
     <div class="find"><span class="tag">Mando</span><p><strong>Fora de casa, 2 vitórias em 17 jogos.</strong> Contra a metade de baixo da tabela, o time somou 20 de 24 pontos em casa e apenas 5 de 27 fora.</p></div>
     <div class="find"><span class="tag">Trajetória</span><p><strong>Líder na 6ª rodada, 10º na 33ª.</strong> A chance de Libertadores caiu de 80,8% para 0,1%. A queda começou entre as rodadas 12 e 19, período de duas trocas de técnico.</p></div>
@@ -1723,6 +1723,12 @@ section[aria-labelledby]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 6
     document.getElementById('pl-c').textContent=hh;
     document.getElementById('pl-r').innerHTML='<span>'+a+'</span><span>'+b+'</span>';
     pc.setAttribute('aria-label','Próximo jogo: '+nx.rd+'ª rodada, '+dd+' às '+hh+', '+a+' x '+b);}
+  else if(pc){var TB=(window.TABELA||[]).filter(function(r){return r[1]==='São Paulo';})[0];
+    document.getElementById('pl-c').textContent='FIM';
+    document.getElementById('pl-r').innerHTML='<span>SÃO PAULO</span><span>'+(TB?TB[0]+'º · '+TB[8]+' PTS':'TEMPORADA 2026')+'</span>';
+    pc.setAttribute('aria-label','Temporada encerrada'+(TB?': São Paulo em '+TB[0]+'º com '+TB[8]+' pontos':''));}
+  /* título dos achados acompanha quantos existem (a skill escreve de 3 a 6 por rodada) */
+  var ha=document.querySelector('[data-conta="achados"]');if(ha){var nf=document.querySelectorAll('#s-resumo ~ .findings .find, .findings .find').length,EX=['','Um achado','Dois achados','Três achados','Quatro achados','Cinco achados','Seis achados','Sete achados','Oito achados'];if(EX[nf])ha.textContent=EX[nf];}
   var PL=window.PLACAR_PREV,PR=window.PREVISOES||[],t=document.getElementById('trust-t');
   if(t){if(PL)t.innerHTML='<b>'+PL.palpites+' de '+PL.jogos+'</b> palpites certos até aqui, registrados antes de cada jogo.';
     else if(PR.length)t.innerHTML='<b>'+PR.length+' '+(PR.length>1?'previsões registradas':'previsão registrada')+'</b> antes do apito. O placar começa depois da '+PR[0].rd+'ª rodada.';}
