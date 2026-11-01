@@ -174,7 +174,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .sd-bar i.neg{right:50%;background:var(--loss)}
 .sd-v{font-family:var(--f-mono);font-size:13px;text-align:right}
 .sd-d{grid-column:1/-1;font-size:12px;color:var(--muted);margin-top:-4px;font-variant-numeric:tabular-nums}
-@media(min-width:640px){.sd-row{grid-template-columns:170px minmax(0,1fr) 56px 110px}.sd-d{grid-column:auto;margin:0;text-align:right}}
+@media(min-width:640px){.sd-row{grid-template-columns:170px minmax(0,1fr) 56px 150px}.sd-d{grid-column:auto;margin:0;text-align:right}}
 /* players */
 .pl-intro{border-top:0;padding-block:24px 8px}
 .picker{display:flex;gap:8px;align-items:stretch;margin-top:16px;max-width:560px}
@@ -310,6 +310,52 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
 .wm-stripe{width:72px;height:6px;background:linear-gradient(to right,var(--brand) 0 33.3%,var(--line) 33.3% 66.6%,var(--ink) 66.6% 100%);border-radius:3px;opacity:.7}
 .wm-text{font-family:var(--f-display);font-weight:800;font-size:clamp(26px,6vw,48px);line-height:1;text-transform:uppercase;letter-spacing:.04em;color:var(--ink);opacity:.14;text-align:center;text-wrap:balance}
 .upd{border-left:3px solid var(--s-lib);background:var(--band);padding:10px 14px;margin:14px 0;font-size:15px}
+/* ===== upgrades 01/11: selo, simulador, vizinhos, janelas, trocas, previsões, ficha ===== */
+.selo{background:var(--loss-bg);color:var(--ink);border-left:4px solid var(--loss);padding:10px 14px;margin:14px 0 0;font-size:14.5px}
+.selo b{color:var(--loss)}
+.sim{background:var(--surface);border:1px solid var(--line);padding:18px;margin-top:26px}
+.sim-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 20px;align-items:baseline}
+.sim-presets{display:flex;flex-wrap:wrap;gap:6px}
+.sim-presets button,.seg button{font:500 12.5px var(--f-body);border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:5px 10px;border-radius:999px;cursor:pointer;min-height:32px}
+.sim-presets button:hover{border-color:var(--ink)}
+.sim-rows{display:grid;gap:8px;margin-top:14px}
+.sim-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line-soft)}
+.sim-row .op{font-weight:700;font-size:15px}.sim-row .op span{display:block;font-weight:400;font-size:12.5px;color:var(--muted);font-family:var(--f-mono)}
+.seg{display:flex;gap:4px}
+.seg button{min-width:44px;border-radius:6px;font-weight:700}
+.seg button[aria-pressed="true"].V{background:var(--win);border-color:var(--win);color:#fff}
+.seg button[aria-pressed="true"].E{background:var(--draw);border-color:var(--draw);color:#fff}
+.seg button[aria-pressed="true"].D{background:var(--loss);border-color:var(--loss);color:#fff}
+.sim-out{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;margin-top:16px;padding-top:14px;border-top:2px solid var(--ink)}
+.sim-pts{font-family:var(--f-display);font-weight:900;font-size:64px;line-height:.9;font-variant-numeric:tabular-nums}
+.sim-pts small{display:block;font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.sim-line{position:relative;height:74px;margin-top:6px}
+.sim-line .ax{position:absolute;left:0;right:0;top:40px;height:2px;background:var(--line)}
+.sim-line .tk{position:absolute;top:30px;transform:translateX(-50%);text-align:center;font:500 10.5px/1.15 var(--f-mono);color:var(--muted);white-space:nowrap}
+.sim-line .tk i{display:block;width:2px;height:22px;background:var(--faint);margin:0 auto 3px}
+.sim-line .tk.lo{top:0}.sim-line .tk.lo i{margin:3px auto 0}
+.sim-line .me{position:absolute;top:24px;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:var(--brand);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--brand);transition:left .25s}
+@media(max-width:560px){.sim-out{grid-template-columns:minmax(0,1fr)}.sim-pts{font-size:54px}}
+.cmp{min-width:520px;background:var(--surface);border:1px solid var(--line)}
+.cmp td,.cmp th{padding:8px 10px;white-space:nowrap}.cmp td.n,.cmp th.n{text-align:right}
+.cmp tr.me td{font-weight:700;background:var(--band)}.cmp tr.avg td{color:var(--muted);font-style:italic;border-top:2px solid var(--line)}
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:14px}
+.split>div{background:var(--surface);padding:14px 16px;min-width:0}
+.split .k{font:500 11px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.split .v{font-family:var(--f-display);font-weight:800;font-size:34px;line-height:1.05;font-variant-numeric:tabular-nums;margin:4px 0}
+.split .d{font-size:13px;color:var(--muted)}
+.prev-table{min-width:640px;background:var(--surface);border:1px solid var(--line)}
+.prev-table td,.prev-table th{padding:8px 10px;white-space:nowrap}
+.res{display:inline-block;min-width:26px;text-align:center;font:700 12px/22px var(--f-mono);border-radius:4px}
+.res.V{background:var(--win-bg);color:var(--win)}.res.E{background:var(--draw-bg);color:var(--ink)}.res.D{background:var(--loss-bg);color:var(--loss)}
+.ok{color:var(--win);font-weight:700}.ko{color:var(--loss);font-weight:700}.wait{color:var(--muted)}
+.ficha{margin:4px 0 18px}
+.ficha table{background:var(--bg);font-size:13.5px}
+.ficha td,.ficha th{padding:6px 8px}.ficha td.n,.ficha th.n{text-align:right;font-variant-numeric:tabular-nums}
+.ficha td.fb{font-weight:700;color:var(--ink)}.ficha td.fw{color:var(--muted)}
+.forma{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 4px}
+.forma span{font:500 11px/1 var(--f-mono);padding:5px 6px;border-radius:4px}
+.forma .V{background:var(--win-bg);color:var(--win)}.forma .E{background:var(--draw-bg);color:var(--ink)}.forma .D{background:var(--loss-bg);color:var(--loss)}
 </style>
 
 <div class="stripe" aria-hidden="true"></div>
@@ -325,6 +371,7 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
   <p class="lede">Depois de 33 rodadas, o São Paulo é o 10º colocado com 43 pontos e saldo zero. O título e a Libertadores pela tabela já não estão em jogo. O dado que explica a temporada é o mando: 69% de aproveitamento em casa contra 20% como visitante. Este relatório mostra onde os pontos foram perdidos, quem sustenta o ataque e o que fazer nas cinco rodadas finais e no planejamento de 2027.</p>
 
 </header>
+<div class="selo" id="selo" hidden></div>
 <nav class="tabbar" role="tablist" aria-label="Seções do relatório"><div class="tabbar-in">
   <button type="button" role="tab" id="tb-time" aria-controls="tab-time" aria-selected="true">Time</button>
   <button type="button" role="tab" id="tb-jogadores" aria-controls="tab-jogadores" aria-selected="false">Jogadores</button>
@@ -445,14 +492,14 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
       <p>Nos cinco clássicos estaduais já disputados no Brasileirão, o São Paulo somou um ponto e marcou quatro gols. Contra o Palmeiras, foram duas derrotas sem marcar (0 a 1 em casa, 0 a 2 fora). Somando o Paulistão, o rival eliminou o Tricolor na semifinal (2 a 1).</p>
       <p>O próximo jogo é exatamente um clássico: São Paulo x Corinthians, 4 de novembro, no Morumbis. O Corinthians é o 17º, dentro do Z4, e venceu o primeiro turno por 3 a 2.</p>
     </div>
-    <table class="num">
+    <div class="scroll"><table class="num">
       <thead><tr><th>Clássico</th><th>Casa</th><th>Fora</th><th class="n">Pts</th></tr></thead>
       <tbody>
         <tr><td>Palmeiras</td><td><span class="cell D"><b>D</b>0–1</span></td><td><span class="cell D"><b>D</b>0–2</span></td><td class="n">0/6</td></tr>
         <tr><td>Santos</td><td><span class="cell D"><b>D</b>1–2</span></td><td><span class="cell E"><b>E</b>1–1</span></td><td class="n">1/6</td></tr>
         <tr><td>Corinthians</td><td><span class="cell P"><b>·</b>04/11</span></td><td><span class="cell D"><b>D</b>2–3</span></td><td class="n">0/3</td></tr>
       </tbody>
-    </table>
+    </table></div>
   </div>
 </section>
 
@@ -468,13 +515,13 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
         <div class="srow"><span class="nm">Demais jogadores</span><div class="track"><div class="fill other" style="width:100%"></div></div><span class="vv">20</span></div>
       </div>
       <p class="caption">A artilharia por fonte (football-data.org) inclui gols contra na conta do time; a soma dos demais é o total menos os dois atacantes.</p>
-      <table class="num" style="margin-top:18px">
+      <div class="scroll"><table class="num" style="margin-top:18px">
         <thead><tr><th>Jogador</th><th class="n">J (BR)</th><th class="n">Gols (BR)</th><th class="n">Pên.</th><th class="n">Assist.</th><th class="n">Gols/j</th><th class="n">Temporada</th></tr></thead>
         <tbody>
           <tr><td><strong>Jonathan Calleri</strong> <span class="pill">CA · 9</span></td><td class="n">29</td><td class="n">10</td><td class="n">2</td><td class="n">2</td><td class="n">0,34</td><td class="n">16 gols</td></tr>
           <tr><td><strong>Luciano</strong> <span class="pill">ATA · 10</span></td><td class="n">27</td><td class="n">9</td><td class="n">2</td><td class="n">1</td><td class="n">0,33</td><td class="n">15 gols</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <p class="caption">Brasileirão: football-data.org, lido em 31/10. Temporada (todas as competições): contagem publicada em 11/10.</p>
     </div>
     <div class="read">
@@ -590,6 +637,18 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
   <div class="read"><p>Probabilidades do Modelo ValorFinal. Pontos esperados = 3 × vitória + 1 × empate. A soma da sequência é 7,24 pontos (1,45 por jogo), acima da média da Série A (1,38).</p></div>
   <div class="fx" id="fixtures" style="margin-top:16px"></div>
 
+  <div class="sim" id="sim">
+    <div class="sim-head"><h3 style="margin:0">Simulador da reta final</h3><div class="sim-presets" role="group" aria-label="Cenários prontos"><button type="button" data-p="fav">Favorito do modelo</button><button type="button" data-p="casa">Vence em casa, perde fora</button><button type="button" data-p="all">Vence todas</button></div></div>
+    <p class="small muted" style="margin:6px 0 0">Marque o resultado de cada jogo. A régua compara a pontuação final do São Paulo com a projeção dos vizinhos se eles mantiverem o ritmo atual de pontos por jogo. É uma conta simples; a chance real de vaga é a do Modelo ValorFinal.</p>
+    <div class="sim-rows" id="sim-rows"></div>
+    <div class="sim-out"><div class="sim-pts" id="sim-pts">—<small>pontos no fim</small></div><div><div class="sim-line" id="sim-line" aria-hidden="true"></div><p class="small" id="sim-txt" style="margin:4px 0 0"></p></div></div>
+  </div>
+
+  <h3 style="margin-top:34px">Ritmo dos vizinhos e média da Série A</h3>
+  <p class="small muted" style="margin:0">Pontos, gols marcados e sofridos por jogo. A projeção multiplica os pontos por jogo de hoje por 38.</p>
+  <div class="scroll"><table class="cmp num" id="cmp"></table></div>
+  <p class="caption" id="cmp-txt"></p>
+
   <div class="grid2" style="margin-top:30px">
     <figure class="fig" style="margin:0">
       <div class="fig-head"><span class="fig-title">Posição final simulada (% das simulações)</span></div>
@@ -598,14 +657,14 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     </figure>
     <div class="read">
       <h3>Cenários</h3>
-      <table class="num">
+      <div class="scroll"><table class="num">
         <thead><tr><th>Cenário</th><th class="n">Pontos</th><th>Leitura</th></tr></thead>
         <tbody>
           <tr><td>Mediana do modelo</td><td class="n">50</td><td>10º lugar, Sul-Americana provável</td></tr>
           <tr><td>Vence os 3 em casa, perde os 2 fora</td><td class="n">52</td><td>Briga com Atlético-MG pelo 7º</td></tr>
           <tr><td>Máximo possível</td><td class="n">58</td><td>Ainda abaixo do corte de Top 5 (~61)</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <p style="margin-top:14px">O clássico de 4/11 é o jogo de maior alavancagem: com vitória, a chance de Sul-Americana sobe para 95,5%; com derrota, cai para 73,4%. Vagas extras de Libertadores para o 6º ao 9º só existem se sobrarem da Copa do Brasil e das finais continentais, e o São Paulo precisaria terminar no máximo em 9º (hoje 9º tem 44 pts, Bragantino).</p>
     </div>
   </div>
@@ -744,6 +803,23 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
   <p class="caption">Fonte: SofaScore, mapa de chutes das 33 rodadas. Gols contra não entram nesta tabela.</p>
 </section>
 
+<section aria-labelledby="s-janelas">
+  <span class="eyebrow">Gols · janelas e trocas</span>
+  <h2 id="s-janelas">Quando o jogo vira e o que as trocas mudam</h2>
+  <div class="read"><p id="jan-txt"></p></div>
+  <figure class="fig" style="margin-inline:0">
+    <div class="fig-head"><span class="fig-title">xG criado e cedido por janela de 15 minutos</span><div class="legend"><span><i class="sq" style="background:var(--win)"></i>xG a favor</span><span><i class="sq" style="background:var(--loss)"></i>xG contra</span><span>Número acima da barra: gols</span></div></div>
+    <div class="scroll"><svg id="janchart" role="img" aria-label="xG a favor e contra por janela de 15 minutos"></svg></div>
+    <p class="caption">xG somado de todas as finalizações do Brasileirão (SofaScore). Acréscimos contam na última janela de cada tempo.</p>
+  </figure>
+  <h3 style="margin-top:28px">Antes e depois da primeira substituição</h3>
+  <div class="split" id="subs-split"></div>
+  <p class="caption" id="subs-txt"></p>
+  <h3 style="margin-top:26px">Quem muda o jogo vindo do banco</h3>
+  <p class="small muted" style="margin:0 0 6px">Saldo de xG por 90 minutos (a favor menos contra) enquanto o jogador esteve em campo depois de entrar. Mínimo de 4 entradas.</p>
+  <div id="bench-list"></div>
+</section>
+
 <section aria-labelledby="s-pairs">
   <span class="eyebrow">Duplas e impacto individual</span>
   <h2 id="s-pairs">Quem faz o time melhor quando está em campo</h2>
@@ -805,6 +881,13 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     <div class="ins"><span class="tag">Calendário</span><p><strong>Quatro jogos em 14 dias no fim</strong> (19/11 a 2/12), depois de duas semanas sem jogo após o clássico. Calleri, com 33 anos e um problema na coxa em outubro, é o único sem reposição à altura; Luciano e Lucas Moura revezam ao lado dele, e Marcos Antônio e Bobadilla dividem a vaga no meio.</p></div>
     <div class="ins"><span class="tag">Meta</span><p><strong>10 pontos: as três vitórias em casa e um empate fora.</strong> Isso leva o time a 53 pontos, acima da projeção de 50, e coloca o 7º lugar (Atlético-MG, 50) ao alcance. O clássico vale mais que os outros: com vitória, a chance de Sul-Americana vai a 95,5%.</p></div>
   </div>
+</section>
+<section aria-labelledby="s-prev">
+  <span class="eyebrow">Credibilidade · placar das previsões</span>
+  <h2 id="s-prev">Quanto este relatório acerta</h2>
+  <p class="read">Antes de cada jogo, a escalação sugerida e o palpite ficam registrados com data e não mudam depois. Na rodada seguinte, o placar compara com o time que entrou em campo e com o resultado, ao lado do favorito do Modelo ValorFinal. O índice de Brier mede a calibragem das probabilidades do modelo: 0 é perfeito, 0,67 é chutar um terço para cada resultado.</p>
+  <div id="prev-kpis"></div>
+  <div class="scroll"><table class="prev-table num" id="prev-table"></table></div>
 </section>
 <div id="matches"></div>
 </div>
@@ -918,6 +1001,8 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
 <script src="data/dados.js"></script>
 <script src="data/notas.js"></script>
 <script src="data/escalacoes.js"></script>
+<script src="data/previsoes.js"></script>
+<script>window.RX_CONTADOR=''; /* código da conta GoatCounter, ex.: 'raio-x-spfc' */</script>
 <script>
 /* ===== Jogadores (dados SofaScore, Série A 2026) ===== */
 (function(){
@@ -1165,12 +1250,26 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
   var POS=[[50,128],[24,102],[50,108],[76,102],[10,64],[38,72],[62,72],[90,64],[32,42],[68,42],[50,18]];
   var M=window.ESCALACOES||[];
   function br(v){return String(v).replace('.',',');}
+  var PX={};(window.PROXIMOS||[]).forEach(function(p){PX[p.rd]=p;});var ET=window.ESTAT_TIME,RVX=(window.EXTRA||{}).rivais||{};
+  function f1(v,d){return v===null||v===undefined?'—':Number(v).toFixed(d).replace('.',',');}
+  function ficha(m){var p=PX[m.rd];if(!p||!p.stats)return '';var A=p.stats,B=ET||{};
+    var R=[['Gols marcados por jogo','goalsScored',1,1],['Gols sofridos por jogo','goalsConceded',1,-1],['Grandes chances criadas por jogo','bigChancesCreated',1,1],['Grandes chances cedidas por jogo','bigChancesAgainst',1,-1],['Erros que viraram gol','errorsLeadingToGoal',0,-1],['Posse média (%)','averageBallPossession',0,0],['Passes certos (%)','accuratePassesPercentage',0,1],['Duelos ganhos (%)','duelsWonPercentage',0,1],['Aéreos ganhos (%)','aerialDuelsWonPercentage',0,1]];
+    var h='<div class="ficha"><h3>Ficha em números</h3><div class="scroll"><table class="num"><thead><tr><th>Série A 2026</th><th class="n">'+m.opp+'</th><th class="n">São Paulo</th></tr></thead><tbody>';
+    R.forEach(function(r){var a=A[r[1]],b=B[r[1]];if(a!=null&&r[2])a=a/(A.matches||1);if(b!=null&&r[2])b=b/(B.matches||1);
+      var ca='',cb='';if(r[3]&&a!=null&&b!=null&&Math.abs(a-b)>1e-9){var aw=(a-b)*r[3]>0;ca=aw?'fb':'fw';cb=aw?'fw':'fb';}
+      var dd=r[2]?2:r[1]==='errorsLeadingToGoal'?0:1;h+='<tr><td>'+r[0]+'</td><td class="n '+ca+'">'+f1(a,dd)+'</td><td class="n '+cb+'">'+f1(b,dd)+'</td></tr>';});
+    var ma=p.mandoAdv,sp=null,tb=m.home?RVX.casa:RVX.fora;if(tb)sp=tb.filter(function(x){return x[1]==='São Paulo';})[0];
+    if(ma)h+='<tr><td>'+(m.home?'Como visitante · São Paulo como mandante':'Como mandante · São Paulo como visitante')+'</td><td class="n">'+ma.v+'V '+ma.e+'E '+ma.d+'D</td><td class="n">'+(sp?sp[3]+'V '+sp[4]+'E '+sp[5]+'D':'—')+'</td></tr>';
+    h+='</tbody></table></div>';
+    if(p.forma&&p.forma.length)h+='<div class="small muted" style="margin-top:8px">Últimos '+p.forma.length+' jogos do '+m.opp+' (do mais antigo ao mais recente)</div><div class="forma">'+p.forma.map(function(x){return '<span class="'+x[0]+'">'+x+'</span>';}).join('')+'</div>';
+    return h+'<p class="small muted" style="margin:4px 0 0">Em negrito, quem leva vantagem na métrica. Fonte: SofaScore.</p></div>';}
   var html='';
   M.forEach(function(m,k){
     html+='<section class="match" aria-labelledby="m'+m.rd+'"><div class="m-head"><span class="eyebrow">'+m.rd+'ª rodada · '+m.date+'</span><h2 id="m'+m.rd+'">'+(m.home?'São Paulo x '+m.opp:m.opp+' x São Paulo')+'</h2><div class="m-sub"><span class="pill">'+(m.home?'Morumbis':'Fora')+'</span> <span class="pill">'+m.opp+': '+m.pos+'</span></div>';
     html+='<div class="m-prob" aria-label="Probabilidades: vitória '+br(m.prob[0])+'%, empate '+br(m.prob[1])+'%, derrota '+br(m.prob[2])+'%"><div class="w" style="flex:'+m.prob[0]+'">V '+Math.round(m.prob[0])+'%</div><div class="d" style="flex:'+m.prob[1]+'">E '+Math.round(m.prob[1])+'%</div><div class="l" style="flex:'+m.prob[2]+'">D '+Math.round(m.prob[2])+'%</div></div></div>';
     html+='<div class="m-grid"><div class="m-pitch"><svg viewBox="0 0 100 140" id="pitch'+m.rd+'" role="img" aria-label="Escalação 3-4-2-1"></svg><div class="m-bench"><b>Banco:</b> '+m.bench.join(', ')+'</div></div>';
     html+='<div class="m-info"><div class="sw"><div><h3>O que o '+m.opp+' faz bem</h3><ul>'+m.str.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div><div><h3>Onde ele cede</h3><ul>'+m.weak.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div></div>';
+    html+=ficha(m);
     html+='<h3>Por que essa escalação</h3><ol class="why">'+m.why.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>';
     html+=(m.upd?'<div class="upd"><strong>Atualização pré-jogo'+(m.updData?' · '+m.updData:'')+'.</strong> '+m.upd+'</div>':'')+'<div class="note"><strong>Chave do jogo.</strong> '+m.key+'</div><p class="small muted"><strong>Plano B.</strong> '+m.planb+'</p></div></div></section>';
   });
@@ -1195,7 +1294,7 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
   function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
   function br(v,d){return Number(v).toFixed(d).replace('.',',');}
   // minute chart
-  var mc=document.getElementById('minchart');if(mc){var F=[5,5,8,5,11,5],S=[4,4,8,12,3,8],L=['0–15','16–30','31–45+','46–60','61–75','76–90+'];
+  var mc=document.getElementById('minchart');var JX=(window.EXTRA||{}).janelas;if(mc){var F=JX?JX.gf:[5,5,8,5,11,5],S=JX?JX.gc:[4,4,8,12,3,8],L=['0–15','16–30','31–45+','46–60','61–75','76–90+'];
     var W=620,H=200,m={l:26,r:8,t:16,b:26},iw=W-m.l-m.r,ih=H-m.t-m.b;mc.setAttribute('viewBox','0 0 '+W+' '+H);mc.setAttribute('width','100%');mc.style.minWidth='420px';
     function Y(v){return m.t+ih-v/13*ih;}[0,4,8,12].forEach(function(v){el('line',{x1:m.l,x2:W-m.r,y1:Y(v),y2:Y(v),stroke:'var(--line-soft)'},mc);var t=el('text',{x:m.l-6,y:Y(v)+4,'text-anchor':'end','font-size':10},mc);t.textContent=v;});
     var gw=iw/6;L.forEach(function(l,i){var x=m.l+i*gw,bw=(gw-14)/2;
@@ -1245,4 +1344,99 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     h+='<a class="sd-row" href="#j-'+sl+'"><span class="sd-n">'+r[0]+'</span><span class="sd-bar"><i class="'+(r[1]>=0?'pos':'neg')+'" style="width:'+w+'%"></i></span><span class="sd-v">'+(r[1]>0?'+':r[1]<0?'−':'')+br(Math.abs(r[1]),2)+'</span><span class="sd-d">'+r[2].replace(':',' a ')+' com ele'+(r[3]?' · '+r[3]:'')+'</span></a>';});oo.innerHTML=h;}
 })();
 
+</script>
+<script>
+/* ===== Upgrades 01/11: selo, simulador, vizinhos, janelas, trocas, previsões ===== */
+(function(){
+  var NS='http://www.w3.org/2000/svg';
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function br(v,d){if(v===null||v===undefined||isNaN(v))return '—';return Number(v).toFixed(d===undefined?0:d).replace('.',',');}
+  function sg(v,d){return (v>0?'+':'')+br(v,d);}
+  var EX=window.EXTRA||{},META=window.META||{},TAB=window.TABELA||[],ESC=window.ESCALACOES||[];
+
+  // selo de dados incompletos
+  var selo=document.getElementById('selo');
+  if(selo&&META.incompleto&&META.incompleto.length){selo.hidden=false;selo.innerHTML='<b>Dados incompletos nesta atualização.</b> '+META.incompleto.map(function(x){return String(x).replace(/[<>&]/g,'');}).join(' · ')+' Os números afetados serão corrigidos na próxima coleta.';}
+
+  // simulador
+  var sp=TAB.filter(function(r){return r[1]==='São Paulo';})[0];
+  var rowsEl=document.getElementById('sim-rows');
+  if(rowsEl&&sp&&ESC.length){
+    var base=sp[8],pv={V:3,E:1,D:0},st={};
+    function fav(m){var i=m.prob.indexOf(Math.max.apply(null,m.prob));return 'VED'[i];}
+    ESC.forEach(function(m){st[m.rd]=fav(m);});
+    var h='';ESC.forEach(function(m){h+='<div class="sim-row"><div class="op">'+(m.home?'vs ':'@ ')+m.opp+'<span>R'+m.rd+' · V '+Math.round(m.prob[0])+'% · E '+Math.round(m.prob[1])+'% · D '+Math.round(m.prob[2])+'%</span></div><div class="seg" role="group" aria-label="Resultado contra '+m.opp+'">'+['V','E','D'].map(function(k){return '<button type="button" class="'+k+'" data-rd="'+m.rd+'" data-k="'+k+'" aria-pressed="false">'+k+'</button>';}).join('')+'</div></div>';});
+    rowsEl.innerHTML=h;
+    var viz=((EX.rivais||{}).vizinhos||[]).filter(function(r){return r.time!=='São Paulo';});
+    var xp=base+ESC.reduce(function(s,m){return s+(3*m.prob[0]+m.prob[1])/100;},0);
+    function draw(){
+      rowsEl.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',st[b.dataset.rd]===b.dataset.k?'true':'false');});
+      var fin=base+ESC.reduce(function(s,m){return s+pv[st[m.rd]];},0);
+      document.getElementById('sim-pts').innerHTML=fin+'<small>pontos no fim · modelo espera '+br(xp,1)+'</small>';
+      var all=viz.map(function(r){return r.proj38;}).concat([fin,base,base+3*ESC.length]);
+      var lo=Math.min.apply(null,all)-1,hi=Math.max.apply(null,all)+1;function X(v){return ((v-lo)/(hi-lo)*100).toFixed(2)+'%';}
+      var lh='<div class="ax"></div>';viz.forEach(function(r,i){lh+='<div class="tk'+(i%2?' lo':'')+'" style="left:'+X(r.proj38)+'">'+(i%2?r.time.replace('RB ','')+' '+r.proj38+'<i></i>':'<i></i>'+r.time.replace('RB ','')+' '+r.proj38)+'</div>';});
+      lh+='<div class="me" style="left:'+X(fin)+'" title="São Paulo '+fin+'"></div>';
+      document.getElementById('sim-line').innerHTML=lh;
+      var acima=viz.filter(function(r){return fin>r.proj38;}).length,emp=viz.filter(function(r){return fin===r.proj38;}).length;
+      var w=ESC.filter(function(m){return st[m.rd]==='V';}).length,e=ESC.filter(function(m){return st[m.rd]==='E';}).length;
+      document.getElementById('sim-txt').innerHTML='<strong>'+w+'V '+e+'E '+(ESC.length-w-e)+'D: '+fin+' pontos.</strong> Ficaria acima de '+acima+' dos '+viz.length+' vizinhos'+(emp?' e empatado com '+emp:'')+' se eles mantiverem o ritmo atual.';
+    }
+    rowsEl.addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;st[b.dataset.rd]=b.dataset.k;draw();});
+    document.querySelectorAll('.sim-presets button').forEach(function(b){b.addEventListener('click',function(){var p=b.dataset.p;ESC.forEach(function(m){st[m.rd]=p==='fav'?fav(m):p==='all'?'V':(m.home?'V':'D');});draw();});});
+    draw();
+  }
+
+  // vizinhos e média da liga
+  var cmp=document.getElementById('cmp'),RV=EX.rivais;
+  if(cmp&&RV){var t='<thead><tr><th>Time</th><th class="n">Pts</th><th class="n">Pts/j</th><th class="n">Gols/j</th><th class="n">Sofridos/j</th><th class="n">Aprov.</th><th class="n">Projeção</th></tr></thead><tbody>';
+    RV.vizinhos.forEach(function(r){t+='<tr'+(r.time==='São Paulo'?' class="me"':'')+'><td>'+r.pos+'º '+r.time+'</td><td class="n">'+r.pts+'</td><td class="n">'+br(r.ppj,2)+'</td><td class="n">'+br(r.gpj,2)+'</td><td class="n">'+br(r.gcj,2)+'</td><td class="n">'+r.aprov+'%</td><td class="n">'+r.proj38+'</td></tr>';});
+    var m=RV.media;t+='<tr class="avg"><td>'+m.time+'</td><td class="n">—</td><td class="n">'+br(m.ppj,2)+'</td><td class="n">'+br(m.gpj,2)+'</td><td class="n">'+br(m.gcj,2)+'</td><td class="n">'+m.aprov+'%</td><td class="n">—</td></tr></tbody>';
+    cmp.innerHTML=t;
+    var me=RV.vizinhos.filter(function(r){return r.time==='São Paulo';})[0];
+    if(me){var tx='O São Paulo faz '+br(me.ppj,2)+' ponto por jogo, '+(me.ppj<m.ppj?'abaixo':'acima')+' da média da Série A ('+br(m.ppj,2)+'). Marca '+br(me.gpj,2)+' gol por jogo ('+(me.gpj<m.gpj?'menos':'mais')+' que a média de '+br(m.gpj,2)+') e sofre '+br(me.gcj,2)+' ('+(me.gcj<m.gcj?'menos':'mais')+' que a média).';
+      if(RV.casa&&RV.fora){var c=RV.casa.filter(function(r){return r[1]==='São Paulo';})[0],f=RV.fora.filter(function(r){return r[1]==='São Paulo';})[0];if(c&&f)tx+=' Na tabela só de mandantes é o '+c[0]+'º; na de visitantes, o '+f[0]+'º.';}
+      document.getElementById('cmp-txt').textContent=tx;}
+  }
+
+  // janelas de 15 minutos
+  var J=EX.janelas,jc=document.getElementById('janchart');
+  if(J&&jc){var W=620,H=210,mm={l:30,r:8,t:18,b:26},iw=W-mm.l-mm.r,ih=H-mm.t-mm.b;jc.setAttribute('viewBox','0 0 '+W+' '+H);jc.setAttribute('width','100%');jc.style.minWidth='420px';
+    var mx=Math.ceil(Math.max.apply(null,J.xgf.concat(J.xgc))/2)*2+1;function Y(v){return mm.t+ih-v/mx*ih;}
+    for(var v=0;v<=mx;v+=4){el('line',{x1:mm.l,x2:W-mm.r,y1:Y(v),y2:Y(v),stroke:'var(--line-soft)'},jc);var tt=el('text',{x:mm.l-6,y:Y(v)+4,'text-anchor':'end','font-size':10},jc);tt.textContent=v;}
+    var gw=iw/6;J.rot.forEach(function(l,i){var x=mm.l+i*gw,bw=(gw-14)/2;
+      var a=el('rect',{x:x+5,y:Y(J.xgf[i]),width:bw,height:Y(0)-Y(J.xgf[i]),rx:3,fill:'var(--win)'},jc);el('title',{},a).textContent='xG a favor '+br(J.xgf[i],1)+' · '+J.gf[i]+' gols';
+      var b=el('rect',{x:x+7+bw,y:Y(J.xgc[i]),width:bw,height:Y(0)-Y(J.xgc[i]),rx:3,fill:'var(--loss)'},jc);el('title',{},b).textContent='xG contra '+br(J.xgc[i],1)+' · '+J.gc[i]+' gols';
+      var t1=el('text',{x:x+5+bw/2,y:Y(J.xgf[i])-4,'text-anchor':'middle','font-size':10.5,style:'fill:var(--ink)'},jc);t1.textContent=J.gf[i];
+      var t2=el('text',{x:x+7+bw*1.5,y:Y(J.xgc[i])-4,'text-anchor':'middle','font-size':10.5,style:'fill:var(--ink)'},jc);t2.textContent=J.gc[i];
+      var t3=el('text',{x:x+gw/2,y:H-8,'text-anchor':'middle','font-size':10.5},jc);t3.textContent=l+'′';});
+    var d=J.rot.map(function(_,i){return J.xgf[i]-J.xgc[i];}),best=d.indexOf(Math.max.apply(null,d)),worst=d.indexOf(Math.min.apply(null,d));
+    document.getElementById('jan-txt').innerHTML='<strong>A melhor janela é '+J.rot[best]+' minutos</strong>: o time cria '+br(J.xgf[best],1)+' de xG e cede '+br(J.xgc[best],1)+' (gols: '+J.gf[best]+' a '+J.gc[best]+'). <strong>A pior é '+J.rot[worst]+'</strong>: cria '+br(J.xgf[worst],1)+' e cede '+br(J.xgc[worst],1)+' (gols: '+J.gf[worst]+' a '+J.gc[worst]+'). Quando gols e xG apontam para o mesmo lado, o padrão é de jogo, não de sorte.';
+  }
+
+  // substituições
+  var S=EX.subs,ss=document.getElementById('subs-split');
+  if(S&&ss){function card(lab,o){return '<div><div class="k">'+lab+'</div><div class="v">'+br(o.xgf90,2)+' : '+br(o.xgc90,2)+'</div><div class="d">xG a favor e contra por 90 min · gols '+o.gf+':'+o.gc+' em '+Math.round(o.min/90)+' jogos-equivalentes</div></div>';}
+    ss.innerHTML=card('Antes da 1ª troca',S.antes)+card('Depois da 1ª troca',S.depois);
+    var da=S.depois.xgf90-S.depois.xgc90,an=S.antes.xgf90-S.antes.xgc90;
+    document.getElementById('subs-txt').textContent='A primeira troca sai, em média, aos '+S.minPrimeira+' minutos. Depois dela, o jogo fica '+((S.depois.xgf90+S.depois.xgc90)>(S.antes.xgf90+S.antes.xgc90)?'mais aberto':'mais fechado')+': o time cria '+br(S.depois.xgf90,2)+' de xG por 90 (antes, '+br(S.antes.xgf90,2)+') e cede '+br(S.depois.xgc90,2)+' (antes, '+br(S.antes.xgc90,2)+'). O saldo de xG por 90 vai de '+sg(an,2)+' para '+sg(da,2)+'.';
+    var bl=document.getElementById('bench-list'),h2='',mx2=Math.max.apply(null,S.banco.map(function(b){return Math.abs(b.xgSaldo90);}).concat([1]));
+    S.banco.forEach(function(b){var w=Math.min(50,Math.abs(b.xgSaldo90)/mx2*50);h2+='<div class="sd-row"><span class="sd-n">'+b.nome+'</span><span class="sd-bar"><i class="'+(b.xgSaldo90>=0?'pos':'neg')+'" style="width:'+w+'%"></i></span><span class="sd-v">'+sg(b.xgSaldo90,2)+'</span><span class="sd-d">'+b.ent+' entradas · '+b.min+' min · gols '+b.gf+':'+b.gc+'</span></div>';});
+    bl.innerHTML=h2;
+  }
+
+  // placar das previsões
+  var PR=window.PREVISOES||[],PL=window.PLACAR_PREV,pt=document.getElementById('prev-table');
+  if(pt){var k=document.getElementById('prev-kpis');
+    if(PL){k.innerHTML='<div class="kpis" role="list" style="margin:18px 0 14px"><div class="kpi" role="listitem"><div class="k">Palpites certos</div><div class="v">'+PL.palpites+'/'+PL.jogos+'</div><div class="d">resultado do jogo</div></div><div class="kpi" role="listitem"><div class="k">Favorito do modelo</div><div class="v">'+PL.modelo+'/'+PL.jogos+'</div><div class="d">ValorFinal, mesmo jogos</div></div><div class="kpi" role="listitem"><div class="k">Titulares acertados</div><div class="v">'+br(PL.xiMedio,1)+'</div><div class="d">de 11, média por jogo</div></div><div class="kpi" role="listitem"><div class="k">Brier do modelo</div><div class="v">'+br(PL.brier,2)+'</div><div class="d">0 = perfeito · 0,67 = chute</div></div></div>';}
+    else if(PR.length){k.innerHTML='<div class="note"><strong>O placar começa depois da '+PR[0].rd+'ª rodada.</strong> '+PR.length+' previsões já estão registradas desde '+PR[0].registrado+'.</div>';}
+    var t='<thead><tr><th>Rodada</th><th>Jogo</th><th>Palpite</th><th>Modelo (V/E/D)</th><th>Resultado</th><th class="n">Titulares</th><th>Registrado</th></tr></thead><tbody>';
+    PR.forEach(function(p){var r=p.real;t+='<tr><td>R'+p.rd+'</td><td>'+(p.home?'vs ':'@ ')+p.opp+'</td><td><span class="res '+p.palpite+'">'+p.palpite+'</span></td><td>'+(p.prob?p.prob.map(function(x){return Math.round(x);}).join(' / '):'—')+'</td><td>'+(r?'<span class="res '+r.res+'">'+r.res+'</span> '+r.placar+' <span class="'+(r.acertouPalpite?'ok">✓':'ko">✗')+'</span>':'<span class="wait">aguardando</span>')+'</td><td class="n">'+(r?r.acertosXI+'/11':'—')+'</td><td>'+p.registrado+'</td></tr>';});
+    pt.innerHTML=t+'</tbody>';
+  }
+})();
+</script>
+<script>
+/* Contador de visitas (GoatCounter, sem cookies). Só conta no site público e só se RX_CONTADOR tiver o código da conta. */
+(function(){var c=window.RX_CONTADOR;if(!c||!/github\.io$/.test(location.hostname))return;var s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.setAttribute('data-goatcounter','https://'+c+'.goatcounter.com/count');document.body.appendChild(s);})();
 </script>

@@ -1,5 +1,19 @@
 # Changelog
 
+## 01/11/2026 · credibilidade, conteúdo novo e card para redes
+
+- **Placar das previsões** (aba Próximos jogos): escalação sugerida e palpite registrados antes do jogo em `data/previsoes.json`; o `montar.py` preenche o resultado, os titulares acertados e o Brier do modelo. Previsões das rodadas 34 a 38 registradas hoje (palpite = favorito do modelo).
+- **Checagens automáticas** (`ferramentas/validar.py`): placar × lista de gols, mapa de chutes, tabela × campanha, notas e minutos plausíveis, titulares da rodada nova. Com erro, o `montar.py` para; com `--forcar`, a página mostra o selo de dados incompletos.
+- **Plano B do coletor**: 3 tentativas por chamada, `RX.status()` e `RX.retomar()`; o JSON sai marcado com `incompleto` quando algo falhar.
+- **Coletor novo na etapa 4**: estatísticas do São Paulo, tabela de mandantes e visitantes e forma dos próximos adversários. Para a R33 esses campos foram coletados à parte em 01/11 e acrescentados ao `rodada-33.json`.
+- **Ficha do adversário em números** em cada jogo da aba Próximos jogos.
+- **Janelas de 15 minutos com xG e impacto das substituições** (aba Gols, seção nova). O gráfico de gols por faixa passou a ler os dados do `montar.py`.
+- **Simulador da reta final** e **ritmo dos vizinhos × média da Série A** (aba Time, seção Reta final).
+- **Card da rodada** (`ferramentas/card.html` + `gerar-card.js`): PNG 1080×1350 em `relatorios/`, números de `data/card-base.js` (automático) e textos de `data/card.js`.
+- **Contador de visitas** pronto para ligar (GoatCounter, sem cookies): basta preencher `window.RX_CONTADOR` no `index.html`.
+- **Modo fim de temporada**: `montar.py --temporada` gera `relatorios/retrospectiva-2026.md`.
+- Tabelas que estouravam a largura no celular agora rolam dentro do quadro.
+
 ## 01/11/2026 · mapa de finalizações interativo
 
 - Mapa de chutes com filtros por mando, adversário, tipo de jogada e "só gols"; cada chute mostra rodada, placar, minuto, autor, parte do corpo, jogada e xG ao passar o mouse ou tocar.

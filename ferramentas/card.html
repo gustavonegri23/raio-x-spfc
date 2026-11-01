@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080">
+<title>Card da rodada · Raio-X Tricolor</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Card 1080×1350 (4:5) para Instagram e LinkedIn. Lê data/card-base.js (números) e data/card.js (textos). */
+:root{--bg:#121214;--ink:#F2F2EF;--muted:#9C9EA4;--line:#2C2D32;--red:#E0242F;--win:#3FB27A;--draw:#A2A6AE;--loss:#E8484E;
+  --f-display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;--f-body:"Archivo","Helvetica Neue",Arial,sans-serif;--f-mono:"IBM Plex Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box;margin:0}
+html,body{width:1080px;height:1350px;background:var(--bg);color:var(--ink);font-family:var(--f-body);-webkit-font-smoothing:antialiased;overflow:hidden}
+.card{position:relative;width:1080px;height:1350px;padding:0 72px;display:flex;flex-direction:column}
+.stripe{position:absolute;left:0;right:0;top:0;height:22px;background:linear-gradient(to bottom,var(--red) 0 33.3%,#fff 33.3% 66.6%,#000 66.6% 100%)}
+.top{display:flex;justify-content:space-between;align-items:baseline;margin-top:64px;font:500 22px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.top b{color:var(--ink);font-weight:500}
+.score{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:24px;margin-top:46px}
+.team{font:800 46px/1 var(--f-display);text-transform:uppercase;letter-spacing:.01em}
+.team.r{text-align:right}
+.team.me{color:var(--ink)}.team.op{color:var(--muted)}
+.nums{font:900 230px/.82 var(--f-display);font-variant-numeric:tabular-nums;display:flex;gap:28px;align-items:center;letter-spacing:-.01em}
+.nums i{font-style:normal;font-size:120px;color:var(--muted);font-weight:700}
+.nums .me{color:var(--ink)}.nums .op{color:var(--muted)}
+.res{display:flex;gap:14px;align-items:center;justify-content:center;margin-top:28px;font:500 21px var(--f-mono);color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.pill{font:700 21px var(--f-mono);letter-spacing:.1em;padding:7px 16px;border-radius:999px;color:#fff}
+.pill.V{background:var(--win)}.pill.E{background:var(--draw);color:#121214}.pill.D{background:var(--loss)}
+.gols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px;font:400 20px/1.45 var(--f-mono);color:var(--muted)}
+.gols div:last-child{text-align:right}
+h1{font:900 82px/.92 var(--f-display);text-transform:uppercase;margin-top:48px;letter-spacing:-.005em;text-wrap:balance}
+ol{list-style:none;padding:0;margin-top:30px;display:grid;gap:22px;counter-reset:d}
+li{display:grid;grid-template-columns:54px 1fr;gap:18px;font-size:29px;line-height:1.32;counter-increment:d}
+li::before{content:counter(d);font:900 54px/1 var(--f-display);color:var(--red)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--line);border-bottom:2px solid var(--line);margin-top:auto}
+.kpi{padding:22px 0 20px;border-left:2px solid var(--line);padding-left:20px}.kpi:first-child{border-left:0;padding-left:0}
+.kpi .k{font:500 17px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font:800 60px/1 var(--f-display);margin-top:8px;font-variant-numeric:tabular-nums}
+.kpi .d{font-size:18px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.next{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-size:24px}
+.next b{font-weight:700}.next span{font:500 18px var(--f-mono);color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:0 0 46px;font:500 17px var(--f-mono);color:var(--muted);white-space:nowrap}
+.foot .link{color:var(--ink);font-weight:500}
+.wm{position:absolute;right:-30px;top:540px;font:900 300px/1 var(--f-display);color:#fff;opacity:.025;transform:rotate(-90deg);transform-origin:right top;white-space:nowrap;pointer-events:none}
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="stripe"></div>
+  <div class="wm" aria-hidden="true">RAIO-X</div>
+  <div class="top"><span><b>Raio-X Tricolor</b> · rodada <b id="rd"></b></span><span>Brasileirão 2026</span></div>
+  <div class="score"><div class="team" id="t1"></div><div class="nums" id="nums"></div><div class="team r" id="t2"></div></div>
+  <div class="res" id="res"></div>
+  <div class="gols" id="gols"></div>
+  <h1 id="manchete"></h1>
+  <ol id="dest"></ol>
+  <div class="kpis" id="kpis"></div>
+  <div class="next" id="next"></div>
+  <div class="foot"><span class="link" id="link"></span><span>Feito por Gustavo Negri Tavares · análise independente</span></div>
+</div>
+<script src="../data/card-base.js"></script>
+<script src="../data/card.js"></script>
+<script src="../data/escalacoes.js"></script>
+<script>
+(function(){
+  var B=window.CARD_BASE||{},C=window.CARD||{},N=(window.ESCALACOES||[])[0];
+  function $(i){return document.getElementById(i);}
+  function br(v,d){return Number(v).toFixed(d).replace('.',',');}
+  function esc(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  var res=B.gf>B.ga?'V':B.gf===B.ga?'E':'D',RN={V:'Vitória',E:'Empate',D:'Derrota'};
+  $('rd').textContent=B.rodada;
+  var me='<span class="me">'+B.gf+'</span>',op='<span class="op">'+B.ga+'</span>';
+  $('t1').textContent=B.casa?'São Paulo':B.adv;$('t1').className='team '+(B.casa?'me':'op');
+  $('t2').textContent=B.casa?B.adv:'São Paulo';$('t2').className='team r '+(B.casa?'op':'me');
+  $('nums').innerHTML=(B.casa?me:op)+'<i>×</i>'+(B.casa?op:me);
+  $('res').innerHTML='<span class="pill '+res+'">'+RN[res]+'</span><span>'+B.data+' · '+(B.casa?'Morumbis':'fora de casa')+' · '+B.formacao+'</span>';
+  var gn=(B.gols||{}).nos||[],ge=(B.gols||{}).eles||[];
+  $('gols').innerHTML='<div>'+(B.casa?gn:ge).map(esc).join('<br>')+'</div><div>'+(B.casa?ge:gn).map(esc).join('<br>')+'</div>';
+  $('manchete').textContent=C.manchete||'';
+  $('dest').innerHTML=(C.destaques||[]).slice(0,3).map(function(x){return '<li><span>'+esc(x)+'</span></li>';}).join('');
+  var k=[['Posição',B.posicao+'º',B.pts+' pts em '+B.jogos],['Distância',B.atras7!=null?'−'+B.atras7:'—',B.atras7!=null?'para o 7º ('+B.setimo+')':''],['Sul-Americana',C.sulamericana!=null?C.sulamericana+'%':'—','modelo ValorFinal'],['Melhor nota',B.melhor?br(B.melhor.nota,1):'—',B.melhor?B.melhor.nome:'']];
+  $('kpis').innerHTML=k.map(function(x){return '<div class="kpi"><div class="k">'+x[0]+'</div><div class="v">'+x[1]+'</div><div class="d">'+esc(x[2])+'</div></div>';}).join('');
+  if(N)$('next').innerHTML='<span>Próximo jogo</span><div><b>'+(N.home?'São Paulo x '+N.opp:N.opp+' x São Paulo')+'</b> · '+N.date.replace(/\s*·\s*/,', ')+' · V '+Math.round(N.prob[0])+'%</div>';
+  $('link').textContent=C.link||'';
+  // reduz a manchete se ela quebrar em mais de duas linhas
+  var h=$('manchete'),fs=82;while(h.scrollHeight>fs*0.92*2+8&&fs>56){fs-=4;h.style.fontSize=fs+'px';}
+  document.body.setAttribute('data-pronto','1');
+})();
+</script>
+</body>
+</html>

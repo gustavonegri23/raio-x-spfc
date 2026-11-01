@@ -7,14 +7,25 @@
     4) RX.parte(0), RX.parte(1)…  -> devolve cada pedaço; junte todos, na ordem, num arquivo data/rodadas/rodada-NN.json
   Se a coleta passar do tempo limite da ferramenta, rode por etapas:
     await RX.e1(); await RX.e2(); await RX.e3(); await RX.e4(); RX.exportar();
+  Plano B: RX.status() mostra as etapas feitas e as chamadas que falharam (cada chamada já tenta 3 vezes).
+    await RX.retomar() refaz só o que faltou. Se ainda faltar, exportar() marca o JSON com "incompleto"
+    e a página mostra o selo de dados incompletos.
 */
 window.RX = (function () {
   const TEAM = 1981, UT = 325, SEASON = 87678; // São Paulo · Brasileirão Série A · 2026
-  const j = u => fetch(u).then(r => r.ok ? r.json() : null).catch(() => null);
+  // Plano B: até 3 tentativas por chamada, com espera crescente; o que falhar fica em st.falhas
+  const dorme = ms => new Promise(r => setTimeout(r, ms));
+  const j = async u => {
+    for (let t = 0; t < 3; t++) {
+      try { const r = await fetch(u); if (r.ok) return await r.json(); if (r.status === 404) return null; } catch (e) {}
+      await dorme(800 * (t + 1) * (t + 1));
+    }
+    st.falhas.push(u); return null;
+  };
   const F = ['rating','appearances','matchesStarted','minutesPlayed','goals','assists','expectedGoals','expectedAssists','bigChancesCreated','bigChancesMissed','keyPasses','accuratePasses','accuratePassesPercentage','accurateFinalThirdPasses','accurateLongBalls','successfulDribbles','totalContest','tackles','interceptions','clearances','ballRecovery','totalDuelsWonPercentage','aerialDuelsWonPercentage','totalShots','shotsOnTarget','headedGoals','leftFootGoals','rightFootGoals','goalsFromOutsideTheBox','penaltyGoals','touchesInOppBox','accurateCrosses','totalCross','saves','savesPercentage','goalsConceded','cleanSheet','expectedGoalsConceded','kilometersCoveredPer90','topSpeed','defensiveContributions','yellowCards','errorLeadToGoal','dribbledPast'];
   const SIT = {'regular':'r','assisted':'a','fast-break':'f','corner':'c','set-piece':'s','free-kick':'k','penalty':'p','throw-in-set-piece':'t'};
   const BP = {'right-foot':'R','left-foot':'L','head':'H','other':'O'};
-  const st = { players: [], idx: {}, events: [], games: [], log: [] };
+  const st = { players: [], idx: {}, events: [], games: [], log: [], falhas: [], feito: {} };
   const say = m => { st.log.push(new Date().toISOString().slice(11,19) + ' ' + m); return m; };
 
   /* Etapa 1 · elenco, estatísticas da temporada e mapas de calor */
@@ -35,7 +46,7 @@ window.RX = (function () {
       const mx = Math.max(...g) || 1; o.hm = g.map(v => Math.round(v / mx * 9)).join('');
     }
     st.players = list; st.idx = {}; list.forEach((o, i) => st.idx[o.p.id] = i);
-    return say('e1: ' + list.length + ' jogadores');
+    st.feito.e1 = true; return say('e1: ' + list.length + ' jogadores');
   }
 
   /* Etapa 2 · jogos do Brasileirão: escalação, nota, gols, chutes, formação, distância do time */
@@ -57,7 +68,7 @@ window.RX = (function () {
         rd: e.roundInfo.round, ts: e.startTimestamp, opp: home ? (e.awayTeam.shortName || e.awayTeam.name) : (e.homeTeam.shortName || e.homeTeam.name),
         gf: home ? e.homeScore.current : e.awayScore.current, ga: home ? e.awayScore.current : e.homeScore.current, form: side?.formation || '' });
     }
-    return say('e2: ' + st.games.length + ' jogos');
+    st.feito.e2 = true; return say('e2: ' + st.games.length + ' jogos');
   }
 
   /* Etapa 3 · GPS por jogador por jogo */
@@ -71,7 +82,7 @@ window.RX = (function () {
       }));
       g.gps = rows.filter(Boolean).join(' ');
     }
-    return say('e3: GPS ok');
+    st.feito.e3 = true; return say('e3: GPS ok');
   }
 
   /* Etapa 4 · próximos 5 adversários, desfalques e tabela casa/fora */
@@ -81,10 +92,21 @@ window.RX = (function () {
     const stH = await j(`/api/v1/unique-tournament/${UT}/season/${SEASON}/standings/home`), stA = await j(`/api/v1/unique-tournament/${UT}/season/${SEASON}/standings/away`), stT = await j(`/api/v1/unique-tournament/${UT}/season/${SEASON}/standings/total`);
     const row = (s, id) => { const r = s?.standings?.[0]?.rows?.find(x => x.team.id === id); return r ? { pos: r.position, v: r.wins, e: r.draws, d: r.losses, gp: r.scoresFor, gc: r.scoresAgainst, pts: r.points } : null; };
     st.tabela = (stT?.standings?.[0]?.rows || []).map(r => [r.position, r.team.shortName || r.team.name, r.matches, r.wins, r.draws, r.losses, r.scoresFor, r.scoresAgainst, r.points]);
+    const lin = s => (s?.standings?.[0]?.rows || []).map(r => [r.position, r.team.shortName || r.team.name, r.matches, r.wins, r.draws, r.losses, r.scoresFor, r.scoresAgainst, r.points]);
+    st.tabelaCasa = lin(stH); st.tabelaFora = lin(stA);
+    const KS = ['matches','goalsScored','goalsConceded','averageBallPossession','bigChancesCreated','bigChancesAgainst','errorsLeadingToGoal','aerialDuelsWonPercentage','duelsWonPercentage','accuratePassesPercentage','fastBreakGoals','headedGoals','totalCrosses','cleanSheets'];
+    const pega = S => Object.fromEntries(KS.map(k => [k, S && S[k] != null ? Math.round(S[k] * 100) / 100 : null]));
+    const meu = await j(`/api/v1/team/${TEAM}/unique-tournament/${UT}/season/${SEASON}/statistics/overall`);
+    st.estatTime = pega(meu?.statistics);
     st.proximos = [];
     for (const e of ev) {
       const home = e.homeTeam.id === TEAM, opp = home ? e.awayTeam : e.homeTeam;
-      const [s, lu, tp] = await Promise.all([j(`/api/v1/team/${opp.id}/unique-tournament/${UT}/season/${SEASON}/statistics/overall`), j(`/api/v1/event/${e.id}/lineups`), j(`/api/v1/team/${opp.id}/unique-tournament/${UT}/season/${SEASON}/top-players/overall`)]);
+      const [s, lu, tp, ul] = await Promise.all([j(`/api/v1/team/${opp.id}/unique-tournament/${UT}/season/${SEASON}/statistics/overall`), j(`/api/v1/event/${e.id}/lineups`), j(`/api/v1/team/${opp.id}/unique-tournament/${UT}/season/${SEASON}/top-players/overall`), j(`/api/v1/team/${opp.id}/events/last/0`)]);
+      // forma: últimos 5 jogos do adversário na Série A, do mais antigo ao mais recente (V/E/D)
+      const forma = (ul?.events || []).filter(x => x.tournament?.uniqueTournament?.id === UT && x.status?.type === 'finished').slice(-5).map(x => {
+        const h = x.homeTeam.id === opp.id, a = h ? x.homeScore.current : x.awayScore.current, b = h ? x.awayScore.current : x.homeScore.current;
+        return (a > b ? 'V' : a === b ? 'E' : 'D') + ' ' + a + 'x' + b + ' ' + (h ? 'vs ' : '@ ') + (h ? (x.awayTeam.shortName || x.awayTeam.name) : (x.homeTeam.shortName || x.homeTeam.name));
+      });
       const T = tp?.topPlayers || {}, pick = (k, c = 3) => (T[k] || []).slice(0, c).map(x => x.player.shortName + ' ' + Math.round((x.statistics[k] ?? 0) * 100) / 100);
       const S = s?.statistics || {};
       st.proximos.push({ rd: e.roundInfo?.round, ts: e.startTimestamp, home, opp: opp.name,
@@ -92,9 +114,9 @@ window.RX = (function () {
         desfalquesAdv: lu ? ((home ? lu.away : lu.home)?.missingPlayers || []).map(m => m.player.shortName + ' (' + m.type + ')') : [],
         mandoAdv: row(home ? stA : stH, opp.id),
         stats: Object.fromEntries(['matches','goalsScored','goalsConceded','averageBallPossession','bigChancesCreated','bigChancesAgainst','errorsLeadingToGoal','aerialDuelsWonPercentage','duelsWonPercentage','accuratePassesPercentage','fastBreakGoals','headedGoals','totalCrosses','cleanSheets'].map(k => [k, S[k] != null ? Math.round(S[k] * 100) / 100 : null])),
-        artilheiros: pick('goals'), garcons: pick('assists'), notas: pick('rating'), criadores: pick('bigChancesCreated', 2) });
+        artilheiros: pick('goals'), garcons: pick('assists'), notas: pick('rating'), criadores: pick('bigChancesCreated', 2), forma });
     }
-    return say('e4: ' + st.proximos.length + ' próximos jogos');
+    st.feito.e4 = true; return say('e4: ' + st.proximos.length + ' próximos jogos');
   }
 
   /* Monta o JSON no formato que a página e o montar.py esperam */
@@ -134,12 +156,22 @@ window.RX = (function () {
       CAMPO.push(g.rd + '#' + Object.entries(on).map(([k, v]) => k + ':' + v[0] + ':' + v[1]).join(' ') + '#' + ((g.side?.players || []).filter(p => !p.substitute).map(p => st.idx[p.player.id]).filter(x => x !== undefined).join(',')));
     }
     const rodada = Math.max(...st.games.map(g => g.rd));
-    const out = { rodada, coletado: new Date().toISOString(), SOFA: { F, P, G }, GPS, SHOTMAP, GOLS, CAMPO, tabela: st.tabela || [], proximos: st.proximos || [] };
+    const out = { rodada, coletado: new Date().toISOString(), SOFA: { F, P, G }, GPS, SHOTMAP, GOLS, CAMPO, tabela: st.tabela || [], proximos: st.proximos || [],
+      tabelaCasa: st.tabelaCasa || [], tabelaFora: st.tabelaFora || [], estatTime: st.estatTime || null };
+    const faltou = ['e1', 'e2', 'e3', 'e4'].filter(k => !st.feito[k]);
+    if (faltou.length || st.falhas.length) out.incompleto = faltou.concat(st.falhas.length ? [st.falhas.length + ' chamadas sem resposta'] : []);
     st.out = JSON.stringify(out);
     return say('exportar: rodada ' + rodada + ', ' + st.out.length + ' caracteres');
   }
   async function tudo() { await e1(); await e2(); await e3(); await e4(); return exportar(); }
+  /* Plano B: refaz só as etapas que não terminaram (a aba precisa continuar aberta) e tenta de novo as chamadas que falharam */
+  async function retomar() {
+    st.falhas = [];
+    for (const [k, f] of [['e1', e1], ['e2', e2], ['e3', e3], ['e4', e4]]) if (!st.feito[k]) await f();
+    return exportar();
+  }
+  const status = () => ({ feito: st.feito, falhas: st.falhas.length, exemplos: st.falhas.slice(0, 5) });
   const N = 40000;
-  return { e1, e2, e3, e4, exportar, tudo, partes: () => Math.ceil((st.out || '').length / N), parte: i => (st.out || '').slice(i * N, (i + 1) * N), log: () => st.log, _st: st };
+  return { e1, e2, e3, e4, exportar, tudo, retomar, status, partes: () => Math.ceil((st.out || '').length / N), parte: i => (st.out || '').slice(i * N, (i + 1) * N), log: () => st.log, _st: st };
 })();
 'RX pronto: rode await RX.tudo()';

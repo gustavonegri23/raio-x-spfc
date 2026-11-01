@@ -1,0 +1,132 @@
+[
+ {
+  "rd": 34,
+  "opp": "Corinthians",
+  "home": true,
+  "registrado": "01/11/2026",
+  "xi": [
+   "Rafael",
+   "Arboleda",
+   "Tolói",
+   "Newton",
+   "Iago",
+   "Bobadilla",
+   "Danielzinho",
+   "Lucas Ramon",
+   "Luciano",
+   "Artur",
+   "Calleri"
+  ],
+  "prob": [
+   51.9,
+   24.1,
+   24.1
+  ],
+  "palpite": "V",
+  "palpiteFonte": "favorito do modelo (trocar pelo palpite do analista, se quiser)"
+ },
+ {
+  "rd": 35,
+  "opp": "Fluminense",
+  "home": true,
+  "registrado": "01/11/2026",
+  "xi": [
+   "Rafael",
+   "Sabino",
+   "Arboleda",
+   "Newton",
+   "Iago",
+   "M. Antônio",
+   "Danielzinho",
+   "Pedro Lima",
+   "Lucas Moura",
+   "Artur",
+   "Calleri"
+  ],
+  "prob": [
+   44.1,
+   25.4,
+   30.5
+  ],
+  "palpite": "V",
+  "palpiteFonte": "favorito do modelo (trocar pelo palpite do analista, se quiser)"
+ },
+ {
+  "rd": 36,
+  "opp": "Botafogo",
+  "home": false,
+  "registrado": "01/11/2026",
+  "xi": [
+   "Rafael",
+   "Sabino",
+   "Arboleda",
+   "Newton",
+   "Iago",
+   "Bobadilla",
+   "Danielzinho",
+   "Pedro Lima",
+   "Lucas Moura",
+   "Artur",
+   "Calleri"
+  ],
+  "prob": [
+   28.9,
+   25.2,
+   46
+  ],
+  "palpite": "D",
+  "palpiteFonte": "favorito do modelo (trocar pelo palpite do analista, se quiser)"
+ },
+ {
+  "rd": 37,
+  "opp": "Remo",
+  "home": true,
+  "registrado": "01/11/2026",
+  "xi": [
+   "Rafael",
+   "Sabino",
+   "Arboleda",
+   "Tolói",
+   "Wendell",
+   "M. Antônio",
+   "Danielzinho",
+   "Lucas Ramon",
+   "Luciano",
+   "Artur",
+   "Calleri"
+  ],
+  "prob": [
+   53.9,
+   23.6,
+   22.5
+  ],
+  "palpite": "V",
+  "palpiteFonte": "favorito do modelo (trocar pelo palpite do analista, se quiser)"
+ },
+ {
+  "rd": 38,
+  "opp": "Athletico-PR",
+  "home": false,
+  "registrado": "01/11/2026",
+  "xi": [
+   "Rafael",
+   "Sabino",
+   "Tolói",
+   "Arboleda",
+   "Iago",
+   "Bobadilla",
+   "Danielzinho",
+   "Lucas Ramon",
+   "Lucas Moura",
+   "Artur",
+   "Calleri"
+  ],
+  "prob": [
+   22.1,
+   23.5,
+   54.4
+  ],
+  "palpite": "D",
+  "palpiteFonte": "favorito do modelo (trocar pelo palpite do analista, se quiser)"
+ }
+]

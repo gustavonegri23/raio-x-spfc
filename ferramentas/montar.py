@@ -5,11 +5,17 @@ Lê data/rodadas/rodada-NN.json (saída do coletor.js) e gera:
   1. data/dados.js                    -> dados que a página carrega (SOFA, GPS, SHOTMAP, META)
   2. relatorios/resumo-rodada-NN.md   -> números-chave para reescrever highlights e insights,
                                          com a comparação contra a rodada anterior quando ela existir
-Uso:  python3 ferramentas/montar.py            (usa a rodada mais recente em data/rodadas)
-      python3 ferramentas/montar.py 34         (rodada específica)
+  3. data/previsoes.js                -> placar das previsões (lê data/previsoes.json e preenche o real)
+Antes de gerar, roda as checagens de ferramentas/validar.py e para se houver ERRO.
+Uso:  python3 ferramentas/montar.py              (usa a rodada mais recente em data/rodadas)
+      python3 ferramentas/montar.py 34           (rodada específica)
+      python3 ferramentas/montar.py --forcar     (gera mesmo com erro nas checagens; a página mostra o selo de dados incompletos)
+      python3 ferramentas/montar.py --temporada  (gera também relatorios/retrospectiva-2026.md)
 Só usa a biblioteca padrão do Python.
 """
 import json, os, sys, glob, statistics as stt
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import validar as V, extras as X
 from collections import Counter, defaultdict
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,15 +42,45 @@ def carregar(n=None):
     return json.load(open(alvo, encoding='utf-8')), ant
 
 
-def escrever_dados(o):
+def escrever_dados(o, extra=None, aviso=None):
     dst = os.path.join(RAIZ, 'data', 'dados.js')
     with open(dst, 'w', encoding='utf-8') as f:
         f.write('/* Dados SofaScore · Série A 2026 · gerado por ferramentas/montar.py */\n')
         f.write('window.SHOTMAP=' + json.dumps(o['SHOTMAP']) + ';\n')
         f.write('window.GPS=' + json.dumps(o['GPS'], separators=(',', ':')) + ';\n')
         f.write('window.SOFA=' + json.dumps(o['SOFA'], ensure_ascii=False, separators=(',', ':')) + ';\n')
-        f.write('window.META=' + json.dumps({'rodada': o['rodada'], 'coletado': o['coletado'][:10]}) + ';\n')
+        meta = {'rodada': o['rodada'], 'coletado': o['coletado'][:10]}
+        if aviso:
+            meta['incompleto'] = aviso
+        f.write('window.META=' + json.dumps(meta, ensure_ascii=False) + ';\n')
+        f.write('window.TABELA=' + json.dumps(o.get('tabela', []), ensure_ascii=False, separators=(',', ':')) + ';\n')
+        f.write('window.PROXIMOS=' + json.dumps(o.get('proximos', []), ensure_ascii=False, separators=(',', ':')) + ';\n')
+        f.write('window.ESTAT_TIME=' + json.dumps(o.get('estatTime'), ensure_ascii=False) + ';\n')
+        if extra:
+            f.write('window.EXTRA=' + json.dumps(extra, ensure_ascii=False, separators=(',', ':')) + ';\n')
     return dst
+
+
+def card_base(o):
+    """Números automáticos do card da rodada (data/card-base.js). Os textos ficam em data/card.js."""
+    import datetime
+    G = sorted(o['SOFA']['G'], key=lambda g: g[0])
+    g = G[-1]
+    P = o['SOFA']['P']
+    gols = {'nos': [], 'eles': []}
+    for x in sorted((x.split('|') for x in o['GOLS'] if int(x.split('|')[0]) == g[0]), key=lambda q: int(q[3]) + int(q[4] or 0) / 100):
+        mn = x[3] + (("+" + x[4]) if x[4] not in ('', '0') else '') + "'"
+        nome = x[6] + (' (contra)' if x[5] == 'ownGoal' else '') + (' (pên.)' if x[5] == 'penalty' else '')
+        gols['nos' if x[2] == '1' else 'eles'].append(nome + ' ' + mn)
+    notas = [(float(t.split(':')[2]), P[int(t.split(':')[0])][0]) for t in g[7].split() if t.split(':')[2]]
+    tab = o.get('tabela', [])
+    sp = next((r for r in tab if r[1] == 'São Paulo'), None)
+    s7 = next((r for r in tab if r[0] == 7), None)
+    dt = datetime.datetime.fromtimestamp(g[1] - 3 * 3600, datetime.timezone.utc)
+    return {'rodada': g[0], 'casa': g[2] == 1, 'adv': g[3], 'gf': g[4], 'ga': g[5], 'data': dt.strftime('%d/%m'), 'formacao': g[6], 'gols': gols,
+            'melhor': ({'nome': max(notas)[1], 'nota': max(notas)[0]} if notas else None),
+            'posicao': sp[0] if sp else None, 'pts': sp[8] if sp else None, 'jogos': sp[2] if sp else None,
+            'atras7': (s7[8] - sp[8]) if (sp and s7 and sp[0] > 7) else None, 'setimo': s7[1] if s7 else None}
 
 
 def analisar(o):
@@ -223,6 +259,33 @@ def md(R, ant=None, rod=None):
             a = an.get(j['nome'])
             if a and a['nota'] and j['nota'] and abs(j['nota'] - a['nota']) >= 0.05:
                 L.append(f"- {j['nome']}: {br(a['nota'])} → {br(j['nota'])}")
+    E = R.get('extra') or {}
+    if R.get('checagens'):
+        er, av = R['checagens']
+        L += ["", "## Checagens automáticas", f"- {len(er)} erro(s), {len(av)} aviso(s)"] + [f"- ERRO: {x}" for x in er] + [f"- AVISO: {x}" for x in av]
+    if E.get('janelas'):
+        j = E['janelas']
+        L += ["", "## Janelas de 15 minutos", "| Janela | GF | GC | xG a favor | xG contra |", "|---|---|---|---|---|"]
+        L += [f"| {j['rot'][i]} | {j['gf'][i]} | {j['gc'][i]} | {br(j['xgf'][i], 1)} | {br(j['xgc'][i], 1)} |" for i in range(6)]
+    if E.get('subs'):
+        sb = E['subs']
+        L += ["", "## Substituições", f"- 1ª troca, minuto médio: {sb['minPrimeira']}",
+              f"- Antes da 1ª troca: {sb['antes']['gf']}:{sb['antes']['gc']} · xG/90 {br(sb['antes']['xgf90'])} a {br(sb['antes']['xgc90'])}",
+              f"- Depois da 1ª troca: {sb['depois']['gf']}:{sb['depois']['gc']} · xG/90 {br(sb['depois']['xgf90'])} a {br(sb['depois']['xgc90'])}",
+              "- Vindos do banco (4+ entradas, saldo de xG por 90):"] + [f"  - {b['nome']}: {b['ent']} entradas, {b['min']} min, {b['gf']}:{b['gc']}, {'+' if b['xgSaldo90'] >= 0 else ''}{br(b['xgSaldo90'])}" for b in sb['banco']]
+    if E.get('rivais'):
+        rv = E['rivais']; m = rv['media']
+        L += ["", "## Vizinhos e média da liga", "| Time | Pts/j | GP/j | GC/j | Aprov. | Projeção 38 |", "|---|---|---|---|---|---|"]
+        L += [f"| {r['pos']}º {r['time']} | {br(r['ppj'])} | {br(r['gpj'])} | {br(r['gcj'])} | {r['aprov']}% | {r['proj38']} |" for r in rv['vizinhos']]
+        L += [f"| {m['time']} | {br(m['ppj'])} | {br(m['gpj'])} | {br(m['gcj'])} | {m['aprov']}% | — |"]
+    if R.get('placar'):
+        pl = R['placar']
+        L += ["", "## Placar das previsões", f"- Palpites certos: {pl['palpites']} de {pl['jogos']} · favorito do modelo: {pl['modelo']} de {pl['jogos']}",
+              f"- Titulares acertados: {br(pl['xiMedio'], 1)} de 11 por jogo · Brier do modelo: {br(pl['brier'], 3)}"]
+        for p in R.get('prev', []):
+            if p.get('real'):
+                r = p['real']
+                L.append(f"- R{p['rd']} {p['opp']}: palpite {p['palpite']} · real {r['res']} ({r['placar']}) · XI {r['acertosXI']}/11 · fora do plano: {', '.join(r['foraDoPlano']) or '—'}")
     L += ["", "## Próximos jogos"]
     for p in R['proximos']:
         L.append(f"- R{p['rd']} {'vs' if p['home'] else '@'} {p['opp']} · mando do adversário: {p.get('mandoAdv')} · desfalques SPFC: {', '.join(p['desfalquesSPFC']) or '—'} · desfalques adv.: {', '.join(p['desfalquesAdv']) or '—'} · artilheiros: {', '.join(p['artilheiros'])} · criadores: {', '.join(p['criadores'])} · stats: {p['stats']}")
@@ -230,11 +293,38 @@ def md(R, ant=None, rod=None):
 
 
 if __name__ == '__main__':
-    o, oa = carregar(sys.argv[1] if len(sys.argv) > 1 else None)
-    d = escrever_dados(o)
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    forcar, temporada = '--forcar' in sys.argv, '--temporada' in sys.argv
+    o, oa = carregar(args[0] if args else None)
+    er, av = V.validar(o, oa)
+    for x in er:
+        print('ERRO  ', x)
+    for x in av:
+        print('AVISO ', x)
+    if er and not forcar:
+        sys.exit(f'{len(er)} erro(s) nas checagens. Corrija a coleta ou rode com --forcar para publicar com o selo de dados incompletos.')
+    nomes = [a[0] for a in o['SOFA']['P']]
+    extra = {'janelas': X.janelas(o), 'subs': X.substituicoes(o, nomes), 'rivais': X.rivais(o)}
+    prev, placar = X.previsoes(o, nomes, os.path.join(RAIZ, 'data', 'previsoes.json'))
+    selo = (er + (o.get('incompleto') and ['coleta incompleta: ' + ', '.join(o['incompleto'])] or [])) or None
+    d = escrever_dados(o, extra, selo)
+    with open(os.path.join(RAIZ, 'data', 'previsoes.js'), 'w', encoding='utf-8') as f:
+        f.write('/* Placar das previsões · gerado por ferramentas/montar.py a partir de data/previsoes.json */\n')
+        f.write('window.PREVISOES=' + json.dumps(prev, ensure_ascii=False, separators=(',', ':')) + ';\n')
+        f.write('window.PLACAR_PREV=' + json.dumps(placar, ensure_ascii=False) + ';\n')
+    with open(os.path.join(RAIZ, 'data', 'card-base.js'), 'w', encoding='utf-8') as f:
+        f.write('/* Números do card da rodada · gerado por ferramentas/montar.py. Textos em data/card.js */\n')
+        f.write('window.CARD_BASE=' + json.dumps(card_base(o), ensure_ascii=False) + ';\n')
+    if prev:
+        json.dump(prev, open(os.path.join(RAIZ, 'data', 'previsoes.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     R = analisar(o)
+    R.update({'extra': extra, 'checagens': (er, av), 'prev': prev, 'placar': placar})
     RA = analisar(oa) if oa else None
     os.makedirs(DIR_REL, exist_ok=True)
     out = os.path.join(DIR_REL, f"resumo-rodada-{o['rodada']:02d}.md")
     open(out, 'w', encoding='utf-8').write(md(R, RA, o['rodada']))
     print('ok:', d, out)
+    if temporada:
+        rt = os.path.join(DIR_REL, 'retrospectiva-2026.md')
+        open(rt, 'w', encoding='utf-8').write(X.retrospectiva(R, o, prev, placar, br))
+        print('ok:', rt)
