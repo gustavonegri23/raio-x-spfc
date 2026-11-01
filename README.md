@@ -14,7 +14,7 @@ Pasta local: `C:\Users\gusta\Documents\raio-x-spfc` no computador do Gustavo.
 
 ```
 raio-x-spfc/
-├── index.html               página do relatório (quatro abas: Time, Jogadores, Gols, Próximos jogos)
+├── index.html               página do relatório (capa + capítulos: Temporada, Diagnóstico, Elenco, Reta final, Método)
 ├── data/
 │   ├── dados.js             dados da rodada atual (gerado pelo montar.py; não editar à mão)
 │   ├── notas.js             "leitura do analista" de cada jogador (texto, editado a cada rodada)

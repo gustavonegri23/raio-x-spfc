@@ -1,5 +1,13 @@
 # Changelog
 
+## 01/11/2026 · novo layout: capa e quatro capítulos
+
+- **Estrutura em capítulos**: Capa · 01 Temporada · 02 Diagnóstico · 03 Elenco · 04 Reta final · Método. Cada capítulo abre com numeral, pergunta, introdução e sumário clicável, e termina com a passagem para o próximo.
+- **Seções reorganizadas na ordem da história**: o que aconteceu (trajetória, técnicos, copas), por quê (mando, adversários, clássicos, finalização, chutes, janelas, sistema, físico), quem (ataque, duplas, fichas) e o que fazer (prioridades, simulador, escalações). O placar das previsões e a metodologia viraram o epílogo "Método e acerto".
+- **Capa**: placar no estilo do antigo letreiro do Morumbi com o próximo jogo, campanha jogo a jogo por mando e aproveitamento em casa e fora (tudo calculado de `dados.js`, atualiza sozinho), KPIs, achados e selo do placar das previsões.
+- **Navegação**: barra fixa com progresso de leitura, links diretos para cada seção (ex.: `#s-shots`) e os links antigos (`#gols`, `#jogos`, `#jogadores`, `#j-<jogador>`) continuam funcionando.
+- **Compartilhamento**: metatags para WhatsApp/LinkedIn e favicon. A imagem de prévia espera `og-card.png` na raiz do repositório (copiar o card da rodada com esse nome).
+
 ## 01/11/2026 · credibilidade, conteúdo novo e card para redes
 
 - **Placar das previsões** (aba Próximos jogos): escalação sugerida e palpite registrados antes do jogo em `data/previsoes.json`; o `montar.py` preenche o resultado, os titulares acertados e o Brier do modelo. Previsões das rodadas 34 a 38 registradas hoje (palpite = favorito do modelo).

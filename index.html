@@ -1,8 +1,18 @@
 <title>Raio-X Tricolor 2026</title>
 <meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Análise de desempenho independente do São Paulo FC no Brasileirão 2026, atualizada a cada rodada. Por Gustavo Negri Tavares.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raio-X Tricolor 2026">
+<meta property="og:description" content="Análise de desempenho independente do São Paulo FC no Brasileirão 2026, atualizada a cada rodada.">
+<meta property="og:image" content="https://gustavonegri23.github.io/raio-x-spfc/og-card.png">
+<meta property="og:url" content="https://gustavonegri23.github.io/raio-x-spfc/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141416">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23141416'/%3E%3Crect y='0' width='32' height='5' fill='%23C8102E'/%3E%3Crect y='5' width='32' height='4' fill='%23fff'/%3E%3Ctext x='16' y='27' font-family='Arial Narrow,Arial' font-weight='900' font-size='17' fill='%23fff' text-anchor='middle'%3ERX%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Doto:wght@700;900&family=Archivo:wght@400;500;600;700&family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: relatório de análise de desempenho — faixa tricolor no topo, coluna de leitura de ~72ch, gráficos e matrizes que podem alargar até 1120px */
 :root{
@@ -356,37 +366,228 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
 .forma{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 4px}
 .forma span{font:500 11px/1 var(--f-mono);padding:5px 6px;border-radius:4px}
 .forma .V{background:var(--win-bg);color:var(--win)}.forma .E{background:var(--draw-bg);color:var(--ink)}.forma .D{background:var(--loss-bg);color:var(--loss)}
+/* ===== Formato C · capa + capítulos =====
+   Layout: capa noturna em faixa cheia (a tese e a campanha por mando), depois capítulos numerados
+   com abertura própria, sumário e passagem para o próximo; o resto do relatório segue a coluna de 1120px. */
+:root{
+  --cover:#141416; --cover-ink:#F2F2EE; --cover-mute:#A6A8AE; --cover-line:#2C2D32; --cover-red:#F0414A;
+  --c-v:#2FA36B; --c-e:#8A8F98; --c-d:#E23A44; --c-p:rgba(242,242,238,.34);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cover:#0B0B0C;--cover-line:#26272B}}
+:root[data-theme="dark"]{--cover:#0B0B0C;--cover-line:#26272B}
+
+/* masthead */
+.mast{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;padding-block:16px 12px}
+.brand{font-family:var(--f-display);font-weight:900;font-size:26px;line-height:1;text-transform:uppercase;letter-spacing:.01em;color:var(--ink);text-decoration:none}
+.brand-x{color:var(--brand)}
+.brand-y{color:var(--faint);font-weight:800}
+.mast .docmeta{font-size:11px;gap:4px 16px}
+
+/* navegação por capítulos */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav-in::-webkit-scrollbar{display:none}
+.nav-in a{flex:none;display:flex;align-items:baseline;gap:7px;padding:15px 14px 12px;font:600 15px/1.2 var(--f-body);color:var(--muted);text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap;transition:color .15s}
+.nav-in a:first-child{padding-left:0}
+.nav-in a:hover{color:var(--ink)}
+.nav-in a[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--brand)}
+.nv-n{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--faint)}
+.nav-in a[aria-selected="true"] .nv-n{color:var(--brand)}
+@media (min-width:860px){.nav-in a:last-child{margin-left:auto;padding-right:0}}
+.nav-prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;overflow:hidden}
+.nav-prog i{display:block;height:100%;background:var(--brand);transform-origin:0 50%;transform:scaleX(0)}
+body[data-view="capa"] .nav-prog{display:none}
+.view{padding-bottom:8px}
+
+/* capa */
+.cover{background:var(--cover);color:var(--cover-ink);box-shadow:0 0 0 100vmax var(--cover);clip-path:inset(0 -100vmax);margin-top:-1px}
+.cover-in{padding-block:clamp(36px,6vw,72px) clamp(32px,5vw,56px)}
+.cover-k{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cover-mute)}
+.cover h1{color:var(--cover-ink);margin:18px 0 18px;max-width:14ch;font-size:clamp(52px,10vw,124px)}
+.cover h1 em{color:var(--cover-red)}
+.cover .lede{color:var(--cover-mute);font-size:clamp(17px,2vw,19px)}
+.camp{margin:clamp(32px,5vw,52px) 0 0;padding-top:22px;border-top:1px solid var(--cover-line)}
+.camp-cap{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cover-mute);margin-bottom:16px}
+.camp-rows{display:grid;gap:18px}
+.camp-row{display:grid;grid-template-columns:170px minmax(0,1fr) 128px;gap:20px;align-items:center}
+.camp-lab b{display:block;font-family:var(--f-display);font-weight:800;font-size:24px;line-height:1;text-transform:uppercase}
+.camp-lab small{display:block;font-size:12.5px;color:var(--cover-mute);margin-top:6px;font-variant-numeric:tabular-nums}
+.camp-cells{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(19,minmax(0,1fr));gap:4px}
+.camp-cells li{aspect-ratio:1;max-width:100%;border-radius:2px;background:var(--c-e)}
+.camp-cells li.c-v{background:var(--c-v)}
+.camp-cells li.c-d{background:var(--c-d)}
+.camp-cells li.c-p{background:transparent;box-shadow:inset 0 0 0 1px var(--c-p)}
+.camp-pct{text-align:right}
+.camp-pct b{display:block;font-family:var(--f-display);font-weight:900;font-size:clamp(56px,7vw,84px);line-height:.82;font-variant-numeric:tabular-nums}
+.camp-pct.low b{color:var(--cover-red)}
+.camp-pct small{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--cover-mute);margin-top:6px}
+.camp-leg{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-size:12px;color:var(--cover-mute)}
+.camp-leg span{display:inline-flex;align-items:center;gap:6px}
+.camp-leg i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.camp-leg .c-v{background:var(--c-v)}.camp-leg .c-e{background:var(--c-e)}.camp-leg .c-d{background:var(--c-d)}.camp-leg .c-p{box-shadow:inset 0 0 0 1px var(--c-p)}
+@media (max-width:720px){
+  .camp-row{grid-template-columns:minmax(0,1fr) auto;gap:10px 14px}
+  .camp-cells{grid-column:1/-1;grid-row:2;gap:3px}
+  .camp-pct b{font-size:52px}
+}
+#ch-capa > .kpis{margin-top:0;border-top:0}
+.trust{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:6px 18px;margin:8px 0 0;padding:16px 18px;background:var(--surface);border:1px solid var(--line);color:var(--ink);text-decoration:none}
+.trust:hover{border-color:var(--ink)}
+.tr-k{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--brand)}
+.tr-t{font-size:14.5px;min-width:0}
+.tr-a{font-size:20px;transition:transform .2s}
+.trust:hover .tr-a{transform:translateX(4px)}
+@media (max-width:640px){.trust{grid-template-columns:minmax(0,1fr) auto}.tr-k{grid-column:1/-1}}
+.cc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:26px}
+@media (max-width:960px){.cc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.cc-grid{grid-template-columns:minmax(0,1fr);gap:0}}
+.cc{display:flex;flex-direction:column;gap:6px;padding:14px 0 18px;border-top:3px solid var(--ink);color:var(--ink);text-decoration:none;min-width:0}
+.cc-n{font-family:var(--f-display);font-weight:900;font-size:56px;line-height:.85;color:transparent;-webkit-text-stroke:1.5px var(--brand);transition:color .2s}
+.cc:hover .cc-n{color:var(--brand)}
+.cc-t{font-family:var(--f-display);font-weight:800;font-size:28px;line-height:1;text-transform:uppercase;margin-top:6px}
+.cc-q{font-size:15.5px;color:var(--muted)}
+.cc-s{font-family:var(--f-mono);font-size:12px;color:var(--s-lib);margin-top:auto;padding-top:8px}
+.cc:hover .cc-s{text-decoration:underline}
+
+/* abertura de capítulo */
+.chap-open{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,340px);gap:12px 40px;align-items:start;padding-block:clamp(36px,6vw,64px) clamp(28px,4vw,40px);border-bottom:3px solid var(--ink)}
+.co-num{font-family:var(--f-display);font-weight:900;font-size:clamp(104px,15vw,196px);line-height:.76;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:2px var(--brand)}
+.co-k{display:block;font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+.co-title{font-size:clamp(44px,7vw,88px);line-height:.88;margin:10px 0 14px}
+.co-q{font-size:clamp(19px,2.2vw,23px);font-weight:600;line-height:1.3;margin:0 0 10px}
+.co-intro{color:var(--muted);max-width:54ch;margin:0}
+.co-toc{border-left:1px solid var(--line);padding-left:22px;min-width:0}
+.co-tk{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.co-toc ol{list-style:none;margin:0;padding:0}
+.co-toc a{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;padding:7px 0;border-top:1px solid var(--line-soft);color:var(--ink);text-decoration:none;font-size:14.5px;font-weight:600;line-height:1.3}
+.co-toc li:first-child a{border-top:0}
+.co-toc a:hover .toc-t{color:var(--brand)}
+.toc-n{font-family:var(--f-mono);font-size:12px;font-weight:500;color:var(--faint);padding-top:1px}
+.co-epi{grid-template-columns:minmax(0,1fr)}
+@media (max-width:980px){
+  .chap-open{grid-template-columns:auto minmax(0,1fr)}
+  .co-toc{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px;margin-top:10px}
+  .co-toc ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));column-gap:28px}
+  .co-toc li:first-child a{border-top:1px solid var(--line-soft)}
+}
+@media (max-width:600px){
+  .chap-open{grid-template-columns:minmax(0,1fr)}
+  .co-num{font-size:96px}
+}
+.chapter > section:first-of-type{border-top:0}
+.eyebrow b{font-weight:500;color:var(--ink)}
+section[aria-labelledby]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 64px)}
+
+/* passagem para o próximo capítulo */
+.chap-next{display:grid;gap:6px;margin-top:48px;padding:clamp(26px,4vw,40px) clamp(20px,4vw,40px);background:var(--ink);color:var(--bg);text-decoration:none}
+.cn-k{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cover-red)}
+.cn-t{font-family:var(--f-display);font-weight:900;font-size:clamp(42px,7vw,80px);line-height:.9;text-transform:uppercase}
+.cn-n{color:var(--cover-red);margin-right:.25em}
+.cn-q{font-size:clamp(16px,2vw,19px);opacity:.78}
+.cn-arrow{display:inline-block;transition:transform .2s}
+.chap-next:hover .cn-arrow{transform:translateX(6px)}
+.chap-next:hover .cn-t{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+
+/* epílogo */
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:22px}
+.pipe div{background:var(--surface);padding:16px;display:grid;gap:2px;min-width:0}
+.pipe span{font-family:var(--f-display);font-weight:900;font-size:34px;line-height:1;color:var(--brand)}
+.pipe b{font-size:15px}
+.pipe small{font-size:13px;color:var(--muted);line-height:1.4}
+@media (max-width:760px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fontes ul{columns:2 340px;column-gap:32px;padding-left:18px;margin:8px 0 0;font-size:13.5px}
+.fontes li{break-inside:avoid;margin-bottom:6px}
+.fontes a{color:var(--muted)}
+
+/* rodapé */
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:56px;padding-block:22px 40px;border-top:3px solid var(--ink);font-size:13px;color:var(--muted)}
+.foot b{color:var(--ink)}
+.foot a{color:var(--s-lib)}
+@media (prefers-reduced-motion:reduce){.tr-a,.cn-arrow,.cc-n,.nav-in a{transition:none}}
+/* ajustes da revisão */
+.co-title{font-size:clamp(40px,5.4vw,76px);overflow-wrap:break-word;hyphens:manual}
+.camp-lab small{text-wrap:balance}
+@media (max-width:600px){.mast .docmeta span:nth-child(n+3){display:none}.brand{font-size:24px}}
+/* ===== opção 1: portas escuras, leitura clara ===== */
+/* capa: KPIs sobem sobre a borda da faixa e costuram as duas partes */
+.cover-in{padding-bottom:calc(clamp(32px,5vw,56px) + 64px)}
+#ch-capa > .kpis{position:relative;z-index:1;margin-top:-64px;border:1px solid var(--line);box-shadow:0 18px 40px -24px rgba(20,20,22,.45)}
+.camp-pct b span{font-size:.42em;font-weight:800;margin-left:2px;vertical-align:.95em}
+.camp-pct small{white-space:nowrap}
+/* abertura de capítulo na mesma faixa escura da capa */
+.chap-open{background:var(--cover);color:var(--cover-ink);box-shadow:0 0 0 100vmax var(--cover);clip-path:inset(0 -100vmax);border-bottom:0;margin-top:-1px}
+.chap-open .co-k{color:var(--cover-red)}
+.chap-open .co-num{-webkit-text-stroke-color:var(--cover-red)}
+.chap-open .co-intro{color:var(--cover-mute)}
+.chap-open .co-toc{border-color:var(--cover-line)}
+.chap-open .co-tk{color:var(--cover-mute)}
+.chap-open .co-toc a{color:var(--cover-ink);border-top-color:var(--cover-line)}
+.chap-open .co-toc a:hover .toc-t{color:var(--cover-red)}
+.chap-open .toc-n{color:var(--cover-mute)}
+@media (max-width:980px){.chap-open .co-toc{border-top-color:var(--cover-line)}.chap-open .co-toc li:first-child a{border-top-color:var(--cover-line)}}
+.chapter > .chap-open + section{padding-top:52px}
+/* passagem para o próximo: sempre escura, igual às outras portas */
+.chap-next{background:var(--cover);color:var(--cover-ink)}
+.cn-q{color:var(--cover-mute);opacity:1}
+/* título do capítulo cabe inteiro na coluna, sem quebrar palavra */
+.co-main{container-type:inline-size}
+.co-title{font-size:clamp(38px,12.5cqi,84px);overflow-wrap:normal}
+/* ===== letreiro de LED (referência ao placar antigo do Morumbi) ===== */
+:root{--led:#FFA126;--led-dim:rgba(255,161,38,.10);--led-glow:rgba(255,140,20,.55);--f-led:"Doto","IBM Plex Mono",ui-monospace,monospace}
+.led,.placar{font-family:var(--f-led);font-weight:900;color:var(--led);text-shadow:0 0 6px var(--led-glow),0 0 1px var(--led)}
+.placar{display:grid;grid-template-columns:auto auto minmax(0,1fr);align-items:center;gap:10px clamp(18px,3vw,40px);padding:14px clamp(14px,2.4vw,24px);background-color:#08080A;background-image:radial-gradient(circle,var(--led-dim) 1.1px,transparent 1.4px);background-size:6px 6px;border:1px solid #2A2A2E;box-shadow:inset 0 0 0 4px #111114,inset 0 0 24px rgba(0,0,0,.8);max-width:820px;line-height:1.05}
+.pl-l{display:grid;font-size:clamp(12px,1.3vw,15px);letter-spacing:.06em;text-align:center}
+.pl-c{font-size:clamp(30px,4.2vw,48px);letter-spacing:.04em}
+.pl-r{display:grid;gap:4px;font-size:clamp(26px,4vw,46px);letter-spacing:.07em;min-width:0}
+.pl-r span{white-space:nowrap;overflow:hidden;text-overflow:clip}
+.cover h1{margin-top:28px}
+@media (max-width:600px){.placar{grid-template-columns:auto minmax(0,1fr)}.pl-r{grid-column:1/-1;border-top:1px solid #2A2A2E;padding-top:10px}.pl-l{text-align:left}.pl-c{text-align:right}}
+.chap-open .co-num.led{-webkit-text-stroke:0;color:var(--led);font-weight:900;letter-spacing:.02em;font-size:clamp(96px,13vw,170px);line-height:.85}
+.cn-n.led{color:var(--led)}
+.cc-n{-webkit-text-stroke-color:var(--brand)}
+@media (prefers-reduced-motion:no-preference){.placar .pl-c{animation:pisca 2.4s steps(1) infinite}@keyframes pisca{0%,92%{opacity:1}93%,100%{opacity:.82}}}
+
 </style>
+
 
 <div class="stripe" aria-hidden="true"></div>
 <div class="wrap">
-<header class="top">
+<header class="mast">
+  <a class="brand" href="#capa"><span class="brand-x">Raio-X</span> Tricolor <span class="brand-y">2026</span></a>
   <div class="docmeta">
     <span><b>São Paulo FC</b> · análise independente</span>
     <span>Relatório <b>R33/2026</b></span>
     <span>Corte: <b>31 out 2026</b></span>
     <span>Não oficial · sem vínculo com o clube</span>
   </div>
-  <h1>Um time forte no Morumbis, <em>frágil fora dele</em></h1>
-  <p class="lede">Depois de 33 rodadas, o São Paulo é o 10º colocado com 43 pontos e saldo zero. O título e a Libertadores pela tabela já não estão em jogo. O dado que explica a temporada é o mando: 69% de aproveitamento em casa contra 20% como visitante. Este relatório mostra onde os pontos foram perdidos, quem sustenta o ataque e o que fazer nas cinco rodadas finais e no planejamento de 2027.</p>
-
 </header>
 <div class="selo" id="selo" hidden></div>
-<nav class="tabbar" role="tablist" aria-label="Seções do relatório"><div class="tabbar-in">
-  <button type="button" role="tab" id="tb-time" aria-controls="tab-time" aria-selected="true">Time</button>
-  <button type="button" role="tab" id="tb-jogadores" aria-controls="tab-jogadores" aria-selected="false">Jogadores</button>
-  <button type="button" role="tab" id="tb-gols" aria-controls="tab-gols" aria-selected="false">Gols</button>
-  <button type="button" role="tab" id="tb-jogos" aria-controls="tab-jogos" aria-selected="false">Próximos jogos</button>
-</div></nav>
-<div id="tab-time" class="tabpanel" role="tabpanel" aria-labelledby="tb-time">
+<nav class="nav" aria-label="Capítulos do relatório"><div class="nav-in" role="tablist"><a role="tab" id="nv-capa" href="#capa" aria-controls="ch-capa"><span class="nv-t">Capa</span></a><a role="tab" id="nv-temporada" href="#temporada" aria-controls="ch-temporada"><span class="nv-n">01</span><span class="nv-t">Temporada</span></a><a role="tab" id="nv-diagnostico" href="#diagnostico" aria-controls="ch-diagnostico"><span class="nv-n">02</span><span class="nv-t">Diagnóstico</span></a><a role="tab" id="nv-elenco" href="#elenco" aria-controls="ch-elenco"><span class="nv-n">03</span><span class="nv-t">Elenco</span></a><a role="tab" id="nv-reta" href="#reta" aria-controls="ch-reta"><span class="nv-n">04</span><span class="nv-t">Reta final</span></a><a role="tab" id="nv-metodo" href="#metodo" aria-controls="ch-metodo"><span class="nv-t">Método</span></a></div><div class="nav-prog" aria-hidden="true"><i id="prog"></i></div></nav>
+
+<div id="ch-capa" class="view" role="tabpanel" aria-labelledby="nv-capa">
+  <div class="cover">
+    <div class="cover-in">
+      <div class="placar" id="placar" role="img" aria-label="Placar: próximo jogo do São Paulo">
+        <div class="pl-l" id="pl-l"><span>BRASILEIRÃO</span><span>SÉRIE A 2026</span><span>RAIO-X TRICOLOR</span></div>
+        <div class="pl-c" id="pl-c">--:--</div>
+        <div class="pl-r" id="pl-r"><span>SÃO PAULO</span><span>&nbsp;</span></div>
+      </div>
+      <h1>Um time forte no Morumbis, <em>frágil fora dele</em></h1>
+      <p class="lede">Depois de 33 rodadas, o São Paulo é o 10º colocado com 43 pontos e saldo zero. O título e a Libertadores pela tabela já não estão em jogo. O dado que explica a temporada é o mando: 69% de aproveitamento em casa contra 20% como visitante. Este relatório mostra onde os pontos foram perdidos, quem sustenta o ataque e o que fazer nas cinco rodadas finais e no planejamento de 2027.</p>
+      <figure class="camp" id="camp" aria-labelledby="camp-cap">
+        <figcaption id="camp-cap" class="camp-cap">A campanha jogo a jogo, separada por mando</figcaption>
+        <div class="camp-rows" id="camp-rows"></div>
+        <div class="camp-leg" aria-hidden="true"><span><i class="c-v"></i>Vitória</span><span><i class="c-e"></i>Empate</span><span><i class="c-d"></i>Derrota</span><span><i class="c-p"></i>A jogar</span></div>
+      </figure>
+    </div>
+  </div>
   <div class="kpis" role="list">
     <div class="kpi" role="listitem"><div class="k">Posição · Série A</div><div class="v">10º</div><div class="d">43 pts em 33 jogos · 12V 7E 14D · 43%</div></div>
     <div class="kpi" role="listitem"><div class="k">Gols pró : contra</div><div class="v">39:39</div><div class="d">1,18 marcado e 1,18 sofrido por jogo</div></div>
     <div class="kpi" role="listitem"><div class="k">Casa / Fora</div><div class="v">69/20</div><div class="d">% de aproveitamento · 33 pts em casa, 10 fora</div></div>
     <div class="kpi" role="listitem"><div class="k">Vaga Sul-Americana</div><div class="v">87%</div><div class="d">chance de terminar entre 6º e 11º (modelo ValorFinal)</div></div>
   </div>
-
-<section aria-labelledby="s-resumo">
+  <section aria-labelledby="s-resumo">
   <span class="eyebrow">Resumo executivo</span>
   <h2 id="s-resumo">Cinco achados</h2>
   <div class="findings">
@@ -398,9 +599,30 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     <div class="find"><span class="tag">Reta final</span><p><strong>O calendário restante é o mais leve da Série A.</strong> Três jogos em casa em cinco. Projeção: 50 pontos e 10º lugar. Teto matemático: 58 pontos.</p></div>
   </div>
 </section>
+  <a class="trust" href="#metodo" id="trust"><span class="tr-k">Placar das previsões</span><span class="tr-t" id="trust-t">Cada escalação e palpite fica registrado antes do jogo e não muda depois.</span><span class="tr-a" aria-hidden="true">→</span></a>
+  <section class="chapters" aria-labelledby="s-cap">
+    <span class="eyebrow">Como ler</span>
+    <h2 id="s-cap">Quatro capítulos, uma pergunta cada</h2>
+    <div class="cc-grid"><a class="cc" href="#temporada"><span class="cc-n">01</span><span class="cc-t">A temporada</span><span class="cc-q">O que aconteceu?</span><span class="cc-s">3 seções · ler capítulo →</span></a><a class="cc" href="#diagnostico"><span class="cc-n">02</span><span class="cc-t">O diagnóstico</span><span class="cc-q">Por que o time perde pontos?</span><span class="cc-s">8 seções · ler capítulo →</span></a><a class="cc" href="#elenco"><span class="cc-n">03</span><span class="cc-t">O elenco</span><span class="cc-q">Quem sustenta o time?</span><span class="cc-s">3 seções · ler capítulo →</span></a><a class="cc" href="#reta"><span class="cc-n">04</span><span class="cc-t">A reta final</span><span class="cc-q">O que fazer agora?</span><span class="cc-s">3 seções · ler capítulo →</span></a></div>
+  </section>
+</div>
 
-<section aria-labelledby="s-traj">
-  <span class="eyebrow">01 · Trajetória</span>
+<div id="ch-temporada" class="view chapter" role="tabpanel" aria-labelledby="nv-temporada" hidden>
+  <header class="chap-open">
+    <div class="co-num led" aria-hidden="true">01</div>
+    <div class="co-main">
+      <span class="co-k">Capítulo 01 de 04</span>
+      <h2 class="co-title">A temporada</h2>
+      <p class="co-q">O que aconteceu?</p>
+      <p class="co-intro">A ordem dos fatos: a arrancada, a queda no meio do ano entre as trocas de técnico e a recuperação apoiada no Morumbis.</p>
+    </div>
+    <nav class="co-toc" aria-label="Neste capítulo">
+      <span class="co-tk">Neste capítulo</span>
+      <ol><li><a href="#s-traj"><span class="toc-n">1.1</span><span class="toc-t">Como a temporada escorregou</span></a></li><li><a href="#s-tecnicos"><span class="toc-n">1.2</span><span class="toc-t">Três técnicos em oito meses</span></a></li><li><a href="#s-copas"><span class="toc-n">1.3</span><span class="toc-t">Três eliminações</span></a></li></ol>
+    </nav>
+  </header>
+  <section aria-labelledby="s-traj">
+  <span class="eyebrow"><b>1.1</b> · Trajetória</span>
   <h2 id="s-traj">Como a temporada escorregou</h2>
   <div class="read"><p>A linha azul é a chance de terminar no Top 5 (vaga direta na Libertadores); a vermelha, o risco de rebaixamento. Cada ponto refaz 20.000 simulações do campeonato com o que se sabia naquela rodada. As faixas de fundo marcam o técnico no comando.</p></div>
 
@@ -442,10 +664,53 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
       <p class="muted small">O rating de força do modelo (estilo Elo) está em 1479, abaixo da base de 1500 com que todos os clubes começaram.</p>
     </div>
   </div>
+</section><section aria-labelledby="s-tecnicos">
+  <span class="eyebrow"><b>1.2</b> · Comando técnico</span>
+  <h2 id="s-tecnicos">Três técnicos em oito meses</h2>
+  <div class="read"><p>O São Paulo foi o primeiro clube da Série A a trocar de técnico duas vezes em 2026. Cada troca coincide com uma eliminação.</p></div>
+  <div class="scroll" style="margin-top:14px">
+    <table class="coaches num">
+      <thead><tr><th>Técnico</th><th>Período</th><th class="n">Jogos</th><th>Campanha</th><th class="n">Aprov.</th><th>Saída / situação</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hernán Crespo</strong></td><td>até 9 mar</td><td class="n">—</td><td>Brasileirão: 4 rodadas, invicto, 10 pts</td><td class="n">83% (BR)</td><td>Demitido após queda na semifinal do Paulistão e desgaste interno</td></tr>
+        <tr><td><strong>Roger Machado</strong></td><td>10 mar – 13 mai</td><td class="n">17</td><td>7V 4E 6D · 20 GP, 16 GC</td><td class="n">49%</td><td>Demitido após 3 a 1 para o Juventude (Copa do Brasil, 5ª fase)</td></tr>
+        <tr><td><strong>Dorival Júnior</strong></td><td>desde 15 mai</td><td class="n">19*</td><td>5V 6E 8D (até início de out.)</td><td class="n">36,8%</td><td>Contrato até dez/2026; renovação depende da nova gestão</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption">* Levantamento do ge citado pela imprensa no início de outubro. Dorival estreou em 19 de maio e só venceu no Brasileirão após seis rodadas (2E 4D no período).</p>
+  <div class="read" style="margin-top:12px">
+    <p>O aproveitamento de Dorival é o mais baixo de suas três passagens pelo clube. Há atenuantes: assumiu com o time já em queda, teve a pausa da Copa do Mundo no meio do trabalho e levou a equipe às quartas da Sul-Americana. Para decidir 2027, a diretoria precisa de métricas de processo do time por período de cada técnico (gols esperados a favor e contra, finalizações cedidas, recuperação de posse), que as fontes públicas não consolidam.</p>
+  </div>
+</section><section aria-labelledby="s-copas">
+  <span class="eyebrow"><b>1.3</b> · Copas</span>
+  <h2 id="s-copas">Três eliminações</h2>
+  <div class="cups">
+    <div class="cup"><div class="st">Paulistão</div><div class="ph">Semifinal · eliminado</div><p>6º na fase de liga. Venceu o Bragantino fora (2 a 1) nas quartas e perdeu para o Palmeiras (2 a 1) na semi, em Barueri.</p></div>
+    <div class="cup"><div class="st">Copa do Brasil</div><div class="ph">5ª fase · eliminado</div><p>Venceu o Juventude no Morumbis e perdeu a volta por 3 a 1 em Caxias do Sul. Resultado derrubou Roger Machado.</p></div>
+    <div class="cup"><div class="st">Sul-Americana</div><div class="ph">Quartas · eliminado</div><p>Líder do grupo, invicto (3V 3E, 1 gol sofrido). Passou pelo Bolívar (1 a 1 em La Paz, 3 a 1 em casa). Caiu para o Boca Juniors com 1 a 1 no Morumbis, diante de 50 mil pessoas.</p></div>
+  </div>
+  <p class="read" style="margin-top:16px">A campanha continental foi o melhor desempenho do ano e rendeu cerca de R$ 10 milhões em premiação até as quartas. O padrão defensivo do grupo (um gol sofrido em seis jogos) não se repetiu no Brasileirão fora de casa.</p>
 </section>
-
-<section aria-labelledby="s-mando">
-  <span class="eyebrow">02 · Mando de campo</span>
+  
+  <a class="chap-next" href="#diagnostico"><span class="cn-k">Próximo capítulo</span><span class="cn-t"><span class="cn-n led">02</span>O diagnóstico</span><span class="cn-q">Por que o time perde pontos? <span class="cn-arrow" aria-hidden="true">→</span></span></a>
+</div>
+<div id="ch-diagnostico" class="view chapter" role="tabpanel" aria-labelledby="nv-diagnostico" hidden>
+  <header class="chap-open">
+    <div class="co-num led" aria-hidden="true">02</div>
+    <div class="co-main">
+      <span class="co-k">Capítulo 02 de 04</span>
+      <h2 class="co-title">O diagnóstico</h2>
+      <p class="co-q">Por que o time perde pontos?</p>
+      <p class="co-intro">Do recorte mais amplo ao mais fino: mando, adversário, clássicos, finalização, bola parada, minuto do jogo, sistema tático e físico.</p>
+    </div>
+    <nav class="co-toc" aria-label="Neste capítulo">
+      <span class="co-tk">Neste capítulo</span>
+      <ol><li><a href="#s-mando"><span class="toc-n">2.1</span><span class="toc-t">Dois times com a mesma camisa</span></a></li><li><a href="#s-matriz"><span class="toc-n">2.2</span><span class="toc-t">Resultado contra cada adversário</span></a></li><li><a href="#s-classicos"><span class="toc-n">2.3</span><span class="toc-t">1 ponto em 15</span></a></li><li><a href="#s-diag"><span class="toc-n">2.4</span><span class="toc-t">Cria mais do que cede, mas finaliza mal fora e entrega o fim do jogo</span></a></li><li><a href="#s-shots"><span class="toc-n">2.5</span><span class="toc-t">De onde o time chuta e de onde sofre</span></a></li><li><a href="#s-janelas"><span class="toc-n">2.6</span><span class="toc-t">Quando o jogo vira e o que as trocas mudam</span></a></li><li><a href="#s-form"><span class="toc-n">2.7</span><span class="toc-t">O 3-4-2-1 recuperou o time</span></a></li><li><a href="#s-gps"><span class="toc-n">2.8</span><span class="toc-t">Correr mais não decidiu jogos</span></a></li></ol>
+    </nav>
+  </header>
+  <section aria-labelledby="s-mando">
+  <span class="eyebrow"><b>2.1</b> · Mando de campo</span>
   <h2 id="s-mando">Dois times com a mesma camisa</h2>
   <div class="read"><p>A diferença de 49 pontos percentuais entre casa e fora é o principal problema de desempenho da temporada. O recorte abaixo separa os adversários pela posição atual na tabela: os nove acima do São Paulo e os dez abaixo.</p></div>
 
@@ -473,19 +738,15 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
       <p class="muted small" style="margin-top:10px">Fora de casa o time marca metade e sofre quase o dobro. O problema é dos dois lados do campo.</p>
     </div>
   </div>
-</section>
-
-<section aria-labelledby="s-matriz">
-  <span class="eyebrow">03 · Confrontos</span>
+</section><section aria-labelledby="s-matriz">
+  <span class="eyebrow"><b>2.2</b> · Confrontos</span>
   <h2 id="s-matriz">Resultado contra cada adversário</h2>
   <div class="read"><p>Adversários na ordem da tabela atual. Placar com os gols do São Paulo primeiro. A linha preta separa quem está acima de quem está abaixo do São Paulo. Células tracejadas são jogos que ainda faltam.</p></div>
   <div class="legend" style="margin:14px 0 4px"><span><i class="sq" style="background:var(--win)"></i>V vitória</span><span><i class="sq" style="background:var(--draw)"></i>E empate</span><span><i class="sq" style="background:var(--loss)"></i>D derrota</span></div>
   <div class="scroll"><table class="matrix-table" id="matrix"><thead><tr><th>#</th><th>Adversário</th><th>No Morumbis</th><th>Fora</th><th class="n">Pts</th></tr></thead><tbody></tbody></table></div>
   <p class="caption">Fonte dos resultados: football-data.org via ValorFinal, após a 33ª rodada.</p>
-</section>
-
-<section aria-labelledby="s-classicos">
-  <span class="eyebrow">04 · Clássicos</span>
+</section><section aria-labelledby="s-classicos">
+  <span class="eyebrow"><b>2.3</b> · Clássicos</span>
   <h2 id="s-classicos">1 ponto em 15</h2>
   <div class="grid2" style="margin-top:14px">
     <div class="read">
@@ -501,212 +762,8 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
       </tbody>
     </table></div>
   </div>
-</section>
-
-<section aria-labelledby="s-ataque">
-  <span class="eyebrow">05 · Ataque</span>
-  <h2 id="s-ataque">Um ataque de dois nomes</h2>
-  <div class="grid2" style="margin-top:14px">
-    <div>
-      <h3>Gols no Brasileirão 2026 (39 no total)</h3>
-      <div class="scorers" style="margin-top:14px">
-        <div class="srow"><span class="nm">Calleri</span><div class="track"><div class="fill" style="width:50%"></div></div><span class="vv">10</span></div>
-        <div class="srow"><span class="nm">Luciano</span><div class="track"><div class="fill" style="width:45%"></div></div><span class="vv">9</span></div>
-        <div class="srow"><span class="nm">Demais jogadores</span><div class="track"><div class="fill other" style="width:100%"></div></div><span class="vv">20</span></div>
-      </div>
-      <p class="caption">A artilharia por fonte (football-data.org) inclui gols contra na conta do time; a soma dos demais é o total menos os dois atacantes.</p>
-      <div class="scroll"><table class="num" style="margin-top:18px">
-        <thead><tr><th>Jogador</th><th class="n">J (BR)</th><th class="n">Gols (BR)</th><th class="n">Pên.</th><th class="n">Assist.</th><th class="n">Gols/j</th><th class="n">Temporada</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Jonathan Calleri</strong> <span class="pill">CA · 9</span></td><td class="n">29</td><td class="n">10</td><td class="n">2</td><td class="n">2</td><td class="n">0,34</td><td class="n">16 gols</td></tr>
-          <tr><td><strong>Luciano</strong> <span class="pill">ATA · 10</span></td><td class="n">27</td><td class="n">9</td><td class="n">2</td><td class="n">1</td><td class="n">0,33</td><td class="n">15 gols</td></tr>
-        </tbody>
-      </table></div>
-      <p class="caption">Brasileirão: football-data.org, lido em 31/10. Temporada (todas as competições): contagem publicada em 11/10.</p>
-    </div>
-    <div class="read">
-      <h3>Pontos de atenção</h3>
-      <p><strong>Calleri</strong> é o 8º artilheiro do Brasileirão, empatado com Danilo (Botafogo). Na temporada, chegou a 16 gols em 42 jogos e a 95 pelo clube, a cinco dos 100. Depois de um 2025 com só 18 jogos, voltou a ser titular de ritmo alto.</p>
-      <p><strong>Luciano</strong> sentiu o adutor da coxa direita após o jogo com o Santos, em 2 de outubro, desfalcou o time contra Cruzeiro e Vitória e voltou contra Vasco e Mirassol. É o 2º maior artilheiro do clube no século, atrás de Luís Fabiano.</p>
-      <p><strong>Volume de uso.</strong> Os mais utilizados na temporada são Rafael (47 jogos), Danielzinho (45) e Calleri (42). Com Sul-Americana até setembro e calendário apertado no returno, o desgaste se concentrou em poucos nomes.</p>
-      <p><strong>Coadjuvantes.</strong> Até a metade do ano, Bobadilla liderava as assistências do elenco e Artur, Ferreirinha, Tapia e Lucas Moura tinham entre 3 e 4 gols cada. Nenhum chegou perto da dupla.</p>
-      <div class="note">Dependência: o time marca 1,18 gol por jogo; sem a dupla, o restante do elenco responde por 0,61 gol por jogo.</div>
-    </div>
-  </div>
-</section>
-<section aria-labelledby="s-form">
-  <span class="eyebrow">06 · Sistema de jogo</span>
-  <h2 id="s-form">O 3-4-2-1 recuperou o time</h2>
-  <div class="read"><p>A formação de cada partida vem do SofaScore. Crespo começou com cinco defensores e passou ao 4-3-1-2. Roger e o início de Dorival usaram o 4-2-3-1, o desenho que menos rendeu no ano. A partir da 25ª rodada, Dorival fixou o 3-4-2-1, com três zagueiros, dois alas e dois meias por dentro atrás do centroavante.</p></div>
-
-  <div class="scroll" style="margin-top:16px">
-  <table class="num form-table">
-    <thead><tr><th>Formação</th><th>Quando</th><th class="n">J</th><th class="n">Pts</th><th class="n">Pts/j</th><th class="n">GP</th><th class="n">GC</th><th style="min-width:150px">Pontos por jogo</th></tr></thead>
-    <tbody>
-      <tr><td><strong>3-4-2-1</strong></td><td>R25 em diante (Dorival)</td><td class="n">8</td><td class="n">16</td><td class="n" style="color:var(--win)">2,00</td><td class="n">11</td><td class="n">8</td><td><div class="bar"><span style="width:67%;background:var(--win)"></span></div></td></tr>
-      <tr><td><strong>4-3-1-2</strong></td><td>R3–R8 (Crespo e Roger)</td><td class="n">5</td><td class="n">9</td><td class="n">1,80</td><td class="n">6</td><td class="n">3</td><td><div class="bar"><span style="width:60%"></span></div></td></tr>
-      <tr><td><strong>4-2-3-1</strong></td><td>R10–R24 (Roger e Dorival)</td><td class="n">11</td><td class="n">9</td><td class="n" style="color:var(--loss)">0,82</td><td class="n">14</td><td class="n">17</td><td><div class="bar"><span style="width:27%;background:var(--loss)"></span></div></td></tr>
-      <tr><td><strong>Outras sete</strong></td><td>5-3-2, 3-4-1-2, 4-4-2, 4-3-3 e outras</td><td class="n">9</td><td class="n">9</td><td class="n">1,00</td><td class="n">8</td><td class="n">11</td><td><div class="bar"><span style="width:33%"></span></div></td></tr>
-    </tbody>
-  </table>
-  </div>
-  <p class="caption">Escala da barra: 0 a 3 pontos por jogo. Dez formações diferentes em 33 rodadas. Fonte: SofaScore (formação inicial de cada jogo) e placares oficiais.</p>
-
-  <div class="grid2" style="margin-top:26px">
-    <div>
-      <div class="versus" aria-label="3-4-2-1: casa contra fora">
-        <div><div class="lab">3-4-2-1 · casa</div><div class="big">15<span class="muted" style="font-size:24px">/15</span></div><div class="sub">5 vitórias em 5 jogos · Bragantino, Atlético-MG, Inter, Vitória, Vasco</div><div class="bar"><span style="width:100%;background:var(--win)"></span></div></div>
-        <div><div class="lab">3-4-2-1 · fora</div><div class="big" style="color:var(--loss)">1<span class="muted" style="font-size:24px">/9</span></div><div class="sub">0V 1E 2D · Palmeiras, Mirassol, Bahia</div><div class="bar"><span style="width:11%;background:var(--loss)"></span></div></div>
-      </div>
-    </div>
-    <div class="read">
-      <h3>O que o sistema resolveu e o que não resolveu</h3>
-      <p>No Morumbis, o 3-4-2-1 venceu todos os jogos. A linha de três protegeu a área contra cruzamentos, o ponto fraco que o próprio Dorival apontou ("tomávamos gols em bolas paradas"), e liberou os alas para atacar.</p>
-      <p>Fora de casa, nada mudou: 1 ponto em 9. A lesão de Domingos Duarte (ligamento cruzado, 20/9), o zagueiro mais forte pelo alto, devolveu a dúvida sobre a bola aérea na reta final.</p>
-    </div>
-  </div>
-
-  <h3 style="margin-top:34px">Quem cresce e quem cai com três zagueiros</h3>
-  <p class="read small muted">Nota média SofaScore de cada jogador nos jogos com três zagueiros contra os jogos com linha de quatro. Só jogadores com pelo menos 4 jogos com nota em cada desenho, ou o mais próximo disso entre os titulares.</p>
-  <div class="sysdiff" id="sysdiff"><a class="sd-row" href="#j-artur" data-goto="artur"><span class="sd-n">Artur</span><span class="sd-bar"><i class="pos" style="width:50%"></i></span><span class="sd-v">+0.50</span><span class="sd-d">7,47 × 6,97</span></a><a class="sd-row" href="#j-jonathan-calleri" data-goto="jonathan-calleri"><span class="sd-n">Jonathan Calleri</span><span class="sd-bar"><i class="pos" style="width:46%"></i></span><span class="sd-v">+0.46</span><span class="sd-d">7,13 × 6,67</span></a><a class="sd-row" href="#j-luciano" data-goto="luciano"><span class="sd-n">Luciano</span><span class="sd-bar"><i class="pos" style="width:35%"></i></span><span class="sd-v">+0.35</span><span class="sd-d">7,23 × 6,88</span></a><a class="sd-row" href="#j-damian-bobadilla" data-goto="damian-bobadilla"><span class="sd-n">Damián Bobadilla</span><span class="sd-bar"><i class="pos" style="width:32%"></i></span><span class="sd-v">+0.32</span><span class="sd-d">7,09 × 6,77</span></a><a class="sd-row" href="#j-wendell" data-goto="wendell"><span class="sd-n">Wendell</span><span class="sd-bar"><i class="pos" style="width:26%"></i></span><span class="sd-v">+0.26</span><span class="sd-d">6,87 × 6,61</span></a><a class="sd-row" href="#j-iago-borduchi" data-goto="iago-borduchi"><span class="sd-n">Iago Borduchi</span><span class="sd-bar"><i class="pos" style="width:21%"></i></span><span class="sd-v">+0.21</span><span class="sd-d">6,96 × 6,75</span></a><a class="sd-row" href="#j-robert-arboleda" data-goto="robert-arboleda"><span class="sd-n">Robert Arboleda</span><span class="sd-bar"><i class="pos" style="width:7%"></i></span><span class="sd-v">+0.07</span><span class="sd-d">6,99 × 6,92</span></a><a class="sd-row" href="#j-pablo-maia" data-goto="pablo-maia"><span class="sd-n">Pablo Maia</span><span class="sd-bar"><i class="neg" style="width:8%"></i></span><span class="sd-v">−0.08</span><span class="sd-d">6,64 × 6,72</span></a><a class="sd-row" href="#j-danielzinho" data-goto="danielzinho"><span class="sd-n">Danielzinho</span><span class="sd-bar"><i class="neg" style="width:10%"></i></span><span class="sd-v">−0.10</span><span class="sd-d">6,86 × 6,96</span></a><a class="sd-row" href="#j-marcos-antonio" data-goto="marcos-antonio"><span class="sd-n">Marcos Antônio</span><span class="sd-bar"><i class="neg" style="width:15%"></i></span><span class="sd-v">−0.15</span><span class="sd-d">6,89 × 7,04</span></a><a class="sd-row" href="#j-sabino" data-goto="sabino"><span class="sd-n">Sabino</span><span class="sd-bar"><i class="neg" style="width:15%"></i></span><span class="sd-v">−0.15</span><span class="sd-d">6,91 × 7,06</span></a><a class="sd-row" href="#j-rafael-toloi" data-goto="rafael-toloi"><span class="sd-n">Rafael Tolói</span><span class="sd-bar"><i class="neg" style="width:27%"></i></span><span class="sd-v">−0.27</span><span class="sd-d">6,87 × 7,14</span></a></div><p class="caption">Três zagueiros inclui o 5-3-2 das duas primeiras rodadas e o 3-4-1-2. Toque num nome para abrir a ficha.</p>
-  <p class="read" style="margin-top:14px">O sistema favorece quem ataca a área e quem joga pelos corredores: Artur por dentro, Calleri recebendo cruzamentos, Bobadilla com cobertura atrás, Wendell e Iago como alas. Quem perde um pouco são os passadores do meio e os zagueiros de dupla, como Marcos Antônio, Sabino e Tolói, que ficam com menos gente perto para tocar. Para ver a ficha completa de cada um, abra a aba <a href="#jogadores">Jogadores</a>.</p>
-</section>
-
-<section aria-labelledby="s-gps">
-  <span class="eyebrow">07 · Físico (GPS)</span>
-  <h2 id="s-gps">Correr mais não decidiu jogos</h2>
-  <div class="read"><p>Distância medida pelo rastreamento do SofaScore, disponível em 29 das 33 rodadas (faltam a 17ª, 18ª, 19ª e 32ª). O São Paulo percorre em média 92,3 km por jogo, contra 96,1 km dos adversários.</p></div>
-  <div class="gps-tiles" style="margin-top:16px">
-    <div><span>Média SPFC</span><b>92,3 km</b><em>por jogo rastreado</em></div>
-    <div><span>Média adversários</span><b>96,1 km</b><em>−3,8 km para o São Paulo</em></div>
-    <div><span>Correu mais que o rival</span><b>9 de 29</b><em>jogos</em></div>
-    <div><span>Pontos por jogo</span><b>1,11 × 1,55</b><em>correndo mais × correndo menos</em></div>
-  </div>
-  <figure class="fig" id="fig-gps" style="margin-inline:0">
-    <div class="fig-head"><span class="fig-title">Distância total por jogo (km)</span><span class="legend"><span><i style="background:var(--s-lib)"></i>São Paulo</span><span><i style="background:var(--faint)"></i>Adversário</span></span></div>
-    <div class="scroll"><svg id="gpsteam" role="img" aria-label="Distância percorrida por jogo, São Paulo contra adversário"></svg></div>
-    <p class="caption" id="gpsinfo">Toque num jogo para ver o placar e as distâncias. Rodadas sem rastreamento aparecem vazias.</p>
-  </figure>
-  <div class="grid2" style="margin-top:18px">
-    <div class="read">
-      <h3>O que os números dizem</h3>
-      <p>Nas vitórias, o São Paulo correu menos (88,8 km) e o adversário mais (94,8 km): quando o time tem a bola e o placar, quem corre atrás é o outro. Os empates foram os jogos de maior volume (101,1 km). Distância, sozinha, não explica o resultado; o que pesa é onde e com que intensidade se corre.</p>
-      <p>Fora de casa a diferença para o rival é menor (−3,3 km) do que em casa (−4,3 km), o que reforça a leitura do relatório: o problema fora não é falta de entrega física, é de organização com e sem a bola.</p>
-    </div>
-    <div>
-      <h3>Quem mais corre (km por 90 minutos)</h3>
-      <p class="small muted">Jogadores de linha com pelo menos 450 minutos rastreados. Toque num nome para abrir a ficha.</p>
-      <div class="grank" id="gpsrank"></div>
-    </div>
-  </div>
-</section>
-<section aria-labelledby="s-tecnicos">
-  <span class="eyebrow">08 · Comando técnico</span>
-  <h2 id="s-tecnicos">Três técnicos em oito meses</h2>
-  <div class="read"><p>O São Paulo foi o primeiro clube da Série A a trocar de técnico duas vezes em 2026. Cada troca coincide com uma eliminação.</p></div>
-  <div class="scroll" style="margin-top:14px">
-    <table class="coaches num">
-      <thead><tr><th>Técnico</th><th>Período</th><th class="n">Jogos</th><th>Campanha</th><th class="n">Aprov.</th><th>Saída / situação</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Hernán Crespo</strong></td><td>até 9 mar</td><td class="n">—</td><td>Brasileirão: 4 rodadas, invicto, 10 pts</td><td class="n">83% (BR)</td><td>Demitido após queda na semifinal do Paulistão e desgaste interno</td></tr>
-        <tr><td><strong>Roger Machado</strong></td><td>10 mar – 13 mai</td><td class="n">17</td><td>7V 4E 6D · 20 GP, 16 GC</td><td class="n">49%</td><td>Demitido após 3 a 1 para o Juventude (Copa do Brasil, 5ª fase)</td></tr>
-        <tr><td><strong>Dorival Júnior</strong></td><td>desde 15 mai</td><td class="n">19*</td><td>5V 6E 8D (até início de out.)</td><td class="n">36,8%</td><td>Contrato até dez/2026; renovação depende da nova gestão</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="caption">* Levantamento do ge citado pela imprensa no início de outubro. Dorival estreou em 19 de maio e só venceu no Brasileirão após seis rodadas (2E 4D no período).</p>
-  <div class="read" style="margin-top:12px">
-    <p>O aproveitamento de Dorival é o mais baixo de suas três passagens pelo clube. Há atenuantes: assumiu com o time já em queda, teve a pausa da Copa do Mundo no meio do trabalho e levou a equipe às quartas da Sul-Americana. Para decidir 2027, a diretoria precisa de métricas de processo do time por período de cada técnico (gols esperados a favor e contra, finalizações cedidas, recuperação de posse), que as fontes públicas não consolidam.</p>
-  </div>
-</section>
-
-<section aria-labelledby="s-copas">
-  <span class="eyebrow">09 · Copas</span>
-  <h2 id="s-copas">Três eliminações</h2>
-  <div class="cups">
-    <div class="cup"><div class="st">Paulistão</div><div class="ph">Semifinal · eliminado</div><p>6º na fase de liga. Venceu o Bragantino fora (2 a 1) nas quartas e perdeu para o Palmeiras (2 a 1) na semi, em Barueri.</p></div>
-    <div class="cup"><div class="st">Copa do Brasil</div><div class="ph">5ª fase · eliminado</div><p>Venceu o Juventude no Morumbis e perdeu a volta por 3 a 1 em Caxias do Sul. Resultado derrubou Roger Machado.</p></div>
-    <div class="cup"><div class="st">Sul-Americana</div><div class="ph">Quartas · eliminado</div><p>Líder do grupo, invicto (3V 3E, 1 gol sofrido). Passou pelo Bolívar (1 a 1 em La Paz, 3 a 1 em casa). Caiu para o Boca Juniors com 1 a 1 no Morumbis, diante de 50 mil pessoas.</p></div>
-  </div>
-  <p class="read" style="margin-top:16px">A campanha continental foi o melhor desempenho do ano e rendeu cerca de R$ 10 milhões em premiação até as quartas. O padrão defensivo do grupo (um gol sofrido em seis jogos) não se repetiu no Brasileirão fora de casa.</p>
-</section>
-
-<section aria-labelledby="s-reta">
-  <span class="eyebrow">10 · Reta final</span>
-  <h2 id="s-reta">Cinco jogos, três no Morumbis</h2>
-  <div class="read"><p>Probabilidades do Modelo ValorFinal. Pontos esperados = 3 × vitória + 1 × empate. A soma da sequência é 7,24 pontos (1,45 por jogo), acima da média da Série A (1,38).</p></div>
-  <div class="fx" id="fixtures" style="margin-top:16px"></div>
-
-  <div class="sim" id="sim">
-    <div class="sim-head"><h3 style="margin:0">Simulador da reta final</h3><div class="sim-presets" role="group" aria-label="Cenários prontos"><button type="button" data-p="fav">Favorito do modelo</button><button type="button" data-p="casa">Vence em casa, perde fora</button><button type="button" data-p="all">Vence todas</button></div></div>
-    <p class="small muted" style="margin:6px 0 0">Marque o resultado de cada jogo. A régua compara a pontuação final do São Paulo com a projeção dos vizinhos se eles mantiverem o ritmo atual de pontos por jogo. É uma conta simples; a chance real de vaga é a do Modelo ValorFinal.</p>
-    <div class="sim-rows" id="sim-rows"></div>
-    <div class="sim-out"><div class="sim-pts" id="sim-pts">—<small>pontos no fim</small></div><div><div class="sim-line" id="sim-line" aria-hidden="true"></div><p class="small" id="sim-txt" style="margin:4px 0 0"></p></div></div>
-  </div>
-
-  <h3 style="margin-top:34px">Ritmo dos vizinhos e média da Série A</h3>
-  <p class="small muted" style="margin:0">Pontos, gols marcados e sofridos por jogo. A projeção multiplica os pontos por jogo de hoje por 38.</p>
-  <div class="scroll"><table class="cmp num" id="cmp"></table></div>
-  <p class="caption" id="cmp-txt"></p>
-
-  <div class="grid2" style="margin-top:30px">
-    <figure class="fig" style="margin:0">
-      <div class="fig-head"><span class="fig-title">Posição final simulada (% das simulações)</span></div>
-      <div class="scroll"><svg id="chart-dist" role="img" aria-label="Distribuição da posição final: 10º lugar 32,9%, 9º 27,0%, 11º 14,3%, 8º 10,0%"></svg></div>
-      <p class="caption">20.000 campeonatos simulados. Em 80% deles o time termina entre 8º e 12º.</p>
-    </figure>
-    <div class="read">
-      <h3>Cenários</h3>
-      <div class="scroll"><table class="num">
-        <thead><tr><th>Cenário</th><th class="n">Pontos</th><th>Leitura</th></tr></thead>
-        <tbody>
-          <tr><td>Mediana do modelo</td><td class="n">50</td><td>10º lugar, Sul-Americana provável</td></tr>
-          <tr><td>Vence os 3 em casa, perde os 2 fora</td><td class="n">52</td><td>Briga com Atlético-MG pelo 7º</td></tr>
-          <tr><td>Máximo possível</td><td class="n">58</td><td>Ainda abaixo do corte de Top 5 (~61)</td></tr>
-        </tbody>
-      </table></div>
-      <p style="margin-top:14px">O clássico de 4/11 é o jogo de maior alavancagem: com vitória, a chance de Sul-Americana sobe para 95,5%; com derrota, cai para 73,4%. Vagas extras de Libertadores para o 6º ao 9º só existem se sobrarem da Copa do Brasil e das finais continentais, e o São Paulo precisaria terminar no máximo em 9º (hoje 9º tem 44 pts, Bragantino).</p>
-    </div>
-  </div>
-</section>
-
-<section aria-labelledby="s-rec">
-  <span class="eyebrow">11 · Recomendações</span>
-  <h2 id="s-rec">Prioridades da comissão</h2>
-  <p class="read muted">Ordenadas por impacto esperado em pontos e no planejamento de 2027.</p>
-  <div class="recs">
-    <div class="rec"><div><h3>Ganhar os três jogos em casa</h3><p>O time é invicto no Morumbis contra a metade de baixo e faz 1,56 gol por jogo como mandante. Corinthians (17º), Fluminense (4º) e Remo (19º) valem 9 pontos, e o modelo espera 5,2 deles. Escalar a força máxima nesses jogos e gerir carga nos dois de fora se houver desgaste.</p><div class="kpi-line">Meta: ≥ 7 pts em casa · chance de Sul-Americana > 95%</div></div></div>
-    <div class="rec"><div><h3>Plano de jogo específico para fora</h3><p>Fora, o time sofre 1,53 gol por jogo e perdeu 6 de 9 contra times da metade de baixo. Para Botafogo e Athletico-PR, a referência é o modelo usado na Sul-Americana (um gol sofrido em seis jogos): bloco mais baixo, saída rápida e menos laterais projetados ao mesmo tempo.</p><div class="kpi-line">Meta para 2027: ≥ 1,0 ponto por jogo fora (+7 pts/temporada sobre 2026)</div></div></div>
-    <div class="rec"><div><h3>Transformar volume de bola parada em gol</h3><p>O time está entre os que mais cobram escanteios no campeonato (mais de 200), mas fez só 14 gols fora de casa. O gol de Sabino contra o Bolívar, de escanteio fechado, mostra o caminho. Sem Luciano, a bola parada é a fonte de gol mais barata que existe.</p><div class="kpi-line">Indicador: gols de bola parada / escanteios cobrados</div></div></div>
-    <div class="rec"><div><h3>Cada um na posição em que rende</h3><p>Artur por dentro, como meia-atacante do 3-4-2-1 (7,37 de nota média contra 6,97 aberto). Luciano como atacante, não recuado como meia (7,06 contra 6,90). Newton como zagueiro, não volante (6,86 contra 6,67). Tolói como reposição de Duarte pela bola aérea (79% de aéreos ganhos). Ferreirinha aberto pela esquerda, onde rende 7,27, e não como centroavante (6,82).</p><div class="kpi-line">Indicador: nota média por jogador no papel definido × fora dele</div></div></div>
-    <div class="rec"><div><h3>Reduzir a dependência da dupla de ataque</h3><p>Calleri e Luciano fizeram 49% dos gols, os dois têm 33 anos e ambos tiveram lesões musculares em outubro. O mercado de 2027 deve priorizar um atacante de lado que finalize (meta de 8 gols ou mais) e um meia que dê assistência com regularidade.</p><div class="kpi-line">Meta: nenhum jogador com mais de 30% dos gols do time</div></div></div>
-    <div class="rec"><div><h3>Decidir 2027 com dados de processo</h3><p>Os resultados públicos mostram queda de 1,60 para 1,06 ponto por jogo após a 15ª rodada, mas não separam mérito do técnico e qualidade do elenco. Antes de renovar ou trocar, cruzar gols esperados a favor e contra, finalizações cedidas e intensidade (dados de GPS e do provedor de eventos do clube) por período de cada técnico.</p><div class="kpi-line">Entregável: dossiê de processo por técnico até o fim de novembro</div></div></div>
-  </div>
-  <div class="sig">Análise independente de Gustavo Negri Tavares · dados públicos · 31/10/2026</div>
-</section>
-</div>
-<div id="tab-jogadores" class="tabpanel" role="tabpanel" aria-labelledby="tb-jogadores" hidden>
-<section class="pl-intro" aria-labelledby="s-indiv">
-  <span class="eyebrow">Análise individual · Série A 2026</span>
-  <h2 id="s-indiv">Relatório por jogador</h2>
-  <p class="read">Escolha um jogador. A lista segue a ordem de minutos jogados no Brasileirão. Cada ficha traz o mapa de calor da temporada, as estatísticas da função comparadas com o resto do elenco, onde ele rende melhor, a nota jogo a jogo, a melhor partida e como foram os gols.</p>
-  <div class="picker">
-    <button type="button" class="nav-btn" id="pprev" aria-label="Jogador anterior">‹</button>
-    <label class="sr" for="psel">Jogador</label>
-    <select id="psel"></select>
-    <button type="button" class="nav-btn" id="pnext" aria-label="Próximo jogador">›</button>
-  </div>
-  <details class="roster">
-    <summary>Ver o elenco inteiro (31 jogadores com minutos)</summary>
-    <div class="scroll"><table class="num rtable" id="rtable"><thead><tr><th>Jogador</th><th>Pos.</th><th class="n">J</th><th class="n">Min</th><th class="n">Nota</th><th class="n">G</th><th class="n">A</th></tr></thead><tbody></tbody></table></div>
-  </details>
-</section>
-<article id="prep" aria-live="polite"></article>
-</div>
-
-<div id="tab-gols" class="tabpanel" role="tabpanel" aria-labelledby="tb-gols" hidden>
-<section class="pl-intro" aria-labelledby="s-diag">
-  <span class="eyebrow">Diagnóstico de gols · Série A 2026</span>
+</section><section aria-labelledby="s-diag">
+  <span class="eyebrow"><b>2.4</b> · Diagnóstico de gols · Série A 2026</span>
   <h2 id="s-diag">Cria mais do que cede, mas finaliza mal fora e entrega o fim do jogo</h2>
   <p class="read">Gols, finalizações e gols esperados (xG) de todas as 33 rodadas, a partir do mapa de chutes e dos lances de cada partida no SofaScore. O xG mede a chance de cada chute virar gol; a diferença entre gols e xG mostra quem converte acima ou abaixo do esperado.</p>
   <div class="gps-tiles" style="margin-top:16px">
@@ -765,10 +822,8 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     <tr><td>22ª</td><td>Grêmio (fora)</td><td>86′</td><td>1 x 1</td><td>1 x 2</td><td class="n">1</td></tr>
     <tr><td>33ª</td><td>Bahia (fora)</td><td>81′</td><td>2 x 2</td><td>2 x 3</td><td class="n">1</td></tr>
   </tbody></table></div>
-</section>
-
-<section aria-labelledby="s-shots">
-  <span class="eyebrow">Mapa de finalizações</span>
+</section><section aria-labelledby="s-shots">
+  <span class="eyebrow"><b>2.5</b> · Mapa de finalizações</span>
   <h2 id="s-shots">De onde o time chuta e de onde sofre</h2>
   <div class="shotctl">
     <div class="seg" role="group" aria-label="Filtro de mando">
@@ -801,10 +856,8 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     <tr><td>Pênalti</td><td class="n">7</td><td class="n">5,5</td><td class="n">6</td><td class="n">1</td><td class="n">0,8</td><td class="n">1</td></tr>
   </tbody></table></div>
   <p class="caption">Fonte: SofaScore, mapa de chutes das 33 rodadas. Gols contra não entram nesta tabela.</p>
-</section>
-
-<section aria-labelledby="s-janelas">
-  <span class="eyebrow">Gols · janelas e trocas</span>
+</section><section aria-labelledby="s-janelas">
+  <span class="eyebrow"><b>2.6</b> · Gols · janelas e trocas</span>
   <h2 id="s-janelas">Quando o jogo vira e o que as trocas mudam</h2>
   <div class="read"><p id="jan-txt"></p></div>
   <figure class="fig" style="margin-inline:0">
@@ -818,10 +871,119 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
   <h3 style="margin-top:26px">Quem muda o jogo vindo do banco</h3>
   <p class="small muted" style="margin:0 0 6px">Saldo de xG por 90 minutos (a favor menos contra) enquanto o jogador esteve em campo depois de entrar. Mínimo de 4 entradas.</p>
   <div id="bench-list"></div>
-</section>
+</section><section aria-labelledby="s-form">
+  <span class="eyebrow"><b>2.7</b> · Sistema de jogo</span>
+  <h2 id="s-form">O 3-4-2-1 recuperou o time</h2>
+  <div class="read"><p>A formação de cada partida vem do SofaScore. Crespo começou com cinco defensores e passou ao 4-3-1-2. Roger e o início de Dorival usaram o 4-2-3-1, o desenho que menos rendeu no ano. A partir da 25ª rodada, Dorival fixou o 3-4-2-1, com três zagueiros, dois alas e dois meias por dentro atrás do centroavante.</p></div>
 
-<section aria-labelledby="s-pairs">
-  <span class="eyebrow">Duplas e impacto individual</span>
+  <div class="scroll" style="margin-top:16px">
+  <table class="num form-table">
+    <thead><tr><th>Formação</th><th>Quando</th><th class="n">J</th><th class="n">Pts</th><th class="n">Pts/j</th><th class="n">GP</th><th class="n">GC</th><th style="min-width:150px">Pontos por jogo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>3-4-2-1</strong></td><td>R25 em diante (Dorival)</td><td class="n">8</td><td class="n">16</td><td class="n" style="color:var(--win)">2,00</td><td class="n">11</td><td class="n">8</td><td><div class="bar"><span style="width:67%;background:var(--win)"></span></div></td></tr>
+      <tr><td><strong>4-3-1-2</strong></td><td>R3–R8 (Crespo e Roger)</td><td class="n">5</td><td class="n">9</td><td class="n">1,80</td><td class="n">6</td><td class="n">3</td><td><div class="bar"><span style="width:60%"></span></div></td></tr>
+      <tr><td><strong>4-2-3-1</strong></td><td>R10–R24 (Roger e Dorival)</td><td class="n">11</td><td class="n">9</td><td class="n" style="color:var(--loss)">0,82</td><td class="n">14</td><td class="n">17</td><td><div class="bar"><span style="width:27%;background:var(--loss)"></span></div></td></tr>
+      <tr><td><strong>Outras sete</strong></td><td>5-3-2, 3-4-1-2, 4-4-2, 4-3-3 e outras</td><td class="n">9</td><td class="n">9</td><td class="n">1,00</td><td class="n">8</td><td class="n">11</td><td><div class="bar"><span style="width:33%"></span></div></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="caption">Escala da barra: 0 a 3 pontos por jogo. Dez formações diferentes em 33 rodadas. Fonte: SofaScore (formação inicial de cada jogo) e placares oficiais.</p>
+
+  <div class="grid2" style="margin-top:26px">
+    <div>
+      <div class="versus" aria-label="3-4-2-1: casa contra fora">
+        <div><div class="lab">3-4-2-1 · casa</div><div class="big">15<span class="muted" style="font-size:24px">/15</span></div><div class="sub">5 vitórias em 5 jogos · Bragantino, Atlético-MG, Inter, Vitória, Vasco</div><div class="bar"><span style="width:100%;background:var(--win)"></span></div></div>
+        <div><div class="lab">3-4-2-1 · fora</div><div class="big" style="color:var(--loss)">1<span class="muted" style="font-size:24px">/9</span></div><div class="sub">0V 1E 2D · Palmeiras, Mirassol, Bahia</div><div class="bar"><span style="width:11%;background:var(--loss)"></span></div></div>
+      </div>
+    </div>
+    <div class="read">
+      <h3>O que o sistema resolveu e o que não resolveu</h3>
+      <p>No Morumbis, o 3-4-2-1 venceu todos os jogos. A linha de três protegeu a área contra cruzamentos, o ponto fraco que o próprio Dorival apontou ("tomávamos gols em bolas paradas"), e liberou os alas para atacar.</p>
+      <p>Fora de casa, nada mudou: 1 ponto em 9. A lesão de Domingos Duarte (ligamento cruzado, 20/9), o zagueiro mais forte pelo alto, devolveu a dúvida sobre a bola aérea na reta final.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px">Quem cresce e quem cai com três zagueiros</h3>
+  <p class="read small muted">Nota média SofaScore de cada jogador nos jogos com três zagueiros contra os jogos com linha de quatro. Só jogadores com pelo menos 4 jogos com nota em cada desenho, ou o mais próximo disso entre os titulares.</p>
+  <div class="sysdiff" id="sysdiff"><a class="sd-row" href="#j-artur" data-goto="artur"><span class="sd-n">Artur</span><span class="sd-bar"><i class="pos" style="width:50%"></i></span><span class="sd-v">+0.50</span><span class="sd-d">7,47 × 6,97</span></a><a class="sd-row" href="#j-jonathan-calleri" data-goto="jonathan-calleri"><span class="sd-n">Jonathan Calleri</span><span class="sd-bar"><i class="pos" style="width:46%"></i></span><span class="sd-v">+0.46</span><span class="sd-d">7,13 × 6,67</span></a><a class="sd-row" href="#j-luciano" data-goto="luciano"><span class="sd-n">Luciano</span><span class="sd-bar"><i class="pos" style="width:35%"></i></span><span class="sd-v">+0.35</span><span class="sd-d">7,23 × 6,88</span></a><a class="sd-row" href="#j-damian-bobadilla" data-goto="damian-bobadilla"><span class="sd-n">Damián Bobadilla</span><span class="sd-bar"><i class="pos" style="width:32%"></i></span><span class="sd-v">+0.32</span><span class="sd-d">7,09 × 6,77</span></a><a class="sd-row" href="#j-wendell" data-goto="wendell"><span class="sd-n">Wendell</span><span class="sd-bar"><i class="pos" style="width:26%"></i></span><span class="sd-v">+0.26</span><span class="sd-d">6,87 × 6,61</span></a><a class="sd-row" href="#j-iago-borduchi" data-goto="iago-borduchi"><span class="sd-n">Iago Borduchi</span><span class="sd-bar"><i class="pos" style="width:21%"></i></span><span class="sd-v">+0.21</span><span class="sd-d">6,96 × 6,75</span></a><a class="sd-row" href="#j-robert-arboleda" data-goto="robert-arboleda"><span class="sd-n">Robert Arboleda</span><span class="sd-bar"><i class="pos" style="width:7%"></i></span><span class="sd-v">+0.07</span><span class="sd-d">6,99 × 6,92</span></a><a class="sd-row" href="#j-pablo-maia" data-goto="pablo-maia"><span class="sd-n">Pablo Maia</span><span class="sd-bar"><i class="neg" style="width:8%"></i></span><span class="sd-v">−0.08</span><span class="sd-d">6,64 × 6,72</span></a><a class="sd-row" href="#j-danielzinho" data-goto="danielzinho"><span class="sd-n">Danielzinho</span><span class="sd-bar"><i class="neg" style="width:10%"></i></span><span class="sd-v">−0.10</span><span class="sd-d">6,86 × 6,96</span></a><a class="sd-row" href="#j-marcos-antonio" data-goto="marcos-antonio"><span class="sd-n">Marcos Antônio</span><span class="sd-bar"><i class="neg" style="width:15%"></i></span><span class="sd-v">−0.15</span><span class="sd-d">6,89 × 7,04</span></a><a class="sd-row" href="#j-sabino" data-goto="sabino"><span class="sd-n">Sabino</span><span class="sd-bar"><i class="neg" style="width:15%"></i></span><span class="sd-v">−0.15</span><span class="sd-d">6,91 × 7,06</span></a><a class="sd-row" href="#j-rafael-toloi" data-goto="rafael-toloi"><span class="sd-n">Rafael Tolói</span><span class="sd-bar"><i class="neg" style="width:27%"></i></span><span class="sd-v">−0.27</span><span class="sd-d">6,87 × 7,14</span></a></div><p class="caption">Três zagueiros inclui o 5-3-2 das duas primeiras rodadas e o 3-4-1-2. Toque num nome para abrir a ficha.</p>
+  <p class="read" style="margin-top:14px">O sistema favorece quem ataca a área e quem joga pelos corredores: Artur por dentro, Calleri recebendo cruzamentos, Bobadilla com cobertura atrás, Wendell e Iago como alas. Quem perde um pouco são os passadores do meio e os zagueiros de dupla, como Marcos Antônio, Sabino e Tolói, que ficam com menos gente perto para tocar. Para ver a ficha completa de cada um, abra a aba <a href="#jogadores">Jogadores</a>.</p>
+</section><section aria-labelledby="s-gps">
+  <span class="eyebrow"><b>2.8</b> · Físico (GPS)</span>
+  <h2 id="s-gps">Correr mais não decidiu jogos</h2>
+  <div class="read"><p>Distância medida pelo rastreamento do SofaScore, disponível em 29 das 33 rodadas (faltam a 17ª, 18ª, 19ª e 32ª). O São Paulo percorre em média 92,3 km por jogo, contra 96,1 km dos adversários.</p></div>
+  <div class="gps-tiles" style="margin-top:16px">
+    <div><span>Média SPFC</span><b>92,3 km</b><em>por jogo rastreado</em></div>
+    <div><span>Média adversários</span><b>96,1 km</b><em>−3,8 km para o São Paulo</em></div>
+    <div><span>Correu mais que o rival</span><b>9 de 29</b><em>jogos</em></div>
+    <div><span>Pontos por jogo</span><b>1,11 × 1,55</b><em>correndo mais × correndo menos</em></div>
+  </div>
+  <figure class="fig" id="fig-gps" style="margin-inline:0">
+    <div class="fig-head"><span class="fig-title">Distância total por jogo (km)</span><span class="legend"><span><i style="background:var(--s-lib)"></i>São Paulo</span><span><i style="background:var(--faint)"></i>Adversário</span></span></div>
+    <div class="scroll"><svg id="gpsteam" role="img" aria-label="Distância percorrida por jogo, São Paulo contra adversário"></svg></div>
+    <p class="caption" id="gpsinfo">Toque num jogo para ver o placar e as distâncias. Rodadas sem rastreamento aparecem vazias.</p>
+  </figure>
+  <div class="grid2" style="margin-top:18px">
+    <div class="read">
+      <h3>O que os números dizem</h3>
+      <p>Nas vitórias, o São Paulo correu menos (88,8 km) e o adversário mais (94,8 km): quando o time tem a bola e o placar, quem corre atrás é o outro. Os empates foram os jogos de maior volume (101,1 km). Distância, sozinha, não explica o resultado; o que pesa é onde e com que intensidade se corre.</p>
+      <p>Fora de casa a diferença para o rival é menor (−3,3 km) do que em casa (−4,3 km), o que reforça a leitura do relatório: o problema fora não é falta de entrega física, é de organização com e sem a bola.</p>
+    </div>
+    <div>
+      <h3>Quem mais corre (km por 90 minutos)</h3>
+      <p class="small muted">Jogadores de linha com pelo menos 450 minutos rastreados. Toque num nome para abrir a ficha.</p>
+      <div class="grank" id="gpsrank"></div>
+    </div>
+  </div>
+</section>
+  
+  <a class="chap-next" href="#elenco"><span class="cn-k">Próximo capítulo</span><span class="cn-t"><span class="cn-n led">03</span>O elenco</span><span class="cn-q">Quem sustenta o time? <span class="cn-arrow" aria-hidden="true">→</span></span></a>
+</div>
+<div id="ch-elenco" class="view chapter" role="tabpanel" aria-labelledby="nv-elenco" hidden>
+  <header class="chap-open">
+    <div class="co-num led" aria-hidden="true">03</div>
+    <div class="co-main">
+      <span class="co-k">Capítulo 03 de 04</span>
+      <h2 class="co-title">O elenco</h2>
+      <p class="co-q">Quem sustenta o time?</p>
+      <p class="co-intro">A dependência da dupla de ataque, quem faz o time render mais quando está em campo e a ficha completa de cada jogador.</p>
+    </div>
+    <nav class="co-toc" aria-label="Neste capítulo">
+      <span class="co-tk">Neste capítulo</span>
+      <ol><li><a href="#s-ataque"><span class="toc-n">3.1</span><span class="toc-t">Um ataque de dois nomes</span></a></li><li><a href="#s-pairs"><span class="toc-n">3.2</span><span class="toc-t">Quem faz o time melhor quando está em campo</span></a></li><li><a href="#s-indiv"><span class="toc-n">3.3</span><span class="toc-t">Relatório por jogador</span></a></li></ol>
+    </nav>
+  </header>
+  <section aria-labelledby="s-ataque">
+  <span class="eyebrow"><b>3.1</b> · Ataque</span>
+  <h2 id="s-ataque">Um ataque de dois nomes</h2>
+  <div class="grid2" style="margin-top:14px">
+    <div>
+      <h3>Gols no Brasileirão 2026 (39 no total)</h3>
+      <div class="scorers" style="margin-top:14px">
+        <div class="srow"><span class="nm">Calleri</span><div class="track"><div class="fill" style="width:50%"></div></div><span class="vv">10</span></div>
+        <div class="srow"><span class="nm">Luciano</span><div class="track"><div class="fill" style="width:45%"></div></div><span class="vv">9</span></div>
+        <div class="srow"><span class="nm">Demais jogadores</span><div class="track"><div class="fill other" style="width:100%"></div></div><span class="vv">20</span></div>
+      </div>
+      <p class="caption">A artilharia por fonte (football-data.org) inclui gols contra na conta do time; a soma dos demais é o total menos os dois atacantes.</p>
+      <div class="scroll"><table class="num" style="margin-top:18px">
+        <thead><tr><th>Jogador</th><th class="n">J (BR)</th><th class="n">Gols (BR)</th><th class="n">Pên.</th><th class="n">Assist.</th><th class="n">Gols/j</th><th class="n">Temporada</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Jonathan Calleri</strong> <span class="pill">CA · 9</span></td><td class="n">29</td><td class="n">10</td><td class="n">2</td><td class="n">2</td><td class="n">0,34</td><td class="n">16 gols</td></tr>
+          <tr><td><strong>Luciano</strong> <span class="pill">ATA · 10</span></td><td class="n">27</td><td class="n">9</td><td class="n">2</td><td class="n">1</td><td class="n">0,33</td><td class="n">15 gols</td></tr>
+        </tbody>
+      </table></div>
+      <p class="caption">Brasileirão: football-data.org, lido em 31/10. Temporada (todas as competições): contagem publicada em 11/10.</p>
+    </div>
+    <div class="read">
+      <h3>Pontos de atenção</h3>
+      <p><strong>Calleri</strong> é o 8º artilheiro do Brasileirão, empatado com Danilo (Botafogo). Na temporada, chegou a 16 gols em 42 jogos e a 95 pelo clube, a cinco dos 100. Depois de um 2025 com só 18 jogos, voltou a ser titular de ritmo alto.</p>
+      <p><strong>Luciano</strong> sentiu o adutor da coxa direita após o jogo com o Santos, em 2 de outubro, desfalcou o time contra Cruzeiro e Vitória e voltou contra Vasco e Mirassol. É o 2º maior artilheiro do clube no século, atrás de Luís Fabiano.</p>
+      <p><strong>Volume de uso.</strong> Os mais utilizados na temporada são Rafael (47 jogos), Danielzinho (45) e Calleri (42). Com Sul-Americana até setembro e calendário apertado no returno, o desgaste se concentrou em poucos nomes.</p>
+      <p><strong>Coadjuvantes.</strong> Até a metade do ano, Bobadilla liderava as assistências do elenco e Artur, Ferreirinha, Tapia e Lucas Moura tinham entre 3 e 4 gols cada. Nenhum chegou perto da dupla.</p>
+      <div class="note">Dependência: o time marca 1,18 gol por jogo; sem a dupla, o restante do elenco responde por 0,61 gol por jogo.</div>
+    </div>
+  </div>
+</section><section aria-labelledby="s-pairs">
+  <span class="eyebrow"><b>3.2</b> · Duplas e impacto individual</span>
   <h2 id="s-pairs">Quem faz o time melhor quando está em campo</h2>
   <p class="read">Saldo de gols por 90 minutos com o jogador em campo, comparado com o saldo do time sem ele, usando os minutos reais de entrada e saída de cada jogo. É uma medida de associação, não de causa: depende de com quem e contra quem cada um jogou. Goleiro fica de fora porque o reserva jogou só três vezes.</p>
   <div class="grid2" style="margin-top:14px">
@@ -859,12 +1021,89 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     </tbody></table></div></div>
   </div>
   <div class="note" style="margin-top:16px"><strong>Leitura.</strong> Marcos Antônio aparece em quatro das seis melhores duplas e Sabino em três. Pablo Maia aparece em quatro das seis piores. Artur e Danielzinho, dois titulares frequentes, rendem pouco juntos (1,0 ponto por jogo em 13 partidas, saldo de 8 a 12), um dado para conferir no vídeo. A dupla de meio que mais pontua é Marcos Antônio com Danielzinho.</div>
+</section><section aria-labelledby="s-indiv">
+  <span class="eyebrow"><b>3.3</b> · Análise individual · Série A 2026</span>
+  <h2 id="s-indiv">Relatório por jogador</h2>
+  <p class="read">Escolha um jogador. A lista segue a ordem de minutos jogados no Brasileirão. Cada ficha traz o mapa de calor da temporada, as estatísticas da função comparadas com o resto do elenco, onde ele rende melhor, a nota jogo a jogo, a melhor partida e como foram os gols.</p>
+  <div class="picker">
+    <button type="button" class="nav-btn" id="pprev" aria-label="Jogador anterior">‹</button>
+    <label class="sr" for="psel">Jogador</label>
+    <select id="psel"></select>
+    <button type="button" class="nav-btn" id="pnext" aria-label="Próximo jogador">›</button>
+  </div>
+  <details class="roster">
+    <summary>Ver o elenco inteiro (31 jogadores com minutos)</summary>
+    <div class="scroll"><table class="num rtable" id="rtable"><thead><tr><th>Jogador</th><th>Pos.</th><th class="n">J</th><th class="n">Min</th><th class="n">Nota</th><th class="n">G</th><th class="n">A</th></tr></thead><tbody></tbody></table></div>
+  </details>
 </section>
+  <article id="prep" aria-live="polite"></article>
+  <a class="chap-next" href="#reta"><span class="cn-k">Próximo capítulo</span><span class="cn-t"><span class="cn-n led">04</span>A reta final</span><span class="cn-q">O que fazer agora? <span class="cn-arrow" aria-hidden="true">→</span></span></a>
 </div>
+<div id="ch-reta" class="view chapter" role="tabpanel" aria-labelledby="nv-reta" hidden>
+  <header class="chap-open">
+    <div class="co-num led" aria-hidden="true">04</div>
+    <div class="co-main">
+      <span class="co-k">Capítulo 04 de 04</span>
+      <h2 class="co-title">A reta final</h2>
+      <p class="co-q">O que fazer agora?</p>
+      <p class="co-intro">As prioridades que saem dos capítulos anteriores, o simulador das rodadas que faltam e a escalação sugerida para cada jogo.</p>
+    </div>
+    <nav class="co-toc" aria-label="Neste capítulo">
+      <span class="co-tk">Neste capítulo</span>
+      <ol><li><a href="#s-rec"><span class="toc-n">4.1</span><span class="toc-t">Prioridades da comissão</span></a></li><li><a href="#s-reta"><span class="toc-n">4.2</span><span class="toc-t">Cinco jogos, três no Morumbis</span></a></li><li><a href="#s-jogos"><span class="toc-n">4.3</span><span class="toc-t">Como eu escalaria os próximos 5 jogos</span></a></li></ol>
+    </nav>
+  </header>
+  <section aria-labelledby="s-rec">
+  <span class="eyebrow"><b>4.1</b> · Recomendações</span>
+  <h2 id="s-rec">Prioridades da comissão</h2>
+  <p class="read muted">Ordenadas por impacto esperado em pontos e no planejamento de 2027.</p>
+  <div class="recs">
+    <div class="rec"><div><h3>Ganhar os três jogos em casa</h3><p>O time é invicto no Morumbis contra a metade de baixo e faz 1,56 gol por jogo como mandante. Corinthians (17º), Fluminense (4º) e Remo (19º) valem 9 pontos, e o modelo espera 5,2 deles. Escalar a força máxima nesses jogos e gerir carga nos dois de fora se houver desgaste.</p><div class="kpi-line">Meta: ≥ 7 pts em casa · chance de Sul-Americana > 95%</div></div></div>
+    <div class="rec"><div><h3>Plano de jogo específico para fora</h3><p>Fora, o time sofre 1,53 gol por jogo e perdeu 6 de 9 contra times da metade de baixo. Para Botafogo e Athletico-PR, a referência é o modelo usado na Sul-Americana (um gol sofrido em seis jogos): bloco mais baixo, saída rápida e menos laterais projetados ao mesmo tempo.</p><div class="kpi-line">Meta para 2027: ≥ 1,0 ponto por jogo fora (+7 pts/temporada sobre 2026)</div></div></div>
+    <div class="rec"><div><h3>Transformar volume de bola parada em gol</h3><p>O time está entre os que mais cobram escanteios no campeonato (mais de 200), mas fez só 14 gols fora de casa. O gol de Sabino contra o Bolívar, de escanteio fechado, mostra o caminho. Sem Luciano, a bola parada é a fonte de gol mais barata que existe.</p><div class="kpi-line">Indicador: gols de bola parada / escanteios cobrados</div></div></div>
+    <div class="rec"><div><h3>Cada um na posição em que rende</h3><p>Artur por dentro, como meia-atacante do 3-4-2-1 (7,37 de nota média contra 6,97 aberto). Luciano como atacante, não recuado como meia (7,06 contra 6,90). Newton como zagueiro, não volante (6,86 contra 6,67). Tolói como reposição de Duarte pela bola aérea (79% de aéreos ganhos). Ferreirinha aberto pela esquerda, onde rende 7,27, e não como centroavante (6,82).</p><div class="kpi-line">Indicador: nota média por jogador no papel definido × fora dele</div></div></div>
+    <div class="rec"><div><h3>Reduzir a dependência da dupla de ataque</h3><p>Calleri e Luciano fizeram 49% dos gols, os dois têm 33 anos e ambos tiveram lesões musculares em outubro. O mercado de 2027 deve priorizar um atacante de lado que finalize (meta de 8 gols ou mais) e um meia que dê assistência com regularidade.</p><div class="kpi-line">Meta: nenhum jogador com mais de 30% dos gols do time</div></div></div>
+    <div class="rec"><div><h3>Decidir 2027 com dados de processo</h3><p>Os resultados públicos mostram queda de 1,60 para 1,06 ponto por jogo após a 15ª rodada, mas não separam mérito do técnico e qualidade do elenco. Antes de renovar ou trocar, cruzar gols esperados a favor e contra, finalizações cedidas e intensidade (dados de GPS e do provedor de eventos do clube) por período de cada técnico.</p><div class="kpi-line">Entregável: dossiê de processo por técnico até o fim de novembro</div></div></div>
+  </div>
+</section><section aria-labelledby="s-reta">
+  <span class="eyebrow"><b>4.2</b> · Reta final</span>
+  <h2 id="s-reta">Cinco jogos, três no Morumbis</h2>
+  <div class="read"><p>Probabilidades do Modelo ValorFinal. Pontos esperados = 3 × vitória + 1 × empate. A soma da sequência é 7,24 pontos (1,45 por jogo), acima da média da Série A (1,38).</p></div>
+  <div class="fx" id="fixtures" style="margin-top:16px"></div>
 
-<div id="tab-jogos" class="tabpanel" role="tabpanel" aria-labelledby="tb-jogos" hidden>
-<section class="pl-intro" aria-labelledby="s-jogos">
-  <span class="eyebrow">Plano para a reta final · rodadas 34 a 38</span>
+  <div class="sim" id="sim">
+    <div class="sim-head"><h3 style="margin:0">Simulador da reta final</h3><div class="sim-presets" role="group" aria-label="Cenários prontos"><button type="button" data-p="fav">Favorito do modelo</button><button type="button" data-p="casa">Vence em casa, perde fora</button><button type="button" data-p="all">Vence todas</button></div></div>
+    <p class="small muted" style="margin:6px 0 0">Marque o resultado de cada jogo. A régua compara a pontuação final do São Paulo com a projeção dos vizinhos se eles mantiverem o ritmo atual de pontos por jogo. É uma conta simples; a chance real de vaga é a do Modelo ValorFinal.</p>
+    <div class="sim-rows" id="sim-rows"></div>
+    <div class="sim-out"><div class="sim-pts" id="sim-pts">—<small>pontos no fim</small></div><div><div class="sim-line" id="sim-line" aria-hidden="true"></div><p class="small" id="sim-txt" style="margin:4px 0 0"></p></div></div>
+  </div>
+
+  <h3 style="margin-top:34px">Ritmo dos vizinhos e média da Série A</h3>
+  <p class="small muted" style="margin:0">Pontos, gols marcados e sofridos por jogo. A projeção multiplica os pontos por jogo de hoje por 38.</p>
+  <div class="scroll"><table class="cmp num" id="cmp"></table></div>
+  <p class="caption" id="cmp-txt"></p>
+
+  <div class="grid2" style="margin-top:30px">
+    <figure class="fig" style="margin:0">
+      <div class="fig-head"><span class="fig-title">Posição final simulada (% das simulações)</span></div>
+      <div class="scroll"><svg id="chart-dist" role="img" aria-label="Distribuição da posição final: 10º lugar 32,9%, 9º 27,0%, 11º 14,3%, 8º 10,0%"></svg></div>
+      <p class="caption">20.000 campeonatos simulados. Em 80% deles o time termina entre 8º e 12º.</p>
+    </figure>
+    <div class="read">
+      <h3>Cenários</h3>
+      <div class="scroll"><table class="num">
+        <thead><tr><th>Cenário</th><th class="n">Pontos</th><th>Leitura</th></tr></thead>
+        <tbody>
+          <tr><td>Mediana do modelo</td><td class="n">50</td><td>10º lugar, Sul-Americana provável</td></tr>
+          <tr><td>Vence os 3 em casa, perde os 2 fora</td><td class="n">52</td><td>Briga com Atlético-MG pelo 7º</td></tr>
+          <tr><td>Máximo possível</td><td class="n">58</td><td>Ainda abaixo do corte de Top 5 (~61)</td></tr>
+        </tbody>
+      </table></div>
+      <p style="margin-top:14px">O clássico de 4/11 é o jogo de maior alavancagem: com vitória, a chance de Sul-Americana sobe para 95,5%; com derrota, cai para 73,4%. Vagas extras de Libertadores para o 6º ao 9º só existem se sobrarem da Copa do Brasil e das finais continentais, e o São Paulo precisaria terminar no máximo em 9º (hoje 9º tem 44 pts, Bragantino).</p>
+    </div>
+  </div>
+</section><section aria-labelledby="s-jogos">
+  <span class="eyebrow"><b>4.3</b> · Plano para a reta final · rodadas 34 a 38</span>
   <h2 id="s-jogos">Como eu escalaria os próximos 5 jogos</h2>
   <p class="read">Base: o 3-4-2-1, desenho de melhor rendimento no ano (2,0 pontos por jogo). Para cada partida, o time muda conforme quem está disponível, o que o adversário faz bem e onde ele costuma ceder. Probabilidades do Modelo ValorFinal; estatísticas dos adversários do SofaScore, Série A 2026.</p>
 
@@ -882,20 +1121,38 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     <div class="ins"><span class="tag">Meta</span><p><strong>10 pontos: as três vitórias em casa e um empate fora.</strong> Isso leva o time a 53 pontos, acima da projeção de 50, e coloca o 7º lugar (Atlético-MG, 50) ao alcance. O clássico vale mais que os outros: com vitória, a chance de Sul-Americana vai a 95,5%.</p></div>
   </div>
 </section>
-<section aria-labelledby="s-prev">
-  <span class="eyebrow">Credibilidade · placar das previsões</span>
+  <div id="matches"></div>
+  <a class="chap-next" href="#metodo"><span class="cn-k">Epílogo</span><span class="cn-t">Método e acerto</span><span class="cn-q">Como este relatório é feito e quanto ele acerta <span class="cn-arrow" aria-hidden="true">→</span></span></a>
+</div>
+
+<div id="ch-metodo" class="view chapter" role="tabpanel" aria-labelledby="nv-metodo" hidden>
+  <header class="chap-open co-epi">
+    <div class="co-main">
+      <span class="co-k">Epílogo</span>
+      <h2 class="co-title">Método e acerto</h2>
+      <p class="co-q">Dá para confiar nestes números?</p>
+      <p class="co-intro">De onde vêm os dados, como eles são checados a cada rodada e o placar das previsões feitas antes de cada jogo.</p>
+    </div>
+  </header>
+  <section aria-labelledby="s-prev">
+  <span class="eyebrow"><b>E.1</b> · Credibilidade · placar das previsões</span>
   <h2 id="s-prev">Quanto este relatório acerta</h2>
   <p class="read">Antes de cada jogo, a escalação sugerida e o palpite ficam registrados com data e não mudam depois. Na rodada seguinte, o placar compara com o time que entrou em campo e com o resultado, ao lado do favorito do Modelo ValorFinal. O índice de Brier mede a calibragem das probabilidades do modelo: 0 é perfeito, 0,67 é chutar um terço para cada resultado.</p>
   <div id="prev-kpis"></div>
   <div class="scroll"><table class="prev-table num" id="prev-table"></table></div>
 </section>
-<div id="matches"></div>
-</div>
-
-<footer>
-  <strong style="color:var(--ink)">Metodologia e fontes</strong>
-  <p style="margin-top:8px">Resultados, classificação, campanha por mando, artilharia do Brasileirão e probabilidades vêm do ValorFinal (dados da football-data.org e simulação de Monte Carlo com rating estilo Elo; 20.000 campeonatos por fotografia). Os recortes casa/fora por nível do adversário, os ritmos por período e a concentração de gols são cálculos próprios sobre esses resultados. Números da temporada, lesões e técnicos vêm da imprensa esportiva. Estatísticas individuais, notas por jogo, mapas de calor, formações e detalhes dos gols vêm do SofaScore (Série A 2026, coleta de 31/10/2026, após a 33ª rodada). O SofaScore classifica a posição em cada jogo só como goleiro, defensor, meio-campista ou atacante; a análise "onde rende melhor" cruza essa função com a formação do jogo. Os mapas de calor somam toda a temporada, com o São Paulo atacando para a direita. Contagens de gols podem variar um gol entre fontes por atribuição de lances.</p>
-  <ul>
+  <section aria-labelledby="s-metodo">
+    <span class="eyebrow"><b>E.2</b> · Metodologia</span>
+    <h2 id="s-metodo">De onde vêm os números</h2>
+    <p class="read">Resultados, classificação, campanha por mando, artilharia do Brasileirão e probabilidades vêm do ValorFinal (dados da football-data.org e simulação de Monte Carlo com rating estilo Elo; 20.000 campeonatos por fotografia). Os recortes casa/fora por nível do adversário, os ritmos por período e a concentração de gols são cálculos próprios sobre esses resultados. Números da temporada, lesões e técnicos vêm da imprensa esportiva. Estatísticas individuais, notas por jogo, mapas de calor, formações e detalhes dos gols vêm do SofaScore (Série A 2026, coleta de 31/10/2026, após a 33ª rodada). O SofaScore classifica a posição em cada jogo só como goleiro, defensor, meio-campista ou atacante; a análise "onde rende melhor" cruza essa função com a formação do jogo. Os mapas de calor somam toda a temporada, com o São Paulo atacando para a direita. Contagens de gols podem variar um gol entre fontes por atribuição de lances.</p>
+    <div class="pipe" aria-label="Como o relatório é atualizado">
+      <div><span>1</span><b>Coleta</b><small>SofaScore, depois de cada rodada</small></div>
+      <div><span>2</span><b>Checagem</b><small>placar × gols, tabela × campanha, minutos e notas</small></div>
+      <div><span>3</span><b>Análise</b><small>textos, notas e escalações revisados</small></div>
+      <div><span>4</span><b>Publicação</b><small>site, card da rodada e registro no histórico</small></div>
+    </div>
+    <h3 style="margin-top:30px">Fontes</h3>
+    <div class="fontes"><ul>
     <li><a href="https://www.sofascore.com/football/team/sao-paulo/1981" target="_blank" rel="noopener">SofaScore · São Paulo (estatísticas, notas, mapas de calor, formações e lances dos gols da Série A 2026, coletados em 31/10/2026)</a></li>
     <li><a href="https://www.fotmob.com/teams/10277/squad/sao-paulo" target="_blank" rel="noopener">FotMob · Elenco do São Paulo e páginas dos jogadores (Série A 2026)</a></li>
     <li><a href="https://www.fotmob.com/teams/10277/stats/sao-paulo/players" target="_blank" rel="noopener">FotMob · Estatísticas dos jogadores do São Paulo</a></li>
@@ -911,7 +1168,12 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     <li><a href="https://tribunadosertao.com.br/esportes/2026/10/19/1000624-dorival-junior-tem-futuro-em-aberto-no-sao-paulo-entenda" target="_blank" rel="noopener">Tribuna do Sertão · Números de Dorival em 2026</a></li>
     <li><a href="https://abcdoabc.com.br/sao-paulo-tem-atuacao-apatica-e-esta/" target="_blank" rel="noopener">ABCdoABC · Eliminação para o Boca na Sul-Americana</a></li>
     <li><a href="https://www.flashscore.com.br/noticias/futebol-brasileirao-serie-a-previa-bahia-x-sao-paulo-confira-analise-e-principais-estatisticas/YaJmlUcL/" target="_blank" rel="noopener">Flashscore · Prévia Bahia x São Paulo (escanteios e turnos)</a></li>
-  </ul>
+  </ul></div>
+  </section>
+</div>
+<footer class="foot">
+  <div class="foot-sig"><b>Raio-X Tricolor</b> · análise independente de Gustavo Negri Tavares. Não oficial e sem vínculo com o São Paulo FC.</div>
+  <div class="foot-src">Dados: SofaScore e Modelo ValorFinal. <a href="#metodo">Método, fontes e placar das previsões</a></div>
 </footer>
 <div class="watermark" aria-label="Feito por Gustavo Negri Tavares"><span class="wm-stripe" aria-hidden="true"></span><span class="wm-text">Feito por Gustavo Negri Tavares</span></div>
 </div>
@@ -1201,7 +1463,7 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
         (function(gg){var hit=el('rect',{x:x2,y:m2.t,width:bw2,height:ih2,fill:'transparent',style:'cursor:pointer'},gs);hit.addEventListener('click',function(){gi2.textContent=gg.rd+'ª rodada · '+(gg.home?'vs ':'@ ')+gg.opp+' · '+br(gg.km,2)+' km em '+gg.min+' min'+(gg.spr!==null?' · '+gg.spr+' sprints':'')+(gg.top?' · velocidade máxima '+br(gg.top,1)+' km/h':'');});})(gg);}
     }
   }
-  window.addEventListener('resize',function(){if(heatCv&&!document.getElementById('tab-jogadores').hidden)drawHeat(heatCv,heatHm);});
+  window.addEventListener('resize',function(){if(heatCv&&!document.getElementById('ch-elenco').hidden)drawHeat(heatCv,heatHm);});
   try{window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){if(heatCv)drawHeat(heatCv,heatHm);});}catch(e){}
 
 
@@ -1218,24 +1480,24 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     var gr=document.getElementById('gpsrank'),mx=GPOOL.length?GPOOL[0].k90:1;
     GPOOL.forEach(function(o){var sp=GS[o.p.i]||{};var a=document.createElement('a');a.className='gr-row';a.href='#j-'+o.p.slug;a.innerHTML='<b>'+esc(o.p.name)+'</b><span class="t"><i style="width:'+Math.round(o.k90/mx*100)+'%"></i></span><span class="v">'+br(o.k90,2)+'</span><small>'+br(o.km,1)+' km no ano · '+(sp.spr!=null?sp.spr+' sprints · ':'')+(sp.top?br(sp.top,1)+' km/h':'')+'</small>';gr.appendChild(a);});
   })();
-  /* ---- tabs & routing ---- */
-  var tabs={time:document.getElementById('tab-time'),jogadores:document.getElementById('tab-jogadores'),jogos:document.getElementById('tab-jogos'),gols:document.getElementById('tab-gols')};
-  var btns={time:document.getElementById('tb-time'),jogadores:document.getElementById('tb-jogadores'),jogos:document.getElementById('tb-jogos'),gols:document.getElementById('tb-gols')};
-  btns.gols.addEventListener('click',function(){location.hash='gols';});
-  btns.jogos.addEventListener('click',function(){location.hash='jogos';});
-  function show(which){Object.keys(tabs).forEach(function(k){var on=k===which;tabs[k].hidden=!on;btns[k].setAttribute('aria-selected',on?'true':'false');btns[k].tabIndex=on?0:-1;});}
-  btns.time.addEventListener('click',function(){location.hash='time';});
-  btns.jogadores.addEventListener('click',function(){location.hash=location.hash.indexOf('#j-')===0?location.hash.slice(1):'jogadores';});
+  /* ---- capítulos & roteamento ---- */
+  var VIEWS=['capa','temporada','diagnostico','elenco','reta','metodo'];
+  var LEGACY={time:'capa',gols:'diagnostico',jogos:'reta',jogadores:'elenco'};
+  var SEC2CH={'s-traj':'temporada','s-tecnicos':'temporada','s-copas':'temporada','s-mando':'diagnostico','s-matriz':'diagnostico','s-classicos':'diagnostico','s-diag':'diagnostico','s-shots':'diagnostico','s-janelas':'diagnostico','s-form':'diagnostico','s-gps':'diagnostico','s-ataque':'elenco','s-pairs':'elenco','s-indiv':'elenco','s-rec':'reta','s-reta':'reta','s-jogos':'reta','s-prev':'metodo','s-metodo':'metodo','s-resumo':'capa'};
+  var RM=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(which){VIEWS.forEach(function(k){var on=k===which;var v=document.getElementById('ch-'+k),b=document.getElementById('nv-'+k);v.hidden=!on;b.setAttribute('aria-selected',on?'true':'false');if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');if(on&&b.scrollIntoView){var nav=b.parentNode;nav.scrollLeft=Math.max(0,b.offsetLeft-24);}});document.body.setAttribute('data-view',which);}
   var lastPlayer=P[0].slug;
-  function route(){var h=location.hash.replace('#','');
-    if(h.indexOf('j-')===0){lastPlayer=h.slice(2);show('jogadores');render(lastPlayer);}
-    else if(h==='jogadores'){show('jogadores');render(lastPlayer);}
-    else if(h==='jogos'){show('jogos');}
-    else if(h==='gols'){show('gols');}
-    else{show('time');}
-    window.scrollTo(0,0);}
+  function route(){var h=location.hash.replace('#','');if(LEGACY[h])h=LEGACY[h];
+    if(h.indexOf('j-')===0){lastPlayer=h.slice(2);show('elenco');render(lastPlayer);return;}
+    if(SEC2CH[h]){show(SEC2CH[h]);if(SEC2CH[h]==='elenco')render(lastPlayer);var t=document.getElementById(h);t=t&&(t.closest('section')||t);requestAnimationFrame(function(){t&&t.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});});return;}
+    if(VIEWS.indexOf(h)<0)h='capa';
+    show(h);if(h==='elenco')render(lastPlayer);window.scrollTo(0,0);}
   window.addEventListener('hashchange',route);route();
   document.querySelectorAll('[data-goto]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();location.hash='j-'+a.getAttribute('data-goto');});});
+  /* barra de progresso de leitura */
+  var prog=document.getElementById('prog');
+  function onScroll(){var d=document.documentElement,max=d.scrollHeight-innerHeight;prog.style.transform='scaleX('+(max>0?Math.min(1,scrollY/max):0)+')';}
+  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
 })();
 
 </script>
@@ -1434,6 +1696,36 @@ circle.shot:hover,circle.shot.on,circle.shot:focus{stroke:#C8102E;stroke-width:.
     PR.forEach(function(p){var r=p.real;t+='<tr><td>R'+p.rd+'</td><td>'+(p.home?'vs ':'@ ')+p.opp+'</td><td><span class="res '+p.palpite+'">'+p.palpite+'</span></td><td>'+(p.prob?p.prob.map(function(x){return Math.round(x);}).join(' / '):'—')+'</td><td>'+(r?'<span class="res '+r.res+'">'+r.res+'</span> '+r.placar+' <span class="'+(r.acertouPalpite?'ok">✓':'ko">✗')+'</span>':'<span class="wait">aguardando</span>')+'</td><td class="n">'+(r?r.acertosXI+'/11':'—')+'</td><td>'+p.registrado+'</td></tr>';});
     pt.innerHTML=t+'</tbody>';
   }
+})();
+</script>
+<script>
+/* ===== Capa: campanha por mando (lê SOFA.G e PROXIMOS, atualiza sozinha a cada rodada) ===== */
+(function(){
+  var G=(window.SOFA&&window.SOFA.G)||[],N=window.PROXIMOS||[],host=document.getElementById('camp-rows');if(!host)return;
+  function res(g){return g[4]>g[5]?'v':g[4]===g[5]?'e':'d';}
+  function row(home){
+    var gs=G.filter(function(g){return !!g[2]===home;}).sort(function(a,b){return a[0]-b[0];});
+    var nx=N.filter(function(n){return !!n.home===home;});
+    var pts=gs.reduce(function(s,g){var r=res(g);return s+(r==='v'?3:r==='e'?1:0);},0);
+    var pct=gs.length?Math.round(pts/(gs.length*3)*100):0;
+    var cells=gs.map(function(g){var r=res(g),txt=g[0]+'ª rodada · '+(home?'São Paulo '+g[4]+' x '+g[5]+' '+g[3]:g[3]+' '+g[5]+' x '+g[4]+' São Paulo');
+      return '<li class="c-'+r+'" title="'+txt+'"><span class="sr">'+txt+'</span></li>';}).join('')
+      +nx.map(function(n){var txt=n.rd+'ª rodada · '+(home?'São Paulo x '+n.opp:n.opp+' x São Paulo')+' · a jogar';return '<li class="c-p" title="'+txt+'"><span class="sr">'+txt+'</span></li>';}).join('');
+    var v=gs.filter(function(g){return res(g)==='v';}).length;
+    return '<div class="camp-row"><div class="camp-lab"><b>'+(home?'No Morumbis':'Fora de casa')+'</b><small>'+v+' vitórias em '+gs.length+' jogos · '+pts+' pts</small></div><ol class="camp-cells">'+cells+'</ol><div class="camp-pct'+(home?'':' low')+'"><b>'+pct+'<span>%</span></b><small>aproveitamento</small></div></div>';
+  }
+  host.innerHTML=row(true)+row(false);
+  var nx=N[0],pc=document.getElementById('placar');
+  if(nx&&pc){var d=new Date(nx.ts*1000),tz={timeZone:'America/Sao_Paulo'};
+    var hh=d.toLocaleTimeString('pt-BR',Object.assign({hour:'2-digit',minute:'2-digit'},tz)),dd=d.toLocaleDateString('pt-BR',Object.assign({day:'2-digit',month:'2-digit'},tz));
+    var up=function(x){return String(x).toUpperCase();},a=nx.home?'SÃO PAULO':up(nx.opp),b=nx.home?up(nx.opp):'SÃO PAULO';
+    document.getElementById('pl-l').innerHTML='<span>BRASILEIRÃO 2026</span><span>'+nx.rd+'ª RODADA · '+dd+'</span><span>'+(nx.home?'MORUMBIS-S.PAULO':'FORA DE CASA')+'</span>';
+    document.getElementById('pl-c').textContent=hh;
+    document.getElementById('pl-r').innerHTML='<span>'+a+'</span><span>'+b+'</span>';
+    pc.setAttribute('aria-label','Próximo jogo: '+nx.rd+'ª rodada, '+dd+' às '+hh+', '+a+' x '+b);}
+  var PL=window.PLACAR_PREV,PR=window.PREVISOES||[],t=document.getElementById('trust-t');
+  if(t){if(PL)t.innerHTML='<b>'+PL.palpites+' de '+PL.jogos+'</b> palpites certos até aqui, registrados antes de cada jogo.';
+    else if(PR.length)t.innerHTML='<b>'+PR.length+' '+(PR.length>1?'previsões registradas':'previsão registrada')+'</b> antes do apito. O placar começa depois da '+PR[0].rd+'ª rodada.';}
 })();
 </script>
 <script>
