@@ -6,7 +6,9 @@ Feito por Gustavo Negri Tavares.
 
 ## Onde fica
 
-`C:\Users\gusta\Documents\raio-x-spfc` no computador do Gustavo.
+Site público: https://gustavonegri23.github.io/raio-x-spfc/ (GitHub Pages, repositório gustavonegri23/raio-x-spfc, branch main). A coleta bruta (`data/rodadas/`) e os resumos (`relatorios/`) não vão para o repositório.
+
+Pasta local: `C:\Users\gusta\Documents\raio-x-spfc` no computador do Gustavo.
 
 ## Estrutura
 
