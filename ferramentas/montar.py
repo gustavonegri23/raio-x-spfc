@@ -317,6 +317,15 @@ if __name__ == '__main__':
         f.write('window.CARD_BASE=' + json.dumps(card_base(o), ensure_ascii=False) + ';\n')
     if prev:
         json.dump(prev, open(os.path.join(RAIZ, 'data', 'previsoes.json'), 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    # carimba a versão nos <script src="data/..."> para o navegador não usar dados antigos do cache
+    import re, time
+    ih = os.path.join(RAIZ, 'index.html')
+    if os.path.exists(ih):
+        v = f"{o['rodada']}-{time.strftime('%Y%m%d%H%M')}"
+        h = open(ih, encoding='utf-8').read()
+        h2 = re.sub(r'src="(data/[a-z\-]+\.js)(\?v=[^"]*)?"', lambda m: f'src="{m.group(1)}?v={v}"', h)
+        if h2 != h:
+            open(ih, 'w', encoding='utf-8').write(h2)
     R = analisar(o)
     R.update({'extra': extra, 'checagens': (er, av), 'prev': prev, 'placar': placar})
     RA = analisar(oa) if oa else None
