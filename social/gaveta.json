@@ -1,0 +1,10 @@
+{
+  "marca_metricool": "7809725",
+  "posts": [
+    {"data": "2026-11-02", "hora": "10:00", "tipo": "carrossel", "tema": "lançamento: o São Paulo em 6 números", "metricool_uuid": "-3719177957924581379", "status": "agendado"},
+    {"data": "2026-11-02", "hora": "19:00", "tipo": "reels", "tema": "jogador", "jogador": "Jonathan Calleri", "ep": 1, "metricool_uuid": "-7627728744807051875", "status": "agendado (manual, música)"}
+  ],
+  "jogadores_publicados": ["Jonathan Calleri"],
+  "proximo_ep": 2,
+  "promessas_em_aberto": ["Reels Ep. 01 anuncia o Luciano como próximo (03/11)"]
+}
