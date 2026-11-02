@@ -5,8 +5,8 @@ Ao usar uma curiosidade num post, marcar `[usado AAAA-MM-DD]`. Depois de cada ro
 
 ## Casa × fora (time)
 - **Corre menos que o rival nos dois mandos.** São Paulo: 93,0 km por jogo em casa e 91,5 fora. Adversários: 97,3 em casa e 94,9 fora. (GPS em 29 das 33 rodadas.)
-- **Correr mais não ganha jogo.** Correu mais que o rival em só 9 de 29 jogos. Pontos por jogo: 1,11 correndo mais × 1,55 correndo menos. Nas vitórias, 88,8 km. Os empates foram os jogos de maior volume (101,1 km).
-- **2,2 maratonas por jogo.** Média de 92,3 km por partida (92,3 ÷ 42,195).
+- **Correr mais não ganha jogo.** Correu mais que o rival em só 9 de 29 jogos. Pontos por jogo: 1,11 correndo mais × 1,55 correndo menos. Nas vitórias, 88,8 km. Os empates foram os jogos de maior volume (101,1 km). [usado 2026-11-07]
+- **2,2 maratonas por jogo.** Média de 92,3 km por partida (92,3 ÷ 42,195). [usado 2026-11-07]
 - **Em casa, finaliza no padrão. Fora, desperdiça.** Casa: 241 chutes, 26,2 xG, 25 gols. Fora: 206 chutes, 21,0 xG, 14 gols, ou 7 gols abaixo do esperado.
 - **Fora, o São Paulo vira o time pressionado.** Chutes sofridos: 168 em casa × 247 fora (+47%). Gols sofridos: 13 × 26.
 - **O primeiro tempo fora não existe.** Gols no 1º tempo: 11 de 25 em casa, 4 de 14 fora, em 17 jogos como visitante.
@@ -16,9 +16,9 @@ Ao usar uma curiosidade num post, marcar `[usado AAAA-MM-DD]`. Depois de cada ro
 - **Mando:** 69% de aproveitamento em casa × 20% fora; 2 vitórias em 17 jogos fora. [usado 2026-11-02]
 
 ## Físico (jogadores)
-- **O motor:** Marcos Antônio é quem mais corre no total (208,3 km rastreados) e por 90 minutos (11,02 km). Atrás dele: Iago Borduchi (11,01 km/90), Danielzinho (10,67), Pedro Lima e Bobadilla (10,41).
-- **O mais rápido por 0,01 km/h:** Artur 35,33 km/h × Marcos Antônio 35,32 km/h. Depois vêm Iago Borduchi (35,12), Pedro Lima (34,96), Calleri (34,92) e Newton (34,80).
-- **O rei do sprint:** Iago Borduchi, com 20,8 sprints por 90 min (184 no total). O 2º, Artur, faz 12,4 (Iago faz 68% a mais). Artur também é quem mais sprinta no total (268).
+- **O motor:** Marcos Antônio é quem mais corre no total (208,3 km rastreados) e por 90 minutos (11,02 km). Atrás dele: Iago Borduchi (11,01 km/90), Danielzinho (10,67), Pedro Lima e Bobadilla (10,41). [usado 2026-11-07]
+- **O mais rápido por 0,01 km/h:** Artur 35,33 km/h × Marcos Antônio 35,32 km/h. Depois vêm Iago Borduchi (35,12), Pedro Lima (34,96), Calleri (34,92) e Newton (34,80). [usado 2026-11-07]
+- **O rei do sprint:** Iago Borduchi, com 20,8 sprints por 90 min (184 no total). O 2º, Artur, faz 12,4 (Iago faz 68% a mais). Artur também é quem mais sprinta no total (268). [usado 2026-11-07]
 - **Total rastreado da equipe:** 2.676 km em 29 jogos.
 
 ## Estatística individual
