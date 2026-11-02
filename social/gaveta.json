@@ -20,6 +20,42 @@
       "status": "agendado (manual, música)"
     },
     {
+      "data": "2026-11-03",
+      "hora": "12:00",
+      "tipo": "carrossel",
+      "tema": "tático: quando o jogo vira (janelas de 15 min e substituições)",
+      "metricool_uuid": "6385985465673994127",
+      "status": "rascunho"
+    },
+    {
+      "data": "2026-11-03",
+      "hora": "19:00",
+      "tipo": "reels",
+      "tema": "jogador",
+      "jogador": "Luciano",
+      "ep": 2,
+      "metricool_uuid": "4117989238463810375",
+      "status": "rascunho (manual, música)"
+    },
+    {
+      "data": "2026-11-04",
+      "hora": "10:00",
+      "tipo": "carrossel",
+      "tema": "pré-jogo R34: Corinthians em números (Vila Belmiro)",
+      "metricool_uuid": "-4054512925150786441",
+      "status": "rascunho"
+    },
+    {
+      "data": "2026-11-04",
+      "hora": "18:00",
+      "tipo": "reels",
+      "tema": "jogador",
+      "jogador": "Rafael Tolói",
+      "ep": 3,
+      "metricool_uuid": "3428132019442961337",
+      "status": "rascunho (manual, música)"
+    },
+    {
       "data": "2026-11-07",
       "hora": "11:00",
       "tipo": "carrossel",
@@ -29,11 +65,13 @@
     }
   ],
   "jogadores_publicados": [
-    "Jonathan Calleri"
+    "Jonathan Calleri",
+    "Luciano",
+    "Rafael Tolói"
   ],
-  "proximo_ep": 2,
+  "proximo_ep": 4,
   "promessas_em_aberto": [
-    "Reels Ep. 01 anuncia o Luciano como próximo (03/11)"
+    "Reels Ep. 03 anuncia o Artur como próximo (05/11)"
   ],
   "excluidos": [
     "Enzo Díaz"
