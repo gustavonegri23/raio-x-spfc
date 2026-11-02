@@ -1,5 +1,9 @@
 # Changelog
 
+## 01/11/2026 · local do Majestoso
+
+- São Paulo x Corinthians (R34, 04/11) será na Vila Belmiro, com o Morumbis ocupado por um show. Novo campo opcional `estadio` em `data/escalacoes.js`; o placar da capa e a ficha do jogo usam esse campo quando o mando não é no Morumbis. Textos da capa do diagnóstico (2.3) e da reta final ajustados.
+
 ## 01/11/2026 · novo layout: capa e quatro capítulos
 
 - **Estrutura em capítulos**: Capa · 01 Temporada · 02 Diagnóstico · 03 Elenco · 04 Reta final · Método. Cada capítulo abre com numeral, pergunta, introdução e sumário clicável, e termina com a passagem para o próximo.

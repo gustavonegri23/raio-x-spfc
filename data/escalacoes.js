@@ -1,6 +1,6 @@
-/* Escalações sugeridas para os próximos jogos. Campos opcionais: upd (texto da atualização pré-jogo) e updData. */
+/* Escalações sugeridas para os próximos jogos. Campos opcionais: upd (texto da atualização pré-jogo), updData e estadio (quando o mando não for no Morumbis). */
 window.ESCALACOES=[
-    {rd:34,date:'qua, 4/11 · 21h30',home:true,opp:'Corinthians',pos:'17º · 36 pts',prob:[51.9,24.1,24.1],
+    {rd:34,date:'qua, 4/11 · 21h30',home:true,estadio:'Vila Belmiro',opp:'Corinthians',pos:'17º · 36 pts',prob:[51.9,24.1,24.1],
      xi:['Rafael','Arboleda','Tolói','Newton','Iago','Bobadilla','Danielzinho','Lucas Ramon','Luciano','Artur','Calleri'],
      bench:['M. Antônio (se liberado)','Lucas Moura','Ferreirinha','Pedro Lima','Wendell','Pablo Maia'],
      str:['Rodrigo Garro cria quase tudo: 7 assistências e 10 grandes chances criadas.','Kaio César é o maior driblador do time (50 dribles certos).','Cruza muito: 691 cruzamentos e 9 gols de cabeça no ano.'],
