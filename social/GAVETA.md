@@ -21,6 +21,9 @@ Regras que a tarefa agendada diária segue para manter conteúdo pronto. Editar 
 ## Curiosidades
 Fonte: `social/curiosidades.md` (números conferidos). Usar primeiro as não marcadas e marcar `[usado AAAA-MM-DD]` ao usar. Se o banco estiver acabando ou os dados forem de rodada mais nova que o banco, rodar `python3 social/moldes/garimpo.py data/dados.js`, conferir e atualizar o arquivo. Ser criativo no formato (duelos internos, conversões como "2,2 maratonas por jogo", paradoxos), sem nunca arredondar para exagerar.
 
+## Jogadores excluídos
+- **Enzo Díaz**: treinando fora do elenco. Não aparece em Reels, rankings, curiosidades, duelos nem pré-jogo, nem como comparação ("o 2º colocado").
+
 ## Ordem dos jogadores
 Gancho com o próximo jogo: priorizar quem pesa no adversário da próxima rodada (duelos, escalação sugerida em `escalacoes.js`, pontos fracos do rival). Não repetir jogador já publicado no ciclo, a não ser que haja dado novo de rodada.
 

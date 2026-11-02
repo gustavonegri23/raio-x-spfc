@@ -1,6 +1,6 @@
 # Banco de curiosidades · @data_tricolor
 
-Números conferidos nos dados do Raio-X (SofaScore, Série A 2026, **após a R33**). Gerados por `social/moldes/garimpo.py data/dados.js`.
+Números conferidos nos dados do Raio-X (SofaScore, Série A 2026, **após a R33**). Gerados por `social/moldes/garimpo.py data/dados.js`. **Enzo Díaz fica fora de tudo** (treina separado do elenco).
 Ao usar uma curiosidade num post, marcar `[usado AAAA-MM-DD]`. Depois de cada rodada, rodar o garimpo de novo e atualizar os números (e o rótulo da rodada).
 
 ## Casa × fora (time)
@@ -18,7 +18,7 @@ Ao usar uma curiosidade num post, marcar `[usado AAAA-MM-DD]`. Depois de cada ro
 ## Físico (jogadores)
 - **O motor:** Marcos Antônio é quem mais corre no total (208,3 km rastreados) e por 90 minutos (11,02 km). Atrás dele: Iago Borduchi (11,01 km/90), Danielzinho (10,67), Pedro Lima e Bobadilla (10,41).
 - **O mais rápido por 0,01 km/h:** Artur 35,33 km/h × Marcos Antônio 35,32 km/h. Depois vêm Iago Borduchi (35,12), Pedro Lima (34,96), Calleri (34,92) e Newton (34,80).
-- **O rei do sprint:** Iago Borduchi, com 20,8 sprints por 90 min (184 no total). O 2º, Enzo Díaz, faz 15,6. Artur é quem mais sprinta no total (268).
+- **O rei do sprint:** Iago Borduchi, com 20,8 sprints por 90 min (184 no total). O 2º, Artur, faz 12,4 (Iago faz 68% a mais). Artur também é quem mais sprinta no total (268).
 - **Total rastreado da equipe:** 2.676 km em 29 jogos.
 
 ## Estatística individual
@@ -29,7 +29,7 @@ Ao usar uma curiosidade num post, marcar `[usado AAAA-MM-DD]`. Depois de cada ro
 - **O muro:** Sabino lidera em desarmes (44). Robert Arboleda tem 38.
 - **Dono da área:** Calleri tem 112 toques na área adversária, e Luciano 106. Juntos são 31% de todos os toques do time na área (218 de 712).
 - **Chute de longe é raro:** dos 39 gols, só 5 saíram de fora da área (Artur 2, Pablo Maia, Bobadilla e Lucas Moura 1 cada).
-- **Cartões:** Enzo Díaz lidera com 7 amarelos; Calleri tem 6.
+- **Cartões:** Calleri lidera com 6 amarelos; Wendell e Luciano têm 5.
 - **Quem mais é driblado:** Bobadilla (24 vezes) e Marcos Antônio (23).
 
 ## Ideias de formato

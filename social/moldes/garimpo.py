@@ -6,6 +6,8 @@ P=SOFA['P'];F=SOFA['F']
 def st_(p):
     v=p[4].split(',');return {F[i]:(float(x) if x not in('',None) else None) for i,x in enumerate(v)}
 idx={i:p[0] for i,p in enumerate(P)}
+EXCLUIR={'Enzo Díaz'}  # treina fora do elenco
+P=[p if p[0] not in EXCLUIR else [p[0],p[1],p[2],p[3],','.join(['']*len(F)),p[5]] for p in P]
 G=SOFA['G']; home={g[0]:g[2] for g in G}; res={g[0]:(g[4],g[5]) for g in G}
 # GPS por jogo
 gp={}
@@ -22,12 +24,13 @@ best=[]
 for rd,(a,b,rows) in gp.items():
     for z in rows.split():
         p=z.split(':')
-        if len(p)>3 and p[3]:best.append((float(p[3]),idx[int(p[0])],rd,'casa' if home[rd] else 'fora'))
+        if len(p)>3 and p[3]:best.append((float(p[3]),idx[int(p[0])],rd,'casa' if home[rd] else 'fora')) if idx[int(p[0])] not in EXCLUIR else None
 best.sort(reverse=True);print(' top velocidades',best[:5])
 # season gps
 gs=[]
 for z in GPS['season'].split():
     a=z.split(':');i=int(a[0])
+    if idx[i] in EXCLUIR: continue
     gs.append(dict(n=idx[i],km=float(a[1]) if a[1] else 0,spr=int(a[2]) if a[2] else 0,top=float(a[3]) if a[3] else 0,k90=float(a[6]) if a[6] else None,min=st_(P[i])['minutesPlayed'] or 0))
 print(' km total top',sorted([(round(g['km'],1),g['n']) for g in gs],reverse=True)[:5])
 print(' km/90 top',sorted([(g['k90'],g['n']) for g in gs if g['k90'] and g['min']>=450],reverse=True)[:6])
@@ -52,7 +55,7 @@ rt=defaultdict(lambda:{'c':[],'f':[]})
 for g in G:
     for z in g[7].split():
         a=z.split(':')
-        if a[2]:rt[idx[int(a[0])]]['c' if g[2] else 'f'].append(float(a[2]))
+        if a[2] and idx[int(a[0])] not in EXCLUIR:rt[idx[int(a[0])]]['c' if g[2] else 'f'].append(float(a[2]))
 diff=[(round(st.mean(v['c'])-st.mean(v['f']),2),k,round(st.mean(v['c']),2),round(st.mean(v['f']),2),len(v['c']),len(v['f'])) for k,v in rt.items() if len(v['c'])>=6 and len(v['f'])>=6]
 diff.sort();print(' nota casa-fora (menor->maior)',diff[:4],'...',diff[-4:])
 # goals minute casa/fora from G goal strings
