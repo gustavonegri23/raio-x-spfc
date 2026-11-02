@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+/*FONTS*/
+:root{--bg:#121214;--ink:#F2F2EE;--muted:#A3A5AB;--faint:#6E7076;--red:#E0102F;--red2:#C8102E;--line:#2C2D32;--card:#1B1B1F;--white:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000}
+.s{width:1080px;height:1350px;background:var(--bg);color:var(--ink);position:relative;overflow:hidden;font-family:Archivo,sans-serif;margin-bottom:20px;display:flex;flex-direction:column;padding:96px 88px 80px}
+.s::before{content:"";position:absolute;left:0;right:0;top:0;height:22px;background:linear-gradient(to bottom,var(--red2) 0 33.3%,#fff 33.3% 66.6%,#000 66.6% 100%)}
+.top{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:24px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.top b{color:var(--ink);font-weight:500}
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--faint);letter-spacing:.04em}
+.foot .h{color:var(--ink);font-weight:700;font-size:26px}
+.kick{font-family:"IBM Plex Mono",monospace;font-size:28px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-top:70px}
+.big{font-family:"Big Shoulders Display",sans-serif;font-weight:900;line-height:.86;letter-spacing:-.01em;text-transform:uppercase}
+.h1{font-size:200px;margin-top:28px}
+.h1 em{font-style:normal;color:var(--red)}
+.lede{font-size:44px;line-height:1.28;margin-top:44px;color:var(--ink);max-width:880px;font-weight:500}
+.lede b{font-weight:800;color:var(--white)}
+.small{font-size:34px;line-height:1.38;color:var(--muted);margin-top:30px;max-width:880px}
+.small b{color:var(--ink);font-weight:700}
+.num{font-size:330px;margin-top:40px}
+.num .x{color:var(--faint);font-size:200px}
+.num em{font-style:normal;color:var(--red)}
+.label{font-size:46px;font-weight:700;margin-top:18px;line-height:1.2}
+.swipe{font-family:"IBM Plex Mono",monospace;font-size:30px;color:var(--ink);border:2px solid var(--ink);padding:16px 28px;border-radius:999px}
+.bars{margin-top:56px;display:flex;flex-direction:column;gap:30px}
+.bar{display:grid;grid-template-columns:150px 1fr 150px;align-items:center;gap:24px;font-size:34px;font-weight:600}
+.track{height:54px;background:var(--card);border-radius:6px;overflow:hidden}
+.fill{height:100%;background:var(--ink)}
+.fill.r{background:var(--red)}
+.v{font-family:"Big Shoulders Display";font-weight:800;font-size:58px;text-align:right}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:56px}
+.q{background:var(--card);border-radius:14px;padding:30px 32px;border:2px solid var(--line)}
+.q.hot{border-color:var(--red)}
+.q .t{font-family:"IBM Plex Mono";font-size:23px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.q .n{font-family:"Big Shoulders Display";font-weight:900;font-size:110px;line-height:1;margin-top:10px}
+.q .n span{font-size:56px;color:var(--faint)}
+.q .d{font-size:26px;color:var(--muted);margin-top:4px}
+.split{display:flex;height:120px;margin-top:60px;border-radius:10px;overflow:hidden}
+.split div{display:flex;align-items:center;justify-content:center;font-family:"Big Shoulders Display";font-weight:900;font-size:54px}
+.legend{display:flex;gap:40px;margin-top:22px;font-size:30px;color:var(--muted)}
+.legend i{display:inline-block;width:22px;height:22px;border-radius:4px;margin-right:10px;vertical-align:-2px}
+.pitchwrap{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:50px}
+.pw .t{font-family:"Big Shoulders Display";font-weight:900;font-size:76px;line-height:1}
+.pw .p{font-size:30px;color:var(--muted);margin-top:6px}
+.pw .p b{color:var(--ink)}
+.pw svg{margin-top:20px;width:100%;height:auto}
+.pw.off{opacity:.55}
+.cta{display:flex;flex-direction:column;gap:22px;margin-top:56px}
+.cta div{display:flex;gap:26px;align-items:baseline;font-size:40px;line-height:1.3;font-weight:500}
+.cta span{font-family:"Big Shoulders Display";font-weight:900;color:var(--red);font-size:52px;min-width:60px}
+.handle{font-family:"Big Shoulders Display";font-weight:900;font-size:120px;text-transform:none;margin-top:60px;letter-spacing:-.01em}
+</style><style>
+.rk{display:flex;flex-direction:column;gap:26px;margin-top:54px}
+.rk .r{display:grid;grid-template-columns:56px 300px 1fr 150px;align-items:center;gap:20px;font-size:34px;font-weight:600}
+.rk .r .i{font-family:"Big Shoulders Display";font-weight:900;font-size:52px;color:var(--faint)}
+.rk .r.lead .i{color:var(--red)}
+.rk .track{height:46px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:60px}
+.vs .q .n{font-size:130px}
+</style></head><body>
+<section class="s" id="s1"><div class="top"><b>Data Tricolor</b><span>Ranking do elenco · Físico</span></div>
+<div class="kick">GPS · 29 rodadas rastreadas · 1/5</div>
+<div class="big h1" style="font-size:172px;line-height:.95">Quem corre<br>mais e quem<br>é <em>o mais<br>rápido</em></div>
+<p class="lede">E por que correr mais não tem garantido ponto para o São Paulo.</p>
+<div class="foot"><span class="h">@data_tricolor</span><span class="swipe">Arrasta →</span></div></section>
+
+<section class="s" id="s2"><div class="top"><b>Data Tricolor</b><span>01 · Quem mais corre</span></div>
+<div class="big num" style="font-size:280px"><em>11,02</em></div>
+<div class="label">km por 90 minutos · Marcos Antônio</div>
+<div class="rk"><div class="r lead"><span class="i">1</span><span>Marcos Antônio</span><div class="track"><div class="fill r" style="width:96.2%"></div></div><span class="v">11,02</span></div><div class="r"><span class="i">2</span><span>Iago</span><div class="track"><div class="fill" style="width:95.7%"></div></div><span class="v">11,01</span></div><div class="r"><span class="i">3</span><span>Danielzinho</span><div class="track"><div class="fill" style="width:79.5%"></div></div><span class="v">10,67</span></div><div class="r"><span class="i">4</span><span>Pedro Lima</span><div class="track"><div class="fill" style="width:67.1%"></div></div><span class="v">10,41</span></div><div class="r"><span class="i">5</span><span>Bobadilla</span><div class="track"><div class="fill" style="width:67.1%"></div></div><span class="v">10,41</span></div></div>
+<p class="small">Também é quem mais correu no total: <b>208 km rastreados</b>, mais que ir e voltar de São Paulo a Campinas.</p>
+<div class="foot"><span>Jogadores de linha com 450+ min</span><span>2/5</span></div></section>
+
+<section class="s" id="s3"><div class="top"><b>Data Tricolor</b><span>02 · O mais rápido</span></div>
+<div class="big num" style="font-size:260px">0,01</div>
+<div class="label">km/h separam o 1º do 2º</div>
+<div class="vs"><div class="q hot"><div class="t">Artur</div><div class="n">35,33</div><div class="d">km/h · velocidade máxima</div></div><div class="q"><div class="t">Marcos Antônio</div><div class="n">35,32</div><div class="d">km/h · velocidade máxima</div></div></div>
+<div class="rk" style="margin-top:40px;gap:18px"><div class="r"><span class="i">3</span><span>Iago</span><div class="track"><div class="fill" style="width:88.3%"></div></div><span class="v">35,12</span></div><div class="r"><span class="i">4</span><span>Pedro Lima</span><div class="track"><div class="fill" style="width:81.7%"></div></div><span class="v">34,96</span></div><div class="r"><span class="i">5</span><span>Calleri</span><div class="track"><div class="fill" style="width:80.0%"></div></div><span class="v">34,92</span></div><div class="r"><span class="i">6</span><span>Newton</span><div class="track"><div class="fill" style="width:75.0%"></div></div><span class="v">34,80</span></div></div>
+<div class="foot"><span>Pico registrado na temporada</span><span>3/5</span></div></section>
+
+<section class="s" id="s4"><div class="top"><b>Data Tricolor</b><span>03 · O rei do sprint</span></div>
+<div class="big num"><em>20,8</em></div>
+<div class="label">sprints por 90 minutos · Iago</div>
+<div class="rk"><div class="r lead"><span class="i">1</span><span>Iago</span><div class="track"><div class="fill r" style="width:94.8%"></div></div><span class="v">20,8</span></div><div class="r"><span class="i">2</span><span>Enzo Díaz</span><div class="track"><div class="fill" style="width:56.3%"></div></div><span class="v">15,6</span></div><div class="r"><span class="i">3</span><span>Artur</span><div class="track"><div class="fill" style="width:32.6%"></div></div><span class="v">12,4</span></div><div class="r"><span class="i">4</span><span>Lucas Ramon</span><div class="track"><div class="fill" style="width:23.7%"></div></div><span class="v">11,2</span></div><div class="r"><span class="i">5</span><span>Bobadilla</span><div class="track"><div class="fill" style="width:23.7%"></div></div><span class="v">11,2</span></div></div>
+<p class="small">É <b>um terço a mais</b> que o 2º colocado. No total, quem mais sprintou foi Artur (268).</p>
+<div class="foot"><span>Jogadores de linha com 450+ min</span><span>4/5</span></div></section>
+
+<section class="s" id="s5"><div class="top"><b>Data Tricolor</b><span>04 · O paradoxo</span></div>
+<div class="big num" style="font-size:250px"><em>1,55</em><span class="x" style="font-size:150px"> × </span>1,11</div>
+<div class="label">pontos por jogo correndo menos × correndo mais que o rival</div>
+<div class="vs"><div class="q"><div class="t">São Paulo · por jogo</div><div class="n">92,3<span> km</span></div><div class="d">2,2 maratonas</div></div><div class="q hot"><div class="t">Adversários · por jogo</div><div class="n">96,1<span> km</span></div><div class="d">correram mais em 20 de 29</div></div></div>
+<p class="small">Nas vitórias, o São Paulo correu <b>88,8 km</b>. Quem tem a bola e o placar faz o outro correr.</p>
+<div class="foot"><span>GPS SofaScore · R1 a R33</span><span>5/5</span></div></section>
+</body></html>

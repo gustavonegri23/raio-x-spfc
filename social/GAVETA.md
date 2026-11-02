@@ -11,9 +11,15 @@ Regras que a tarefa agendada diária segue para manter conteúdo pronto. Editar 
 
 ## Grade
 - **Todo dia, Reels "Elenco em números"** (um jogador). Horário sugerido 19h (18h em dia de jogo). Instagram REEL, `autoPublish: false` (o Gustavo põe música em alta pelo app do Metricool).
+- **Segunda, "Casa × Fora"** às 12h: card único ou carrossel curto com uma curiosidade de mando (corrida, finalização, minuto do gol, nota dos jogadores).
 - **Terça e sexta, carrossel tático** às 12h: esquemas e o que funciona/não funciona (3-4-2-1 casa × fora, janelas de 15 min, substituições, bola parada, etc.).
-- **Dia de jogo, carrossel pré-jogo** às 10h: adversário em números (forma, mando, desfalques, pontos fortes e fracos de `escalacoes.js`).
+- **Sábado, "Ranking do elenco"** às 11h: carrossel top 5 com barras (quem mais corre, o mais rápido, sprints, dribles, passes, desarmes...). Molde: `moldes/carrossel-ranking-fisico.html`.
+- **Domingo, "Você sabia?"** às 11h: card único com um dado surpreendente. Mesmo dia, Story "Adivinha?" às 20h (pergunta cuja resposta sai num post da semana seguinte; registrar a promessa em `gaveta.json`).
+- **Dia de jogo, carrossel pré-jogo** às 10h: adversário em números (forma, mando, desfalques, pontos fortes e fracos de `escalacoes.js`). Substitui o post de imagem do dia, se houver.
 - **Pós-jogo NÃO entra na gaveta**: depende da coleta no SofaScore ("atualizar Raio-X").
+
+## Curiosidades
+Fonte: `social/curiosidades.md` (números conferidos). Usar primeiro as não marcadas e marcar `[usado AAAA-MM-DD]` ao usar. Se o banco estiver acabando ou os dados forem de rodada mais nova que o banco, rodar `python3 social/moldes/garimpo.py data/dados.js`, conferir e atualizar o arquivo. Ser criativo no formato (duelos internos, conversões como "2,2 maratonas por jogo", paradoxos), sem nunca arredondar para exagerar.
 
 ## Ordem dos jogadores
 Gancho com o próximo jogo: priorizar quem pesa no adversário da próxima rodada (duelos, escalação sugerida em `escalacoes.js`, pontos fracos do rival). Não repetir jogador já publicado no ciclo, a não ser que haja dado novo de rodada.
