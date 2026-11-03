@@ -1,5 +1,12 @@
 # Changelog
 
+## 03/11/2026 · pré-jogo do Majestoso (R34)
+
+- Atualização pré-jogo em `data/escalacoes.js`: Sabino fora da temporada (cirurgia no joelho), Marcos Antônio fora (tornozelo). Djhordney entra no lugar de Danielzinho e Pedro Lima no de Lucas Ramon; Tolói mantido à frente de Osorio.
+- Previsão da R34 registrada às 15h de 03/11 em `data/previsoes.json`: escalação revisada, probabilidades do ValorFinal (46,6 / 28,9 / 24,5) e palpite V.
+- Chave do jogo com as chances de Sul-Americana atualizadas (94,7% com vitória, 80,9% com empate, 68,0% com derrota).
+- Relatório local `relatorios/prejogo-rodada-34.md` com fontes e impacto esperado.
+
 ## 01/11/2026 · local do Majestoso
 
 - São Paulo x Corinthians (R34, 04/11) será na Vila Belmiro, com o Morumbis ocupado por um show. Novo campo opcional `estadio` em `data/escalacoes.js`; o placar da capa e a ficha do jogo usam esse campo quando o mando não é no Morumbis. Textos da capa do diagnóstico (2.3) e da reta final ajustados.
