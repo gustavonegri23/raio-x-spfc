@@ -31,6 +31,7 @@ Gancho com o próximo jogo: priorizar quem pesa no adversário da próxima rodad
 - Identidade do Raio-X: fundo #121214, vermelho #E0102F, faixa tricolor no topo, Big Shoulders Display + Archivo + IBM Plex Mono.
 - Rodapé: fonte (SofaScore · Série A 2026 · rodada) e "Não oficial".
 - Só números que estão nos dados do Raio-X. Nada inventado ou estimado.
+- **Sem chamada para próximos posts**: nenhum Reels, carrossel ou legenda anuncia o próximo vídeo, episódio ou jogador ("amanhã no Reels", "próximo: X"). A tela final é só a marca @data_tricolor, para a grade ficar livre.
 - **Não citar "link da bio" / relatório completo** até o domínio próprio estar no ar.
 - Legenda em PT-BR, 4 a 7 linhas, gancho na primeira linha, pergunta para comentário quando couber, hashtags: #SPFC #SaoPaulo #Brasileirao #DataTricolor (+ nome do jogador/tema).
 - Local de jogo: usar o campo `estadio` de `escalacoes.js` quando existir (R34 × Corinthians é na Vila Belmiro).
