@@ -1,5 +1,12 @@
 # Changelog
 
+## 03/11/2026 · notícias de 31/10 a 3/11 (corte 3 nov)
+
+- **Destaque de notícias na capa** (seção nova `#s-noticias`, logo depois dos achados): seis cartões com data e fonte — Sabino, Marcos Antônio/Iago/Artur, local e adversário do Majestoso, chance de Libertadores (G9), futuro de Artur e Lucas Moura, eleição do clube.
+- **Correção sobre Sabino:** ele cumpre suspensão (3º amarelo, contra o Bahia) e opera a cartilagem do joelho direito em 4/11. O clube não deu prazo; a imprensa fala em risco de perder o resto da temporada (o registro de pré-jogo dizia "fora da temporada", o que ainda não é confirmado).
+- `data/escalacoes.js`: texto de atualização da R34 revisado (Artur liberado, Osorio à frente de Tolói na imprensa); Sabino tirado das escalações das R35 a R38 (Tolói ou Newton na linha de três, Osorio no banco). As previsões registradas não foram alteradas.
+- Capa: corte em 3 nov, chance de Sul-Americana em 84% (ValorFinal, 3/11). Reta final: quadro de disponibilidade atualizado.
+
 ## 03/11/2026 · pré-jogo do Majestoso (R34)
 
 - Atualização pré-jogo em `data/escalacoes.js`: Sabino fora da temporada (cirurgia no joelho), Marcos Antônio fora (tornozelo). Djhordney entra no lugar de Danielzinho e Pedro Lima no de Lucas Ramon; Tolói mantido à frente de Osorio.
