@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+/*FONTS*/
+:root{--bg:#121214;--ink:#F2F2EE;--muted:#A3A5AB;--faint:#6E7076;--red:#E0102F;--red2:#C8102E;--line:#2C2D32;--card:#1B1B1F}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+#v{width:1080px;height:1920px;position:relative;color:var(--ink);font-family:Archivo,sans-serif;overflow:hidden}
+#v::before{content:"";position:absolute;left:0;right:0;top:0;height:26px;background:linear-gradient(to bottom,var(--red2) 0 33.3%,#fff 33.3% 66.6%,#000 66.6% 100%);z-index:5}
+.top{position:absolute;top:120px;left:90px;right:90px;display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:30px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);z-index:4}
+.top b{color:var(--ink);font-weight:500}
+.prog{position:absolute;left:90px;right:90px;top:180px;height:6px;display:flex;gap:10px;z-index:4}
+.prog i{flex:1;background:#2C2D32;border-radius:3px;overflow:hidden;position:relative}
+.prog i b{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+.scene{position:absolute;left:90px;right:90px;top:300px;bottom:330px;display:flex;flex-direction:column;justify-content:center;opacity:0}
+.big{font-family:"Big Shoulders Display";font-weight:900;text-transform:uppercase;line-height:.86;letter-spacing:-.01em}
+.k{font-family:"IBM Plex Mono";font-size:34px;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.t{font-size:56px;font-weight:700;line-height:1.18;margin-top:30px}
+.p{font-size:44px;line-height:1.35;color:var(--muted);margin-top:34px}
+.p b{color:var(--ink)}
+.foot{position:absolute;left:90px;right:90px;bottom:200px;display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:28px;color:var(--faint);z-index:4}
+.foot b{color:var(--ink);font-size:32px}
+.row{display:flex;gap:26px;margin-top:50px}
+.chip{flex:1;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:34px 30px}
+.chip .n{font-family:"Big Shoulders Display";font-weight:900;font-size:150px;line-height:1}
+.chip .l{font-size:32px;color:var(--muted);margin-top:8px}
+.bar{height:70px;background:var(--card);border-radius:8px;overflow:hidden;margin-top:14px}
+.bar div{height:100%;background:var(--ink)}
+.bl{display:flex;justify-content:space-between;font-size:38px;font-weight:600;margin-top:44px}
+.bl span:last-child{font-family:"Big Shoulders Display";font-weight:900;font-size:64px}
+</style><style>
+.pitch{position:relative;width:820px;height:1080px;margin:30px auto 0;background:#1B1B1F;border:4px solid #55565C;border-radius:18px}
+.pitch .ln{position:absolute;border:4px solid #3A3B40}
+.pl{position:absolute;transform:translate(-50%,-50%);text-align:center;opacity:0}
+.pl i{display:block;width:62px;height:62px;border-radius:50%;background:var(--red);margin:0 auto;box-shadow:0 0 0 6px rgba(224,16,47,.25)}
+.pl.gk i{background:#F2F2EE;box-shadow:0 0 0 6px rgba(242,242,238,.2)}
+.pl.nw i{background:#FFD23F;box-shadow:0 0 0 6px rgba(255,210,63,.25)}
+.pl span{display:block;font-weight:700;font-size:34px;margin-top:10px;white-space:nowrap}
+.stack{display:flex;gap:6px;height:130px;margin-top:40px}
+.stack div{display:flex;align-items:center;justify-content:center;font-family:"Big Shoulders Display";font-weight:900;font-size:64px;color:#fff;overflow:hidden;white-space:nowrap;width:0}
+.legend{display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:30px;color:var(--muted);margin-top:16px}
+</style></head><body>
+<div id="v">
+  <div class="top"><b>Data Tricolor</b><span id="tag">Escalação do Raio-X · R34</span></div>
+  <div class="prog" id="prog"></div>
+
+  <section class="scene" id="s0">
+    <div class="k">Majestoso · Qua, 4/11 · 21h30</div>
+    <div class="big" style="font-size:200px;margin-top:24px">Sem Sabino.<br><span style="color:var(--red)">Sem Marcos<br>Antônio.</span></div>
+    <div class="t" style="font-size:64px;margin-top:56px">O time que os dados escalam pro clássico.</div>
+  </section>
+
+  <section class="scene" id="s1" style="top:240px">
+    <div class="k">3-4-2-1 · Vila Belmiro</div>
+    <div class="pitch">
+      <div class="ln" style="left:-4px;right:-4px;top:50%;height:0;border-width:4px 0 0"></div>
+      <div class="ln" style="left:50%;top:50%;width:200px;height:200px;border-radius:50%;transform:translate(-50%,-50%)"></div>
+      <div class="ln" style="left:22%;right:22%;top:-4px;height:150px;border-top:0"></div>
+      <div class="ln" style="left:22%;right:22%;bottom:-4px;height:150px;border-bottom:0"></div>
+      <div class="pl gk" id="pl0" style="left:50%;top:92%"><i></i><span>Rafael</span></div><div class="pl " id="pl1" style="left:22%;top:76%"><i></i><span>Arboleda</span></div><div class="pl " id="pl2" style="left:50%;top:79%"><i></i><span>Tolói</span></div><div class="pl " id="pl3" style="left:78%;top:76%"><i></i><span>Newton</span></div><div class="pl " id="pl4" style="left:12%;top:54%"><i></i><span>Iago</span></div><div class="pl nw" id="pl5" style="left:37%;top:58%"><i></i><span>Djhordney</span></div><div class="pl " id="pl6" style="left:63%;top:58%"><i></i><span>Bobadilla</span></div><div class="pl nw" id="pl7" style="left:88%;top:54%"><i></i><span>Pedro Lima</span></div><div class="pl " id="pl8" style="left:32%;top:33%"><i></i><span>Artur</span></div><div class="pl " id="pl9" style="left:68%;top:33%"><i></i><span>Luciano</span></div><div class="pl " id="pl10" style="left:50%;top:13%"><i></i><span>Calleri</span></div>
+    </div>
+    <div class="p" style="margin-top:26px;font-size:36px"><b style="color:#FFD23F">●</b> mudanças em relação ao plano: Djhordney e Pedro Lima</div>
+  </section>
+
+  <section class="scene" id="s2">
+    <div class="k">Por que Tolói</div>
+    <div class="big" style="font-size:420px;margin-top:10px;color:var(--red)"><span id="cr">0</span></div>
+    <div class="t">cruzamentos do Corinthians no Brasileirão, e 9 gols de cabeça</div>
+    <div class="p">Tolói é o melhor do elenco pelo alto: <b>79% de duelos aéreos ganhos.</b> Por isso ele, e não Osorio.</div>
+  </section>
+
+  <section class="scene" id="s3">
+    <div class="k">Por que Pedro Lima</div>
+    <div class="t" style="margin-top:20px">Notas nas últimas 3 partidas</div>
+    <div class="row">
+      <div class="chip" id="c1"><div class="n">7,5</div></div>
+      <div class="chip" id="c2"><div class="n">7,4</div></div>
+      <div class="chip" id="c3"><div class="n">7,2</div></div>
+    </div>
+    <div class="bl"><span style="color:var(--red)">Pedro Lima</span><span id="n1" style="color:var(--red)">0</span></div>
+    <div class="bar"><div id="b1" style="width:0;background:var(--red)"></div></div>
+    <div class="bl"><span>Lucas Ramon</span><span id="n2">0</span></div>
+    <div class="bar"><div id="b2" style="width:0;background:#6E7076"></div></div>
+    <div class="p">Média da temporada no Brasileirão.</div>
+  </section>
+
+  <section class="scene" id="s4">
+    <div class="k">O duelo do meio</div>
+    <div class="t" style="margin-top:10px">Rodrigo Garro cria quase tudo no Corinthians</div>
+    <div class="row">
+      <div class="chip" id="c4"><div class="n" style="color:var(--red)">7</div><div class="l">assistências</div></div>
+      <div class="chip" id="c5"><div class="n" style="color:var(--red)">10</div><div class="l">grandes chances criadas</div></div>
+    </div>
+    <div class="p">Quem fecha o corredor dele: <b>Bobadilla</b>, que vem de <b>7,1, 7,9 e 7,8.</b></div>
+  </section>
+
+  <section class="scene" id="s5">
+    <div class="k">O que diz o modelo</div>
+    <div class="big" style="font-size:300px;margin-top:10px"><span id="pv">0</span><span style="font-size:150px">%</span></div>
+    <div class="t">de chance de vitória do São Paulo</div>
+    <div class="stack"><div id="sw" style="background:var(--red);border-radius:10px 0 0 10px">V</div><div id="sd" style="background:#6E7076">E</div><div id="sl" style="background:#3A3B40;border-radius:0 10px 10px 0">D</div></div>
+    <div class="legend"><span>Vitória 46,6%</span><span>Empate 28,9%</span><span>Derrota 24,5%</span></div>
+    <div class="p">Palpite registrado do Raio-X: <b>vitória tricolor.</b></div>
+  </section>
+
+  <section class="scene" id="s6">
+    <div class="k">Sua vez</div>
+    <div class="big" style="font-size:210px;margin-top:20px">Qual seria<br>o <span style="color:var(--red)">seu</span> time?</div>
+    <div class="t">E o placar? Deixa nos comentários 👇</div>
+    <div class="big" style="font-size:120px;text-transform:none;margin-top:90px">@data_tricolor</div>
+  </section>
+  <div class="foot"><span>SofaScore · ValorFinal · R33</span><span>Não oficial</span></div>
+</div>
+<script>
+const D=[4.0,7.0,5.6,5.8,5.6,5.8,4.4];
+const S=[];{let a=0;for(const d of D){S.push([a,a+d]);a+=d}}
+window.DUR=S[S.length-1][1];const T=i=>S[i][0];
+const prog=document.getElementById('prog');S.forEach(()=>{const i=document.createElement('i');i.appendChild(document.createElement('b'));prog.appendChild(i)});
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),ease=x=>1-Math.pow(1-clamp(x),3);
+const fmt=(x,d)=>x.toFixed(d).replace('.',',');const $=id=>document.getElementById(id);
+function scenes(t){S.forEach(([a,b],i)=>{const el=$('s'+i);const fi=ease((t-a)/0.4),fo=i==S.length-1?1:1-ease((t-(b-0.35))/0.35);
+ const o=t<a||t>b?0:Math.min(fi,fo);el.style.opacity=o;el.style.transform=`translateY(${(1-fi)*30}px)`;
+ prog.children[i].firstChild.style.transform=`scaleX(${clamp((t-a)/(b-a))})`});}
+function pop(ids,t0,t,gap=0.5){ids.forEach((id,i)=>{const e=ease((t-t0-i*gap)/0.45);const el=$(id);el.style.opacity=e;el.style.transform=`scale(${0.85+0.15*e})`});}
+
+window.render=function(t){scenes(t);
+ for(let i=0;i<11;i++){const e=ease((t-T(1)-0.4-i*0.32)/0.4);const el=$('pl'+i);el.style.opacity=e;el.style.transform=`translate(-50%,-50%) scale(${0.6+0.4*e})`;}
+ $('cr').textContent=Math.round(691*ease((t-T(2)-0.3)/1.8));
+ pop(['c1','c2','c3'],T(3)+0.4,t,0.4);
+ const b1=ease((t-T(3)-1.8)/1.2),b2=ease((t-T(3)-2.6)/1.2);
+ $('b1').style.width=(b1*(6.97-5.5)/2*100)+'%';$('b2').style.width=(b2*(6.80-5.5)/2*100)+'%';
+ $('n1').textContent=fmt(5.5+1.47*b1,2);$('n2').textContent=fmt(5.5+1.30*b2,2);
+ pop(['c4','c5'],T(4)+0.8,t,0.6);
+ const k=ease((t-T(5)-0.3)/1.6);$('pv').textContent=fmt(46.6*k,1);
+ const w=ease((t-T(5)-0.6)/1.4);$('sw').style.width=(46.6*w)+'%';$('sd').style.width=(28.9*w)+'%';$('sl').style.width=(24.5*w)+'%';
+};render(0);
+</script></body></html>

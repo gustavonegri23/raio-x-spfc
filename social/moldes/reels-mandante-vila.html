@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+/*FONTS*/
+:root{--bg:#121214;--ink:#F2F2EE;--muted:#A3A5AB;--faint:#6E7076;--red:#E0102F;--red2:#C8102E;--line:#2C2D32;--card:#1B1B1F}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+#v{width:1080px;height:1920px;position:relative;color:var(--ink);font-family:Archivo,sans-serif;overflow:hidden}
+#v::before{content:"";position:absolute;left:0;right:0;top:0;height:26px;background:linear-gradient(to bottom,var(--red2) 0 33.3%,#fff 33.3% 66.6%,#000 66.6% 100%);z-index:5}
+.top{position:absolute;top:120px;left:90px;right:90px;display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:30px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);z-index:4}
+.top b{color:var(--ink);font-weight:500}
+.prog{position:absolute;left:90px;right:90px;top:180px;height:6px;display:flex;gap:10px;z-index:4}
+.prog i{flex:1;background:#2C2D32;border-radius:3px;overflow:hidden;position:relative}
+.prog i b{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+.scene{position:absolute;left:90px;right:90px;top:300px;bottom:330px;display:flex;flex-direction:column;justify-content:center;opacity:0}
+.big{font-family:"Big Shoulders Display";font-weight:900;text-transform:uppercase;line-height:.86;letter-spacing:-.01em}
+.k{font-family:"IBM Plex Mono";font-size:34px;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.t{font-size:56px;font-weight:700;line-height:1.18;margin-top:30px}
+.p{font-size:44px;line-height:1.35;color:var(--muted);margin-top:34px}
+.p b{color:var(--ink)}
+.foot{position:absolute;left:90px;right:90px;bottom:200px;display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:28px;color:var(--faint);z-index:4}
+.foot b{color:var(--ink);font-size:32px}
+.row{display:flex;gap:26px;margin-top:50px}
+.chip{flex:1;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:34px 30px}
+.chip .n{font-family:"Big Shoulders Display";font-weight:900;font-size:150px;line-height:1}
+.chip .l{font-size:32px;color:var(--muted);margin-top:8px}
+.bar{height:70px;background:var(--card);border-radius:8px;overflow:hidden;margin-top:14px}
+.bar div{height:100%;background:var(--ink)}
+.bl{display:flex;justify-content:space-between;font-size:38px;font-weight:600;margin-top:44px}
+.bl span:last-child{font-family:"Big Shoulders Display";font-weight:900;font-size:64px}
+</style><style>
+.pitch{position:relative;width:820px;height:1080px;margin:30px auto 0;background:#1B1B1F;border:4px solid #55565C;border-radius:18px}
+.pitch .ln{position:absolute;border:4px solid #3A3B40}
+.pl{position:absolute;transform:translate(-50%,-50%);text-align:center;opacity:0}
+.pl i{display:block;width:62px;height:62px;border-radius:50%;background:var(--red);margin:0 auto;box-shadow:0 0 0 6px rgba(224,16,47,.25)}
+.pl.gk i{background:#F2F2EE;box-shadow:0 0 0 6px rgba(242,242,238,.2)}
+.pl.nw i{background:#FFD23F;box-shadow:0 0 0 6px rgba(255,210,63,.25)}
+.pl span{display:block;font-weight:700;font-size:34px;margin-top:10px;white-space:nowrap}
+.stack{display:flex;gap:6px;height:130px;margin-top:40px}
+.stack div{display:flex;align-items:center;justify-content:center;font-family:"Big Shoulders Display";font-weight:900;font-size:64px;color:#fff;overflow:hidden;white-space:nowrap;width:0}
+.legend{display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:30px;color:var(--muted);margin-top:16px}
+</style></head><body>
+<div id="v">
+  <div class="top"><b>Data Tricolor</b><span id="tag">Majestoso · Vila Belmiro</span></div>
+  <div class="prog" id="prog"></div>
+
+  <section class="scene" id="s0">
+    <div class="k">Qua, 4/11 · 21h30</div>
+    <div class="big" style="font-size:190px;margin-top:24px">Amanhã o<br>São Paulo é<br><span style="color:var(--red)">mandante.</span></div>
+    <div class="t" style="font-size:72px;margin-top:56px">Mas não joga no Morumbis.</div>
+  </section>
+
+  <section class="scene" id="s1">
+    <div class="k">Em casa · 16 jogos</div>
+    <div class="big" style="font-size:440px;margin-top:10px"><span id="h1">0</span><span style="font-size:200px">%</span></div>
+    <div class="t">de aproveitamento</div>
+    <div class="row">
+      <div class="chip" id="c1"><div class="n">33</div><div class="l">pontos</div></div>
+      <div class="chip" id="c2"><div class="n">25</div><div class="l">gols marcados</div></div>
+      <div class="chip" id="c3"><div class="n">13</div><div class="l">gols sofridos</div></div>
+    </div>
+  </section>
+
+  <section class="scene" id="s2">
+    <div class="k">Fora de casa · 17 jogos</div>
+    <div class="big" style="font-size:440px;margin-top:10px;color:var(--red)"><span id="a1">0</span><span style="font-size:200px">%</span></div>
+    <div class="t">de aproveitamento</div>
+    <div class="row">
+      <div class="chip" id="c4"><div class="n">10</div><div class="l">pontos</div></div>
+      <div class="chip" id="c5"><div class="n">14</div><div class="l">gols marcados</div></div>
+      <div class="chip" id="c6"><div class="n" style="color:var(--red)">26</div><div class="l">gols sofridos</div></div>
+    </div>
+  </section>
+
+  <section class="scene" id="s3">
+    <div class="k">E o rival?</div>
+    <div class="big" style="font-size:330px;margin-top:10px">3 <span style="color:var(--muted);font-size:200px">em</span> <span style="color:var(--red)">16</span></div>
+    <div class="t">vitórias do Corinthians como visitante</div>
+    <div class="row">
+      <div class="chip" id="c7"><div class="n">18</div><div class="l">gols marcados fora</div></div>
+      <div class="chip" id="c8"><div class="n" style="color:var(--red)">25</div><div class="l">gols sofridos fora</div></div>
+    </div>
+    <div class="p">Chega em <b>17º, dentro do Z4.</b></div>
+  </section>
+
+  <section class="scene" id="s4">
+    <div class="k">O que está em jogo</div>
+    <div class="t" style="margin-top:20px">Chance de Sul-Americana (hoje: 84,1%)</div>
+    <div class="bl"><span>Se vencer</span><span id="p1">0</span></div>
+    <div class="bar"><div id="q1" style="width:0;background:var(--red)"></div></div>
+    <div class="bl"><span>Se empatar</span><span id="p2">0</span></div>
+    <div class="bar"><div id="q2" style="width:0;background:#8A8F98"></div></div>
+    <div class="bl"><span>Se perder</span><span id="p3">0</span></div>
+    <div class="bar"><div id="q3" style="width:0;background:#55565C"></div></div>
+    <div class="p">Modelo ValorFinal, atualizado em 3/11.</div>
+  </section>
+
+  <section class="scene" id="s5">
+    <div class="k">Sua vez</div>
+    <div class="big" style="font-size:250px;margin-top:20px">A Vila<br>vai ser<br><span style="color:var(--red)">casa?</span></div>
+    <div class="t" style="margin-top:50px">Comenta: casa ou fora? 👇</div>
+  </section>
+
+  <section class="scene" id="s6">
+    <div class="k">Hoje no Reels</div>
+    <div class="big" style="font-size:200px;margin-top:20px">Elenco em<br>números</div>
+    <div class="t">Ep. 03 · Rafael Tolói, o dono do jogo aéreo.</div>
+    <div class="big" style="font-size:120px;text-transform:none;margin-top:90px">@data_tricolor</div>
+    <div class="p" style="margin-top:16px">Siga para o pré e o pós-jogo em números.</div>
+  </section>
+  <div class="foot"><span>SofaScore · ValorFinal · R33</span><span>Não oficial</span></div>
+</div>
+<script>
+const D=[4.0,5.6,5.6,5.6,6.0,4.4,4.2];
+const S=[];{let a=0;for(const d of D){S.push([a,a+d]);a+=d}}
+window.DUR=S[S.length-1][1];const T=i=>S[i][0];
+const prog=document.getElementById('prog');S.forEach(()=>{const i=document.createElement('i');i.appendChild(document.createElement('b'));prog.appendChild(i)});
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)),ease=x=>1-Math.pow(1-clamp(x),3);
+const fmt=(x,d)=>x.toFixed(d).replace('.',',');const $=id=>document.getElementById(id);
+function scenes(t){S.forEach(([a,b],i)=>{const el=$('s'+i);const fi=ease((t-a)/0.4),fo=i==S.length-1?1:1-ease((t-(b-0.35))/0.35);
+ const o=t<a||t>b?0:Math.min(fi,fo);el.style.opacity=o;el.style.transform=`translateY(${(1-fi)*30}px)`;
+ prog.children[i].firstChild.style.transform=`scaleX(${clamp((t-a)/(b-a))})`});}
+function pop(ids,t0,t,gap=0.5){ids.forEach((id,i)=>{const e=ease((t-t0-i*gap)/0.45);const el=$(id);el.style.opacity=e;el.style.transform=`scale(${0.85+0.15*e})`});}
+
+window.render=function(t){scenes(t);
+ $('h1').textContent=Math.round(69*ease((t-T(1)-0.3)/1.6));pop(['c1','c2','c3'],T(1)+1.6,t);
+ $('a1').textContent=Math.round(20*ease((t-T(2)-0.3)/1.6));pop(['c4','c5','c6'],T(2)+1.6,t);
+ pop(['c7','c8'],T(3)+1.0,t,0.6);
+ [[94.7,'p1','q1',0.5],[80.9,'p2','q2',1.3],[68.0,'p3','q3',2.1]].forEach(([v,a,b,d])=>{const e=ease((t-T(4)-d)/1.2);$(a).textContent=fmt(v*e,1)+'%';$(b).style.width=(v*e)+'%'});
+};render(0);
+</script></body></html>
