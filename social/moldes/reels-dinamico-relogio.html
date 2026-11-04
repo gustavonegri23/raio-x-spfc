@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+/*BASE*/
+#clock{width:900px;height:900px;display:block;margin:10px auto 0;overflow:visible}
+.sl{font-family:"IBM Plex Mono";font-size:30px;fill:#A3A5AB;text-anchor:middle}
+.sv{font-family:"Big Shoulders Display";font-weight:900;font-size:62px;text-anchor:middle;fill:#F2F2EE}
+.cs{font-family:"Big Shoulders Display";font-weight:900;font-size:190px;text-anchor:middle;fill:#F2F2EE}
+.cl{font-family:"IBM Plex Mono";font-size:28px;text-anchor:middle;fill:#A3A5AB;letter-spacing:.08em}
+</style></head><body>
+<div id="v">
+ <div id="grid"></div><div id="glow"></div>
+ <div class="brand"><b>Data Tricolor</b><span class="live"><i id="dot"></i>Majestoso · hoje 21h30</span></div>
+ <div id="cam">
+
+  <!-- S0 · gancho: legível já no 1º frame -->
+  <section class="scene" id="s0">
+    <div class="k" data-at="0">Gols sofridos no Brasileirão</div>
+    <div class="big" style="font-size:560px;color:var(--red);margin-top:10px" data-at="0"><span id="h12">12</span></div>
+    <div class="t" style="font-size:84px;margin-top:10px" data-at="0">dos 39 saíram em</div>
+    <div class="t" style="font-size:84px;margin-top:6px"><span class="w hl" data-at="0">só 15 minutos.</span></div>
+  </section>
+
+  <!-- S1 · qual janela -->
+  <section class="scene" id="s1">
+    <div class="big" style="font-size:250px"><span class="w" data-at="0">Na</span> <span class="w" data-at="0.18">volta</span><br><span class="w" data-at="0.36">do</span> <span class="w" data-at="0.5" style="color:var(--red)">intervalo.</span></div>
+    <div class="t" style="font-size:72px;margin-top:60px"><span class="w" data-at="0.8">Do 46' ao 60'.</span></div>
+  </section>
+
+  <!-- S2 · o relógio inteiro -->
+  <section class="scene" id="s2" style="justify-content:flex-start;top:250px">
+    <div class="k">O jogo do São Paulo, de 15 em 15 min</div>
+    <svg id="clock" viewBox="0 0 900 900"></svg>
+    <div class="p" style="margin-top:30px;text-align:center" id="leg"><b style="color:#F2F2EE">■ gols feitos</b> &nbsp; <b style="color:var(--red)">■ gols sofridos</b></div>
+  </section>
+
+  <!-- S3 · melhor momento -->
+  <section class="scene" id="s3">
+    <div class="k" data-at="0">Do 61' ao 75'</div>
+    <div class="big" style="font-size:430px;margin-top:10px"><span id="m11">0</span><span style="color:var(--faint);font-size:260px"> × </span><span id="m3" style="color:var(--red)">0</span></div>
+    <div class="t" style="font-size:80px"><span class="w" data-at="0.7">O melhor momento</span><br><span class="w" data-at="0.9">do time.</span></div>
+  </section>
+
+  <!-- S4 · o fim do jogo -->
+  <section class="scene" id="s4">
+    <div class="k" data-at="0">Depois dos 76' · xG</div>
+    <div class="t" style="font-size:84px;margin-top:20px" data-at="0">E aí o jogo vira.</div>
+    <div class="bl"><span>Cria</span><span id="x1">0</span></div>
+    <div class="bar"><div id="b1" style="background:#F2F2EE"></div></div>
+    <div class="bl"><span style="color:var(--red)">Cede</span><span id="x2" style="color:var(--red)">0</span></div>
+    <div class="bar"><div id="b2" style="background:var(--red)"></div></div>
+    <div class="p"><span class="w" data-at="2.0">Cede <b>quase o dobro</b> do que cria. <b>8 gols sofridos, 5 feitos.</b></span></div>
+  </section>
+
+  <!-- S5 · pergunta + marca -->
+  <section class="scene" id="s5">
+    <div class="k" data-at="0">Hoje, 21h30 · Vila Belmiro</div>
+    <div class="big" style="font-size:230px;margin-top:20px"><span class="w" data-at="0.1">Em que</span><br><span class="w" data-at="0.3">minuto sai</span><br><span class="w" data-at="0.5" style="color:var(--red)">o gol?</span></div>
+    <div class="t" style="font-size:66px;margin-top:50px"><span class="w" data-at="1.0">Crava nos comentários 👇</span></div>
+    <div class="handle"><span class="w" data-at="1.4">@data_tricolor</span></div>
+  </section>
+
+ </div>
+ <div class="foot"><span>SofaScore · Série A 2026 · até a R33</span><span>Não oficial</span></div>
+ <div id="flash"></div>
+</div>
+<script>
+/*BASEJS*/
+const J={rot:["0'–15'","16'–30'","31'–45'","46'–60'","61'–75'","76'+"],gf:[5,5,8,5,11,5],gc:[4,4,8,12,3,8]};
+scenes([['s0',2.4],['s1',1.9],['s2',6.4],['s3',2.4],['s4',3.4],['s5',3.6]]);
+// relógio: 90 min = 360°, 6 setores de 60°
+const C=450,R1=380,R2=300,MAX=12;
+const pol=(r,a)=>[C+r*Math.cos(a),C+r*Math.sin(a)];
+function arc(r,a0,a1){const [x0,y0]=pol(r,a0),[x1,y1]=pol(r,a1);return `M${x0} ${y0} A${r} ${r} 0 ${a1-a0>Math.PI?1:0} 1 ${x1} ${y1}`}
+(function(){let h='';
+  for(let i=0;i<6;i++){const a0=-Math.PI/2+i*Math.PI/3+0.03,a1=a0+Math.PI/3-0.06;
+    h+=`<path d="${arc(R1,a0,a1)}" stroke="#26272C" stroke-width="62" fill="none"/>`;
+    h+=`<path id="gf${i}" d="${arc(R1,a0,a1)}" stroke="#F2F2EE" stroke-width="62" fill="none" pathLength="1" stroke-dasharray="0 1"/>`;
+    h+=`<path d="${arc(R2,a0,a1)}" stroke="#26272C" stroke-width="62" fill="none"/>`;
+    h+=`<path id="gc${i}" d="${arc(R2,a0,a1)}" stroke="#E0102F" stroke-width="62" fill="none" pathLength="1" stroke-dasharray="0 1"/>`;
+    const am=(a0+a1)/2,[lx,ly]=pol(R1+70,am),[vx,vy]=pol(205,am);
+    h+=`<text class="sl" x="${lx}" y="${ly+10}">${J.rot[i]}</text>`;
+    h+=`<g id="v${i}" opacity="0"><text class="sv" x="${vx}" y="${vy+22}">${J.gf[i]}<tspan fill="#6E7076">×</tspan><tspan fill="#E0102F">${J.gc[i]}</tspan></text></g>`;}
+  h+=`<line id="hand" x1="${C}" y1="${C}" x2="${C}" y2="${C-R1-40}" stroke="#F2F2EE" stroke-width="8" stroke-linecap="round"/><circle cx="${C}" cy="${C}" r="16" fill="#F2F2EE"/>`;
+  h+=`<text class="cl" x="${C}" y="${C-95}">MINUTO</text><text id="min" class="cs" x="${C}" y="${C+95}">0'</text>`;
+  $('clock').innerHTML=h})();
+window.render=function(t){
+  base(t);
+  $('dot').style.opacity=0.35+0.65*Math.abs(Math.sin(t*3));
+  // S0: o 12 pulsa
+  $('h12').style.textShadow=`0 0 ${40+30*Math.sin(t*6)}px rgba(224,16,47,.45)`;
+  // S2: ponteiro varre o jogo
+  const a=T('s2')+0.4,d=5.0,p=clamp((t-a)/d),m=p*90;
+  $('hand').setAttribute('transform',`rotate(${p*360} ${C} ${C})`);$('min').textContent=Math.floor(m)+"'";
+  for(let i=0;i<6;i++){const sp=clamp((m-i*15)/15);
+    $('gf'+i).setAttribute('stroke-dasharray',`${ease(sp)*J.gf[i]/MAX} 1`);
+    $('gc'+i).setAttribute('stroke-dasharray',`${ease(sp)*J.gc[i]/MAX} 1`);
+    const vk=back((m-i*15-12)/6);$('v'+i).setAttribute('opacity',clamp((m-i*15-12)/3));
+    const [vx,vy]=pol(205,-Math.PI/2+i*Math.PI/3+Math.PI/6);$('v'+i).setAttribute('transform',`translate(${vx} ${vy}) scale(${0.6+0.4*vk}) translate(${-vx} ${-vy})`);}
+  // destaque do setor 46-60 no fim da varredura
+  const hk=t>a+d?0.5+0.5*Math.sin((t-a-d)*9):0;$('gc3').setAttribute('stroke-width',62+hk*16);
+  // S3
+  count($('m11'),11,T('s3')+0.1,0.9,t);count($('m3'),3,T('s3')+0.3,0.7,t);
+  // S4 barras xG (escala 0–12)
+  const k1=ease((t-T('s4')-0.5)/0.9),k2=ease((t-T('s4')-1.1)/1.0);
+  $('b1').style.width=(k1*6.0/11*100)+'%';$('x1').textContent=fmt(6.0*k1,1);
+  $('b2').style.width=(k2*10.5/11*100)+'%';$('x2').textContent=fmt(10.5*k2,1);
+};
+render(0);
+</script></body></html>

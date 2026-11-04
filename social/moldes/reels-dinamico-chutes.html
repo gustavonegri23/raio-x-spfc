@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+/*BASE*/
+#pitchwrap{position:absolute;left:90px;right:90px;top:690px;height:594px;z-index:3}
+#pitch{width:900px;height:594px;display:block;overflow:visible}
+.cnt{position:absolute;left:90px;right:90px;top:1320px;display:flex;gap:24px;z-index:3}
+.cnt div{flex:1;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:22px 26px}
+.cnt b{display:block;font-family:"Big Shoulders Display";font-weight:900;font-size:110px;line-height:1}
+.cnt span{font-family:"IBM Plex Mono";font-size:26px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.mini{position:absolute;left:90px;right:90px;top:250px;z-index:3}
+.vs{display:flex;gap:26px;margin-top:50px}
+.vs div{flex:1;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:34px 30px}
+.vs b{display:block;font-family:"Big Shoulders Display";font-weight:900;font-size:260px;line-height:.9}
+.vs span{font-size:40px;color:var(--muted);font-weight:700}
+</style></head><body>
+<div id="v">
+ <div id="grid"></div><div id="glow"></div>
+ <div class="brand"><b>Data Tricolor</b><span class="live"><i id="dot"></i>Majestoso · hoje 21h30</span></div>
+ <div id="cam">
+
+  <!-- S0 · gancho -->
+  <section class="scene" id="s0">
+    <div class="k" data-at="0">São Paulo fora de casa · 17 jogos</div>
+    <div class="big" style="font-size:400px;margin-top:10px;color:var(--red)" data-at="0">7 gols</div>
+    <div class="big" style="font-size:250px;margin-top:20px" data-at="0">jogados<br>fora.</div>
+  </section>
+
+  <!-- S1/S3 · mapa (texto em cima, campo e contadores fixos fora das cenas) -->
+  <section class="scene" id="s1" style="justify-content:flex-start;top:240px">
+    <div class="k" data-at="0">Fora de casa</div>
+    <div class="t" style="font-size:76px;margin-top:16px"><span class="w" data-at="0">Cada ponto, um chute.</span><br><span class="w" data-at="0.5" style="color:var(--red)">Vermelho é gol.</span></div>
+  </section>
+
+  <section class="scene" id="s2">
+    <div class="k" data-at="0">Pela qualidade das chances (xG)</div>
+    <div class="vs">
+      <div data-at="0.15"><span>Deveria ter feito</span><b id="q1">0</b></div>
+      <div data-at="0.55"><span>Fez</span><b id="q2" style="color:var(--red)">0</b></div>
+    </div>
+    <div class="t" style="font-size:72px;margin-top:50px"><span class="w" data-at="1.1">7 gols abaixo</span><br><span class="w" data-at="1.25">do que as chances pediam.</span></div>
+  </section>
+
+  <section class="scene" id="s3" style="justify-content:flex-start;top:240px">
+    <div class="k" data-at="0">Em casa · 16 jogos</div>
+    <div class="t" style="font-size:76px;margin-top:16px"><span class="w" data-at="0">Mais chutes.</span><br><span class="w" data-at="0.4">E a pontaria volta.</span></div>
+  </section>
+
+  <section class="scene" id="s4">
+    <div class="k" data-at="0">Chances claras perdidas (xG ≥ 0,30)</div>
+    <div class="vs">
+      <div data-at="0.15"><span>Em casa</span><b id="c1">0</b></div>
+      <div data-at="0.45"><span>Fora</span><b id="c2" style="color:var(--red)">0</b></div>
+    </div>
+    <div class="t" style="font-size:72px;margin-top:50px"><span class="w" data-at="1.0">Quase o dobro</span><br><span class="w" data-at="1.15">longe de casa.</span></div>
+  </section>
+
+  <section class="scene" id="s5">
+    <div class="k" data-at="0">Hoje, 21h30</div>
+    <div class="big" style="font-size:200px;margin-top:20px"><span class="w" data-at="0.1">Mando nosso.</span><br><span class="w" data-at="0.35" style="color:var(--red)">Campo na Vila.</span></div>
+    <div class="t" style="font-size:66px;margin-top:50px"><span class="w" data-at="0.9">A pontaria vai ser de casa ou de fora? 👇</span></div>
+    <div class="handle"><span class="w" data-at="1.4">@data_tricolor</span></div>
+  </section>
+ </div>
+
+ <div id="pitchwrap"><svg id="pitch" viewBox="0 0 100 66"></svg></div>
+ <div class="cnt" id="cnt"><div><span>Chutes</span><b id="n1">0</b></div><div><span>xG</span><b id="n2">0</b></div><div><span>Gols</span><b id="n3" style="color:var(--red)">0</b></div></div>
+
+ <div class="foot"><span>SofaScore · Série A 2026 · até a R33</span><span>Não oficial</span></div>
+ <div id="flash"></div>
+</div>
+<script>
+/*BASEJS*/
+/*SHOTS*/
+scenes([['s0',2.4],['s1',5.4],['s2',3.0],['s3',3.8],['s4',3.0],['s5',3.6]]);
+const NS='http://www.w3.org/2000/svg';
+const sv=$('pitch');
+(function(){let h='';for(let k=0;k<6;k++)h+=`<rect x="0" y="${k*11}" width="100" height="11.2" fill="${k%2?'#17181B':'#1B1C20'}"/>`;
+  const L='fill="none" stroke="#4A4B52" stroke-width="0.45"';
+  h+=`<rect x="0.5" y="0.5" width="99" height="65" ${L}/><rect x="20.4" y="0.5" width="59.2" height="20.6" ${L}/><rect x="36.5" y="0.5" width="27" height="6.9" ${L}/><path d="M40 21.1 A11.5 11.5 0 0 0 60 21.1" ${L}/><path d="M38 65.5 A12 12 0 0 1 62 65.5" ${L}/><rect x="45.5" y="0" width="9" height="1.4" fill="#fff"/>`;
+  sv.innerHTML=h+'<g id="dots"></g>';})();
+// 1 elemento por chute, reaproveitado nas duas passagens (fora → casa)
+const AW=SHOTS.filter(s=>s[0]===0),HM=SHOTS.filter(s=>s[0]===1);
+const POOL=[];for(let i=0;i<Math.max(AW.length,HM.length);i++){const c=document.createElementNS(NS,'circle');$('dots').appendChild(c);POOL.push(c);}
+const ring=document.createElementNS(NS,'circle');ring.setAttribute('fill','none');ring.setAttribute('stroke','#E0102F');$('dots').appendChild(ring);
+function drawSet(list,a,d,t,fade){let n=0,xg=0,g=0,lastGoal=null;
+  POOL.forEach((c,i)=>{const s=list[i];if(!s){c.setAttribute('r',0);return}
+    const at=a+d*i/list.length,k=(t-at)/0.25;if(k<0){c.setAttribute('r',0);return}
+    n++;xg+=s[3];const goal=s[4]==='g';if(goal){g++;lastGoal=[s,at]}
+    const r=(0.9+Math.sqrt(s[3])*4.2)*(goal?back(k):ease(k));
+    c.setAttribute('cx',s[1]);c.setAttribute('cy',s[2]);c.setAttribute('r',Math.max(0,r));
+    if(goal){c.setAttribute('fill','#E0102F');c.setAttribute('stroke','#fff');c.setAttribute('stroke-width',0.3);c.setAttribute('fill-opacity',fade)}
+    else{c.setAttribute('fill','#fff');c.setAttribute('stroke','none');c.setAttribute('fill-opacity',(s[4]==='s'?0.75:0.3)*fade)}});
+  if(lastGoal){const q=clamp((t-lastGoal[1])/0.5);ring.setAttribute('cx',lastGoal[0][1]);ring.setAttribute('cy',lastGoal[0][2]);ring.setAttribute('r',2+q*9);ring.setAttribute('stroke-width',0.8*(1-q));ring.setAttribute('opacity',fade*(1-q))}else ring.setAttribute('opacity',0);
+  return [n,xg,g];}
+window.render=function(t){
+  base(t);$('dot').style.opacity=0.35+0.65*Math.abs(Math.sin(t*3));
+  const a1=T('s1'),a3=T('s3');
+  // campo aparece em S1 e S3 (em S0 fica de marca d'água ao fundo)
+  const inMap=(t>=a1&&t<T('s2'))||(t>=a3&&t<T('s4'));
+  const wrap=$('pitchwrap'),cnt=$('cnt');
+  if(t<a1){wrap.style.opacity=0.0;cnt.style.opacity=0}
+  else{wrap.style.opacity=inMap?1:0;cnt.style.opacity=inMap?1:0}
+  let r=[0,0,0];
+  if(t>=a1&&t<a3) r=drawSet(AW,a1+0.5,4.2,t,1);
+  if(t>=a3) r=drawSet(HM,a3+0.3,2.8,t,1);
+  $('n1').textContent=r[0];$('n2').textContent=fmt(r[1],1);$('n3').textContent=r[2];
+  wrap.style.transform=`scale(${inMap?1.0+0.02*Math.sin(t*2):1})`;
+  count($('q1'),21,T('s2')+0.2,1.0,t);count($('q2'),14,T('s2')+0.6,0.9,t);
+  count($('c1'),6,T('s4')+0.2,0.6,t);count($('c2'),11,T('s4')+0.5,0.8,t);
+};
+render(0);
+</script></body></html>
