@@ -1,3 +1,8 @@
 data/rodadas/
 relatorios/
 social/moldes/node_modules/
+social/moldes/node_modules
+__pycache__/
+# entradas do card da rodada (gerado localmente, não vai para o site)
+data/card.js
+data/card-base.js
