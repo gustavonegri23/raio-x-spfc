@@ -20,12 +20,19 @@ Regra: a cada atualização de rodada, fazer **um** item da lista (o primeiro qu
 - [ ] **Card de pré-jogo.** Mesmo molde do card da rodada, com a escalação sugerida e a ficha do adversário, para postar no dia do jogo.
 - [ ] **Painel de visitas.** Depois de ativar o GoatCounter, mostrar na mensagem pós-rodada as visitas da semana.
 
+## Novas (05/11)
+
+- [ ] **xG por tempo em cada jogo.** No clássico, 0,38 de xG no 1º tempo e 1,49 no 2º; a janela 46-60 é a pior em gols sofridos. Um recorte 1º × 2º tempo jogo a jogo mostra se o intervalo melhora ou piora o time.
+- [ ] **Card e Reels pós-jogo pelo mesmo molde, lendo `rodada-NN.json`.** O Reels da R34 tem os chutes escritos à mão; gerar a lista a partir do `SHOTMAP` evita erro de cópia.
+
 ## Para 2027
 
 - [ ] Planejamento: contratos que terminam, idade por posição, perfil de reforço por setor.
 - [ ] Trocar o ID de temporada no coletor (`SEASON`) e abrir `data/rodadas/2027/`.
 
 ## Feito
+
+- 05/11/2026 · Gráficos por rodada leem o número de rodadas dos dados (parte do item "Tirar os números fixos").
 
 - 01/11/2026 · Impacto das substituições (aba Gols), placar das previsões (aba Próximos jogos), checagens automáticas no montar.py, plano B do coletor, ficha do adversário em números, janelas de 15 minutos com xG, simulador da reta final, vizinhos e média da liga, card da rodada e modo fim de temporada.
 

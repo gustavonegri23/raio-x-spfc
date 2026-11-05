@@ -71,8 +71,9 @@ li::before{content:counter(d);font:900 54px/1 var(--f-display);color:var(--red)}
   var me='<span class="me">'+B.gf+'</span>',op='<span class="op">'+B.ga+'</span>';
   $('t1').textContent=B.casa?'São Paulo':B.adv;$('t1').className='team '+(B.casa?'me':'op');
   $('t2').textContent=B.casa?B.adv:'São Paulo';$('t2').className='team r '+(B.casa?'op':'me');
+  ['t1','t2'].forEach(function(id){var e=$(id),s=46;while(e.scrollWidth>e.clientWidth&&s>28){s-=2;e.style.fontSize=s+'px';}});
   $('nums').innerHTML=(B.casa?me:op)+'<i>×</i>'+(B.casa?op:me);
-  $('res').innerHTML='<span class="pill '+res+'">'+RN[res]+'</span><span>'+B.data+' · '+(B.casa?'Morumbis':'fora de casa')+' · '+B.formacao+'</span>';
+  $('res').innerHTML='<span class="pill '+res+'">'+RN[res]+'</span><span>'+B.data+' · '+(C.estadio||(B.casa?'Morumbis':'fora de casa'))+' · '+B.formacao+'</span>';
   var gn=(B.gols||{}).nos||[],ge=(B.gols||{}).eles||[];
   $('gols').innerHTML='<div>'+(B.casa?gn:ge).map(esc).join('<br>')+'</div><div>'+(B.casa?ge:gn).map(esc).join('<br>')+'</div>';
   $('manchete').textContent=C.manchete||'';

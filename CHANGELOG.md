@@ -1,5 +1,16 @@
 # Changelog
 
+## 05/11/2026 · pós-rodada 34 (São Paulo 0 x 0 Corinthians, Vila Belmiro)
+
+- Coleta do SofaScore completa (4 etapas, sem falhas) em `data/rodadas/rodada-34.json`; checagens automáticas sem erro nem aviso.
+- **Capa:** relatório R34, corte 5 nov; lede, KPIs (44 pts em 34, 39:39, 67/20, Sul-Americana 74%) e seis achados novos: o 0 a 0 com mais chances (20 a 18 finalizações, 1,87 a 1,24 de xG), o segundo tempo com Calleri e Pablo Maia (0,38 → 1,49 de xG), Rafael 8,1, tabela (6 pts do 7º, 2 acima do 12º), placar da previsão (palpite V errou; 10 de 11 titulares) e mando.
+- **ValorFinal mudou de versão** (2.0, Dixon e Coles, 1.000.000 de simulações). A queda da Sul-Americana de 84% para 74% mistura o empate com a troca de modelo; registrado no achado e na metodologia.
+- Capítulos: trajetória (R34), mando (casa × metade de baixo 21/27; Z4 agora com Grêmio), matriz de adversários reordenada, clássicos (2 pontos em 18), diagnóstico 4 (primeiro 0 a 0 do ano), formações (onze; 4-1-4-1 estreou), GPS (34ª sem rastreamento), reta final com quatro jogos (pontos esperados 5,32, projeção 49, distribuição nova da posição final, cenários).
+- `data/notas.js`: Rafael, Iago, Pedro Lima, Bobadilla, Lucas Moura e Newton. `data/escalacoes.js`: R34 removida; probabilidades e posições das R35–R38 atualizadas; Calleri como referência contra o Fluminense.
+- **Card da rodada:** campo opcional `estadio` em `data/card.js` (o card dizia Morumbis) e nome do time encolhe sozinho se não couber. `og-card.png` com "Em casa" no lugar de "No Morumbis".
+- **Upgrade:** os gráficos por rodada (notas, gols e GPS da ficha do jogador) leem o número de rodadas dos dados (`window.NR`), sem o 33 fixo no código.
+- **Reels pós-jogo** `social/2026-11-05/reels-posjogo-r34.mp4` (molde `social/moldes/reels-posjogo-r34.html`): 0,82 bloqueado, 0 a 0 mas não igual, xG acumulado minuto a minuto, segundo tempo, Rafael e Sul-Americana.
+
 ## 03/11/2026 · notícias de 31/10 a 3/11 (corte 3 nov)
 
 - **Destaque de notícias na capa** (seção nova `#s-noticias`, logo depois dos achados): seis cartões com data e fonte — Sabino, Marcos Antônio/Iago/Artur, local e adversário do Majestoso, chance de Libertadores (G9), futuro de Artur e Lucas Moura, eleição do clube.

@@ -23,7 +23,34 @@
    24.5
   ],
   "palpite": "V",
-  "palpiteFonte": "favorito do modelo (trocar pelo palpite do analista, se quiser)"
+  "palpiteFonte": "favorito do modelo (trocar pelo palpite do analista, se quiser)",
+  "real": {
+   "placar": "0x0",
+   "res": "E",
+   "xi": [
+    "Rafael",
+    "Pedro Lima",
+    "Robert Arboleda",
+    "Rafael Tolói",
+    "Iago Borduchi",
+    "Newton",
+    "Artur",
+    "Djhordney",
+    "Damián Bobadilla",
+    "Lucas Moura",
+    "Luciano"
+   ],
+   "acertosXI": 10,
+   "foraDoPlano": [
+    "Lucas Moura"
+   ],
+   "naoUsados": [
+    "Jonathan Calleri"
+   ],
+   "acertouPalpite": false,
+   "acertouModelo": false,
+   "brier": 0.783
+  }
  },
  {
   "rd": 35,
